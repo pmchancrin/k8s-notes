@@ -1,0 +1,56 @@
+{
+    "title": "Kubernetes Notes",
+    "author": "Zhiwei Yin",
+    "description": "Some notes about kubernetes during working and studying.",
+    "language": "zh-hans",
+    "links": {
+        "sidebar":{
+            "My Blog":"https://zhiweiyin318.github.io/",
+            "Kubernetes-handbook(Jimmysong)": "https://jimmysong.io/kubernetes-handbook",
+            "Kubernetes":"https://kubernetes.io/"
+        },
+        "gitbook": true
+    },
+    "plugins":[
+        "github",
+        "disqus",
+        "-lunr", "-search", "search-plus",
+        "splitter",
+        "code",
+        "editlink",
+        "image-captions",
+        "back-to-top-button",
+        "page-toc-button",
+        "local-pagefooter",
+        "theme-default",
+        "favicon"
+    ],
+    "pluginsConfig":{
+        "github":{
+            "url":"https://github.com/zhiweiyin318"
+        },
+        "disqus":{
+            "shortName": "k8s-notes"
+        },
+        "editlink":{
+            "base": "https://github.com/zhiweiyin318/k8s-notes/blob/master/",
+            "label": "Edit This Page",
+            "multilingual": false
+        },
+        "image-captions": {
+            "caption": "Image - _CAPTION_"
+        },
+        "local-pagefooter":{
+            "islocal" : true, 
+            "modify_label": "Updated:",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "theme-default":{
+            "showLevel": true
+        },
+        "favicon":{
+            "shortcut": "favicon.ico",
+            "bookmark": "favicon.ico"
+        }
+    }
+}
