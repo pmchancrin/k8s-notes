@@ -1,0 +1,920 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Etcd · Kubernetes Notes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Zhiwei Yin">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-image-captions/image-captions.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-local-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="calico.html" />
+    
+    
+    <link rel="prev" href="../operator/declarative-api.html" />
+    
+
+    
+        <link rel="shortcut icon" href='../favicon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../favicon.ico' type="image/x-icon">
+    
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://zhiweiyin318.github.io/" target="_blank" class="custom-link">My Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://jimmysong.io/kubernetes-handbook" target="_blank" class="custom-link">Kubernetes-handbook(Jimmysong)</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://kubernetes.io/" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../content/concept.html">
+            
+                <a href="../content/concept.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    IaaS PaaS SaaS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Docker</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../docker/command.html">
+            
+                <a href="../docker/command.html">
+            
+                    
+                        <b>2.1.</b>
+                    
+                    Docker Commands
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../docker/cgroups-namepspace.html">
+            
+                <a href="../docker/cgroups-namepspace.html">
+            
+                    
+                        <b>2.2.</b>
+                    
+                    Namespace && Cgroup
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../docker/namespace.html">
+            
+                <a href="../docker/namespace.html">
+            
+                    
+                        <b>2.2.1.</b>
+                    
+                    Namespace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="../docker/exec-and-volume.html">
+            
+                <a href="../docker/exec-and-volume.html">
+            
+                    
+                        <b>2.2.2.</b>
+                    
+                    Docker exec and Docker volume
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../docker/user-in-docker.html">
+            
+                <a href="../docker/user-in-docker.html">
+            
+                    
+                        <b>2.3.</b>
+                    
+                    User
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../docker/user-and-group.html">
+            
+                <a href="../docker/user-and-group.html">
+            
+                    
+                        <b>2.3.1.</b>
+                    
+                    User and Group
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../docker/non-root-user.html">
+            
+                <a href="../docker/non-root-user.html">
+            
+                    
+                        <b>2.3.2.</b>
+                    
+                    Non-root User
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../docker/docker-image.html">
+            
+                <a href="../docker/docker-image.html">
+            
+                    
+                        <b>2.4.</b>
+                    
+                    Images
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../docker/command.html">
+            
+                <a href="../docker/command.html">
+            
+                    
+                        <b>2.5.</b>
+                    
+                    Dockerfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Kubernetes</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" >
+            
+                <span>
+            
+                    
+                        <b>3.1.</b>
+                    
+                    Install
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.1" data-path="../kubernetes/kubeadm-v1.13.0.html">
+            
+                <a href="../kubernetes/kubeadm-v1.13.0.html">
+            
+                    
+                        <b>3.1.1.</b>
+                    
+                    Kubeadm Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" >
+            
+                <span>
+            
+                    
+                        <b>3.2.</b>
+                    
+                    Component
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.2.1" data-path="../kubernetes/kube.html">
+            
+                <a href="../kubernetes/kube.html">
+            
+                    
+                        <b>3.2.1.</b>
+                    
+                    kube
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.2" data-path="../kubernetes/kubectl.html">
+            
+                <a href="../kubernetes/kubectl.html">
+            
+                    
+                        <b>3.2.2.</b>
+                    
+                    Kubectl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.3" data-path="../kubernetes/kube-apiserver.html">
+            
+                <a href="../kubernetes/kube-apiserver.html">
+            
+                    
+                        <b>3.2.3.</b>
+                    
+                    Kube-apiserver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.4" data-path="../kubernetes/kube-dns.html">
+            
+                <a href="../kubernetes/kube-dns.html">
+            
+                    
+                        <b>3.2.4.</b>
+                    
+                    Kube-dns
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" >
+            
+                <span>
+            
+                    
+                        <b>3.3.</b>
+                    
+                    Resource
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.3.1" data-path="../kubernetes/pod.html">
+            
+                <a href="../kubernetes/pod.html">
+            
+                    
+                        <b>3.3.1.</b>
+                    
+                    Pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.2" data-path="../kubernetes/deployment.html">
+            
+                <a href="../kubernetes/deployment.html">
+            
+                    
+                        <b>3.3.2.</b>
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.3" data-path="../kubernetes/daemonset.html">
+            
+                <a href="../kubernetes/daemonset.html">
+            
+                    
+                        <b>3.3.3.</b>
+                    
+                    DaemonSet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.4" data-path="../kubernetes/job-cronJob.html">
+            
+                <a href="../kubernetes/job-cronJob.html">
+            
+                    
+                        <b>3.3.4.</b>
+                    
+                    Job CronJob
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../kubernetes/authentication-authorization-admission.html">
+            
+                <a href="../kubernetes/authentication-authorization-admission.html">
+            
+                    
+                        <b>3.4.</b>
+                    
+                    Authentication Authorization Admission
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.4.1" data-path="../kubernetes/tls-ca.html">
+            
+                <a href="../kubernetes/tls-ca.html">
+            
+                    
+                        <b>3.4.1.</b>
+                    
+                    TLS CA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.2" data-path="../kubernetes/secret.html">
+            
+                <a href="../kubernetes/secret.html">
+            
+                    
+                        <b>3.4.2.</b>
+                    
+                    Secret
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.3" data-path="../kubernetes/service-account.html">
+            
+                <a href="../kubernetes/service-account.html">
+            
+                    
+                        <b>3.4.3.</b>
+                    
+                    Service Account
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.4" data-path="../kubernetes/configmap.html">
+            
+                <a href="../kubernetes/configmap.html">
+            
+                    
+                        <b>3.4.4.</b>
+                    
+                    ConfigMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Operator</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../operator/declarative-api.html">
+            
+                <a href="../operator/declarative-api.html">
+            
+                    
+                        <b>4.1.</b>
+                    
+                    Declarative API
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Istio</li>
+        
+        
+    
+
+    
+        
+        <li class="header">APP</li>
+        
+        
+    
+        <li class="chapter active" data-level="6.1" data-path="etcd.html">
+            
+                <a href="etcd.html">
+            
+                    
+                        <b>6.1.</b>
+                    
+                    Etcd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="calico.html">
+            
+                <a href="calico.html">
+            
+                    
+                        <b>6.2.</b>
+                    
+                    Calico
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="helm.html">
+            
+                <a href="helm.html">
+            
+                    
+                        <b>6.3.</b>
+                    
+                    Helm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Etcd</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="etcd">ETCD</h1>
+<ul>
+<li>kubernetes&#x7684;&#x6240;&#x6709;&#x4E91;&#x6570;&#x636E;&#x90FD;&#x4FDD;&#x5B58;&#x5728;/registry&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x4E0B;&#x4E00;&#x5C42;&#x662F;API&#x5BF9;&#x8C61;&#x7C7B;&#x578B;&#xFF08;&#x590D;&#x6570;&#xFF09;&#xFF0C;&#x518D;&#x4E0B;&#x4E00;&#x5C42;&#x662F;namespace&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x5C42;&#x662F;&#x5BF9;&#x8C61;&#x540D;&#x5B57;&#x3002;</li>
+<li>calico&#x7F51;&#x7EDC;&#x5B58;&#x50A8;&#x662F;&#x4EE5;v2&#x7684;API&#x6765;&#x5B58;&#x50A8;&#x7684;&#xFF0C;kubernetes&#x662F;v3 API&#x3002;</li>
+<li>&#x73AF;&#x5883;&#x53D8;&#x91CF; ETCDCTL_API &#x9ED8;&#x8BA4;&#x662F;2</li>
+</ul>
+<h3 id="v2-&#x67E5;&#x8BE2;&#x547D;&#x4EE4;">v2 &#x67E5;&#x8BE2;&#x547D;&#x4EE4;</h3>
+<pre><code>[root@node1 test]# export ETCDCTL_API=2
+[root@node1 test]# etcdctl --version
+etcdctl version: 3.2.4
+API version: 2
+[root@node1 test]# etcdctl ls 
+/calico
+[root@node1 test]# etcdctl get /calico/bgp/v1/host/node1/ip_addr_v4
+192.168.137.101
+</code></pre><h3 id="v3-&#x67E5;&#x8BE2;&#x547D;&#x4EE4;">v3 &#x67E5;&#x8BE2;&#x547D;&#x4EE4;</h3>
+<ul>
+<li>--prefix &#x67E5;&#x8BE2;&#x6240;&#x6709;&#x5B50;&#x76EE;&#x5F55;</li>
+<li>-w &#x8F93;&#x51FA;&#x683C;&#x5F0F;</li>
+<li>-m 
+```
+[root@node1 test]# export ETCDCTL_API=3
+[root@node1 test]# 
+[root@node1 test]# etcdctl --cacert=/etc/ssl/etcd/ssl/ca.pem --cert=/etc/ssl/etcd/ssl/member-node1.pem --key=/etc/ssl/etcd/ssl/member-node1-key.pem get /registry/configmaps/default/game-config -w=json|python -m json.tool
+{
+  &quot;count&quot;: 1,
+  &quot;header&quot;: {<pre><code>  &quot;cluster_id&quot;: 8635001981321661628,
+  &quot;member_id&quot;: 12035000773768423000,
+  &quot;raft_term&quot;: 1682,
+  &quot;revision&quot;: 416787
+</code></pre>  },
+  &quot;kvs&quot;: [<pre><code>  {
+      &quot;create_revision&quot;: 396096,
+      &quot;key&quot;: &quot;L3JlZ2lzdHJ5L2NvbmZpZ21hcHMvZGVmYXVsdC9nYW1lLWNvbmZpZw==&quot;,
+      &quot;mod_revision&quot;: 396096,
+      &quot;value&quot;: &quot;azhzAAoPCgJ2MRIJQ29uZmlnTWFwEu8CClMKC2dhbWUtY29uZmlnEgAaB2RlZmF1bHQiACokN2RkMmQ3N2MtNzg2Yi0xMWU4LWEwYjQtMDgwMDI3N2I3NWM0MgA4AEILCOKlw9kFEKypk3x6ABKxAQoPZ2FtZS5wcm9wZXJ0aWVzEp0BZW5lbWllcz1hbGllbnMKbGl2ZXM9MwplbmVtaWVzLmNoZWF0PXRydWUKZW5lbWllcy5jaGVhdC5sZXZlbD1ub0dvb2RSb3R0ZW4Kc2VjcmV0LmNvZGUucGFzc3BocmFzZT1VVURETFJMUkJBQkFTCnNlY3JldC5jb2RlLmFsbG93ZWQ9dHJ1ZQpzZWNyZXQuY29kZS5saXZlcz0zMBJkCg11aS5wcm9wZXJ0aWVzElNjb2xvci5nb29kPXB1cnBsZQpjb2xvci5iYWQ9eWVsbG93CmFsbG93LnRleHRtb2RlPXRydWUKaG93Lm5pY2UudG8ubG9vaz1mYWlybHlOaWNlChoAIgA=&quot;,
+      &quot;version&quot;: 1
+  }
+</code></pre>  ]
+}</li>
+</ul>
+<pre><code>* &#x8F93;&#x51FA;key base64&#x7F16;&#x7801;&#x4E86;&#xFF0C;&#x9700;&#x8981;&#x89E3;&#x7801;
+</code></pre><p>[root@node1 test]# echo L3JlZ2lzdHJ5L2NvbmZpZ21hcHMvZGVmYXVsdC9nYW1lLWNvbmZpZw==|base64 -d
+/registry/configmaps/default/game-config
+[root@node1 test]# </p>
+<pre><code>
+### &#x9047;&#x5230;&#x7684;&#x95EE;&#x9898;
+etcd&#x5BB9;&#x5668;&#x5185;&#x65E0;&#x6CD5;&#x67E5;&#x8BE2;
+</code></pre><p>/etc # etcdctl --ca-file=$ETCD_TRUSTED_CA_FILE --cert-file=$ETCD_CERT_FILE --key-file=ETCD_KEY_FILE cluster-health
+Error:  open ETCD_KEY_FILE: no such file or directory
+/etc # etcdctl --ca-file=$ETCD_TRUSTED_CA_FILE --cert-file=$ETCD_CERT_FILE --key-file=$ETCD_KEY_FILE cluster-health
+cluster may be unhealthy: failed to list members
+Error:  client: etcd cluster is unavailable or misconfigured; error #0: malformed HTTP response &quot;\x15\x03\x01\x00\x02\x02&quot;
+; error #1: dial tcp 127.0.0.1:4001: getsockopt: connection refused</p>
+<p>error #0: malformed HTTP response &quot;\x15\x03\x01\x00\x02\x02&quot;
+error #1: dial tcp 127.0.0.1:4001: getsockopt: connection refused</p>
+<pre><code>&#x89E3;&#x51B3;&#x529E;&#x6CD5;
+</code></pre><p>/etc # export ETCDCTL_ENDPOINT=<a href="https://127.0.0.1:2379" target="_blank">https://127.0.0.1:2379</a>
+/etc # etcdctl --ca-file=$ETCD_TRUSTED_CA_FILE --cert-file=$ETCD_CERT_FILE --key-file=$ETCD_KEY_FILE cluster-health
+member 82cf071e8608bc84 is healthy: got healthy result from <a href="https://192.168.137.102:2379" target="_blank">https://192.168.137.102:2379</a>
+member a704e9708804a658 is healthy: got healthy result from <a href="https://192.168.137.101:2379" target="_blank">https://192.168.137.101:2379</a>
+member e30c96cca4e3ace1 is healthy: got healthy result from <a href="https://192.168.137.103:2379" target="_blank">https://192.168.137.103:2379</a>
+cluster is healthy
+```</p>
+<h3 id="&#x53C2;&#x8003;&#x6587;&#x6863;">&#x53C2;&#x8003;&#x6587;&#x6863;</h3>
+<ul>
+<li><a href="https://jimmysong.io/kubernetes-handbook/guide/using-etcdctl-to-access-kubernetes-data.html" target="_blank">https://jimmysong.io/kubernetes-handbook/guide/using-etcdctl-to-access-kubernetes-data.html</a></li>
+<li><a href="https://jimmysong.io/kubernetes-handbook/concepts/etcd.html" target="_blank">https://jimmysong.io/kubernetes-handbook/concepts/etcd.html</a></li>
+<li><a href="https://zhangkesheng.github.io/2018/01/25/kubernetes-ha/" target="_blank">https://zhangkesheng.github.io/2018/01/25/kubernetes-ha/</a> </li>
+</ul>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">Updated:
+2019-01-14 15:43:07
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../operator/declarative-api.html" class="navigation navigation-prev " aria-label="Previous page: Declarative API">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="calico.html" class="navigation navigation-next " aria-label="Next page: Calico">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Etcd","level":"6.1","depth":1,"next":{"title":"Calico","level":"6.2","depth":1,"path":"app/calico.md","ref":"app/calico.md","articles":[]},"previous":{"title":"Declarative API","level":"4.1","depth":1,"path":"operator/declarative-api.md","ref":"operator/declarative-api.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":2,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":3,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":5,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":6,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":7,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":8,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":9,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"app/etcd.md","mtime":"2019-01-14T07:43:07.408Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-14T08:28:49.793Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

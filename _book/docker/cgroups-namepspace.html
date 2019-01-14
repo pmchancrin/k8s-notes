@@ -1,0 +1,958 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Namespace && Cgroup · Kubernetes Notes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Zhiwei Yin">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-image-captions/image-captions.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-local-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="namespace.html" />
+    
+    
+    <link rel="prev" href="command.html" />
+    
+
+    
+        <link rel="shortcut icon" href='../favicon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../favicon.ico' type="image/x-icon">
+    
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://zhiweiyin318.github.io/" target="_blank" class="custom-link">My Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://jimmysong.io/kubernetes-handbook" target="_blank" class="custom-link">Kubernetes-handbook(Jimmysong)</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://kubernetes.io/" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../content/concept.html">
+            
+                <a href="../content/concept.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    IaaS PaaS SaaS
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Docker</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="command.html">
+            
+                <a href="command.html">
+            
+                    
+                        <b>2.1.</b>
+                    
+                    Docker Commands
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.2" data-path="cgroups-namepspace.html">
+            
+                <a href="cgroups-namepspace.html">
+            
+                    
+                        <b>2.2.</b>
+                    
+                    Namespace && Cgroup
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="namespace.html">
+            
+                <a href="namespace.html">
+            
+                    
+                        <b>2.2.1.</b>
+                    
+                    Namespace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="exec-and-volume.html">
+            
+                <a href="exec-and-volume.html">
+            
+                    
+                        <b>2.2.2.</b>
+                    
+                    Docker exec and Docker volume
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="user-in-docker.html">
+            
+                <a href="user-in-docker.html">
+            
+                    
+                        <b>2.3.</b>
+                    
+                    User
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="user-and-group.html">
+            
+                <a href="user-and-group.html">
+            
+                    
+                        <b>2.3.1.</b>
+                    
+                    User and Group
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="non-root-user.html">
+            
+                <a href="non-root-user.html">
+            
+                    
+                        <b>2.3.2.</b>
+                    
+                    Non-root User
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="docker-image.html">
+            
+                <a href="docker-image.html">
+            
+                    
+                        <b>2.4.</b>
+                    
+                    Images
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="command.html">
+            
+                <a href="command.html">
+            
+                    
+                        <b>2.5.</b>
+                    
+                    Dockerfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Kubernetes</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" >
+            
+                <span>
+            
+                    
+                        <b>3.1.</b>
+                    
+                    Install
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.1" data-path="../kubernetes/kubeadm-v1.13.0.html">
+            
+                <a href="../kubernetes/kubeadm-v1.13.0.html">
+            
+                    
+                        <b>3.1.1.</b>
+                    
+                    Kubeadm Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" >
+            
+                <span>
+            
+                    
+                        <b>3.2.</b>
+                    
+                    Component
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.2.1" data-path="../kubernetes/kube.html">
+            
+                <a href="../kubernetes/kube.html">
+            
+                    
+                        <b>3.2.1.</b>
+                    
+                    kube
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.2" data-path="../kubernetes/kubectl.html">
+            
+                <a href="../kubernetes/kubectl.html">
+            
+                    
+                        <b>3.2.2.</b>
+                    
+                    Kubectl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.3" data-path="../kubernetes/kube-apiserver.html">
+            
+                <a href="../kubernetes/kube-apiserver.html">
+            
+                    
+                        <b>3.2.3.</b>
+                    
+                    Kube-apiserver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.4" data-path="../kubernetes/kube-dns.html">
+            
+                <a href="../kubernetes/kube-dns.html">
+            
+                    
+                        <b>3.2.4.</b>
+                    
+                    Kube-dns
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" >
+            
+                <span>
+            
+                    
+                        <b>3.3.</b>
+                    
+                    Resource
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.3.1" data-path="../kubernetes/pod.html">
+            
+                <a href="../kubernetes/pod.html">
+            
+                    
+                        <b>3.3.1.</b>
+                    
+                    Pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.2" data-path="../kubernetes/deployment.html">
+            
+                <a href="../kubernetes/deployment.html">
+            
+                    
+                        <b>3.3.2.</b>
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.3" data-path="../kubernetes/daemonset.html">
+            
+                <a href="../kubernetes/daemonset.html">
+            
+                    
+                        <b>3.3.3.</b>
+                    
+                    DaemonSet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.4" data-path="../kubernetes/job-cronJob.html">
+            
+                <a href="../kubernetes/job-cronJob.html">
+            
+                    
+                        <b>3.3.4.</b>
+                    
+                    Job CronJob
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../kubernetes/authentication-authorization-admission.html">
+            
+                <a href="../kubernetes/authentication-authorization-admission.html">
+            
+                    
+                        <b>3.4.</b>
+                    
+                    Authentication Authorization Admission
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.4.1" data-path="../kubernetes/tls-ca.html">
+            
+                <a href="../kubernetes/tls-ca.html">
+            
+                    
+                        <b>3.4.1.</b>
+                    
+                    TLS CA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.2" data-path="../kubernetes/secret.html">
+            
+                <a href="../kubernetes/secret.html">
+            
+                    
+                        <b>3.4.2.</b>
+                    
+                    Secret
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.3" data-path="../kubernetes/service-account.html">
+            
+                <a href="../kubernetes/service-account.html">
+            
+                    
+                        <b>3.4.3.</b>
+                    
+                    Service Account
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.4" data-path="../kubernetes/configmap.html">
+            
+                <a href="../kubernetes/configmap.html">
+            
+                    
+                        <b>3.4.4.</b>
+                    
+                    ConfigMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Operator</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../operator/declarative-api.html">
+            
+                <a href="../operator/declarative-api.html">
+            
+                    
+                        <b>4.1.</b>
+                    
+                    Declarative API
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Istio</li>
+        
+        
+    
+
+    
+        
+        <li class="header">APP</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../app/etcd.html">
+            
+                <a href="../app/etcd.html">
+            
+                    
+                        <b>6.1.</b>
+                    
+                    Etcd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../app/calico.html">
+            
+                <a href="../app/calico.html">
+            
+                    
+                        <b>6.2.</b>
+                    
+                    Calico
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../app/helm.html">
+            
+                <a href="../app/helm.html">
+            
+                    
+                        <b>6.3.</b>
+                    
+                    Helm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Namespace && Cgroup</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x6982;&#x8FF0;">&#x6982;&#x8FF0;</h1>
+<p>&#x5BB9;&#x5668;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E00;&#x79CD;&#x6C99;&#x76D2;&#x6280;&#x672F;&#x7684;&#xFF0C;&#x6C99;&#x76D2;&#x5C31;&#x50CF;&#x96C6;&#x88C5;&#x7BB1;&#x4E00;&#x6837;&#xFF0C;&#x628A;&#x5E94;&#x7528;&#x88C5;&#x8D77;&#x6765;&#xFF0C;&#x5E94;&#x7528;&#x4E8E;&#x5E94;&#x7528;&#x4E4B;&#x95F4;&#xFF0C;&#x6709;&#x4E86;&#x8FB9;&#x754C;&#xFF0C;&#x4E92;&#x4E0D;&#x5E72;&#x6270;&#xFF0C;&#x800C;&#x4E14;&#x65B9;&#x4FBF;&#x88AB;&#x642C;&#x6765;&#x642C;&#x53BB;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;PaaS&#x6700;&#x7406;&#x60F3;&#x7684;&#x72B6;&#x6001;&#x3002;  </p>
+<p>&#x7A0B;&#x5E8F;&#x5728;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;&#x8868;&#x73B0;&#x5C31;&#x662F;&#x8FDB;&#x7A0B;&#xFF0C;&#x5BB9;&#x5668;&#x6280;&#x672F;&#x7684;&#x6838;&#x5FC3;&#x529F;&#x80FD;&#x5C31;&#x662F;&#x901A;&#x8FC7;&#x7EA6;&#x675F;&#x548C;&#x4FEE;&#x6539;&#x8FDB;&#x7A0B;&#x7684;&#x52A8;&#x6001;&#x8868;&#x73B0;&#xFF0C;&#x521B;&#x9020;&#x51FA;&#x4E00;&#x4E2A;&#x201C;&#x8FB9;&#x754C;&#x201D;&#x3002;Linux&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;Cgroups&#x6280;&#x672F;&#x662F;&#x7528;&#x6765;&#x5236;&#x9020;&#x7EA6;&#x675F;&#x7684;&#x624B;&#x6BB5;&#xFF0C;Namespace&#x6280;&#x672F;&#x662F;&#x7528;&#x6765;&#x4FEE;&#x6539;&#x8FDB;&#x7A0B;&#x89C6;&#x56FE;&#x7684;&#x4E3B;&#x8981;&#x65B9;&#x6CD5;&#x3002;  </p>
+<h2 id="&#x9694;&#x79BB;&#x6280;&#x672F;&#xFF08;namespace&#xFF09;">&#x9694;&#x79BB;&#x6280;&#x672F;&#xFF08;Namespace&#xFF09;</h2>
+<p>&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;<br>&#x8FD0;&#x884C;busybox&#x5BB9;&#x5668;&#xFF0C;&#x6267;&#x884C;/bin/sh&#xFF0C;&#x5728;&#x8DD1;&#x4E2A;sleep&#x3002;</p>
+<pre><code>$ docker run -it busybox /bin/sh
+/ #
+/ # ps
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sh
+    7 root      0:00 ps
+/ # 
+/ # sleep 100 &amp;
+/ # ps
+PID   USER     TIME  COMMAND
+    1 root      0:00 /bin/sh
+    9 root      0:00 sleep 100
+   10 root      0:00 ps
+/ #
+</code></pre><p>&#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x7684;&#x8FDB;&#x7A0B;</p>
+<pre><code>[root@yzw zhiweiyin]# ps auxf
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root      1122  0.3  1.7 729148 66444 ?        Ssl  08:14   0:10 /usr/bin/dockerd
+root      1318  0.5  0.7 574660 30976 ?        Ssl  08:14   0:16  \_ docker-containerd --config /var/run/docker/containerd/containerd.toml
+root      4511  0.0  0.0   7488  3156 ?        Sl   08:58   0:00      \_ docker-containerd-shim -namespace moby -workdir /var/lib/docker/containerd/daemon/io.containerd.runtime.v1.linux/moby
+root      4529  0.0  0.0   1252   264 pts/0    Ss   08:58   0:00          \_ /bin/sh
+root      4671  0.0  0.0   1232     4 pts/0    S+   09:01   0:00              \_ sleep 100
+</code></pre><p>&#x5BB9;&#x5668;&#x91CC;&#x9762;sh&#x7684;&#x8FDB;&#x7A0B;&#x53F7;&#x662F;1&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x8FDB;&#x7A0B;&#x53F7;&#x662F;4529&#xFF0C;&#x4E14;&#x662F;docker-containerd-shim&#x7684;&#x5B50;&#x8FDB;&#x7A0B;&#xFF0C;sleep&#x4E5F;&#x662F;&#x7C7B;&#x4F3C;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;Namespace&#x673A;&#x5236;&#xFF0C;&#x5BB9;&#x5668;&#x91CC;&#x9762;&#x5C4F;&#x853D;&#x6389;&#x4E86;&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x548C;&#x8FDB;&#x7A0B;&#x53F7;&#x3002; </p>
+<p>Linux&#x4E0A;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x662F;&#x7528;clone,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;PID&#x53F7;&#x3002;</p>
+<pre><code>int pid = clone(main_function,stack_size,SIGCHID,NULL)
+</code></pre><p>&#x5F53;&#x6211;&#x4EEC;&#x52A0;&#x4E0A;CLONE_NEWPID&#x53C2;&#x6570;&#x540E;&#xFF0C;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#x5C31;&#x4F1A;&#x201C;&#x770B;&#x5230;&#x201D;&#x662F;&#x4E00;&#x4E2A;&#x5168;&#x65B0;&#x7684;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4;&#xFF0C;&#x5728;&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#x7A7A;&#x95F4;&#x91CC;PID&#x662F;1&#x3002;&#x4F46;&#x662F;&#x5728;&#x4E3B;&#x673A;&#x4E0A;&#x4ECD;&#x7136;&#x662F;&#x53E6;&#x5916;&#x7684;PID&#x53F7;&#x3002;&#x591A;&#x6B21;&#x6267;&#x884C;clone&#x4F1A;&#x521B;&#x5EFA;&#x591A;&#x4E2A;PID Namespace&#x51FA;&#x6765;&#xFF0C;&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x91CC;&#x9762;PID&#x90FD;&#x4E3A;1&#xFF0C;&#x770B;&#x4E0D;&#x5230;&#x771F;&#x6B63;&#x7684;&#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x7684;PID&#xFF0C;&#x4E5F;&#x770B;&#x4E0D;&#x5230;&#x5176;&#x4ED6;PID Namespace&#x91CC;&#x7684;&#x60C5;&#x51B5;&#x3002;</p>
+<pre><code> int pid = clone(main_function,stack_size,CLONE_NEWPID|SIGCHID,NULL)
+</code></pre><p> Mount Namespace &#x7528;&#x4E8E;&#x88AB;&#x9694;&#x79BB;&#x8FDB;&#x7A0B;&#x53EA;&#x770B;&#x5230;&#x5F53;&#x524D;Namespace&#x91CC;&#x7684;&#x6302;&#x8F7D;&#x70B9;&#x4FE1;&#x606F;&#x3002;<br> Network Namespace &#x7528;&#x4E8E;&#x88AB;&#x9694;&#x79BB;&#x8FDB;&#x7A0B;&#x53EA;&#x770B;&#x5230;&#x5F53;&#x524D;Namespace&#x91CC;&#x9762;&#x7684;&#x7F51;&#x7EDC;&#x8BBE;&#x5907;&#x548C;&#x914D;&#x7F6E;&#x3002;  </p>
+<p> <strong>&#x8FD9;&#x5C31;&#x662F;Linux&#x5BB9;&#x5668;&#x5B9E;&#x73B0;&#x7684;&#x539F;&#x7406;&#x3002;&#x521B;&#x5EFA;&#x5BB9;&#x5668;&#x8FDB;&#x7A0B;&#x65F6;&#xFF0C;&#x6307;&#x5B9A;&#x4E86;&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#x6240;&#x9700;&#x8981;&#x542F;&#x52A8;&#x7684;&#x4E00;&#x7EC4;Namespace&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x6837;&#x5BB9;&#x5668;&#x5C31;&#x53EA;&#x80FD;&#x201C;&#x770B;&#x201D;&#x5230;&#x5F53;&#x524D;&#x5BB9;&#x5668;Namespace&#x6240;&#x9650;&#x5B9A;&#x7684;&#x8D44;&#x6E90;&#x3001;&#x6587;&#x4EF6;&#x3001;&#x8BBE;&#x7F6E;&#x3001;&#x72B6;&#x6001;&#x3001;&#x6216;&#x8005;&#x914D;&#x7F6E;&#x4E86;&#xFF0C;&#x5BF9;&#x4E8E;&#x5BBF;&#x4E3B;&#x673A;&#x548C;&#x5176;&#x4ED6;&#x4E0D;&#x76F8;&#x5E72;&#x7684;&#x8FDB;&#x7A0B;&#x90FD;&#x770B;&#x4E0D;&#x5230;&#x4E86;&#x3002;&#x5BB9;&#x5668;&#x5176;&#x5B9E;&#x662F;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x8FDB;&#x7A0B;&#x800C;&#x5DF2;&#x3002;</strong></p>
+<h2 id="&#x865A;&#x62DF;&#x673A;-vs-&#x5BB9;&#x5668;">&#x865A;&#x62DF;&#x673A; vs. &#x5BB9;&#x5668;</h2>
+<p>&#x5148;&#x770B;&#x4E24;&#x5F20;&#x56FE;&#xFF1A;<br><img src="../images/VM-Docker.png" alt="image">  </p>
+<p>&#x5DE6;&#x8FB9;&#x662F;&#x865A;&#x62DF;&#x673A;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#xFF0C;Hypervisor&#x7684;&#x8F6F;&#x4EF6;&#x901A;&#x8FC7;&#x786C;&#x4EF6;&#x7684;&#x865A;&#x62DF;&#x5316;&#x529F;&#x80FD;&#xFF0C;&#x6A21;&#x62DF;&#x51FA;&#x4E86;&#x8FD0;&#x884C;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x7684;&#x5404;&#x79CD;&#x786C;&#x4EF6;&#xFF0C;&#x7136;&#x540E;&#x5728;&#x6A21;&#x62DF;&#x7684;&#x786C;&#x4EF6;&#x4E0A;&#x6309;&#x7167;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF; Guest OS&#xFF0C;&#x8F6F;&#x4EF6;&#x8FDB;&#x7A0B;&#x8DD1;&#x5728;&#x8FD9;&#x4E2A;Guest OS&#x91CC;&#xFF0C;&#x4E5F;&#x5C31;&#x53EA;&#x80FD;&#x770B;&#x5230;&#x8FD9;&#x4E2A;OS&#x91CC;&#x9762;&#x7684;&#x6587;&#x4EF6;&#x548C;&#x76EE;&#x5F55;&#xFF0C;&#x4EE5;&#x53CA;&#x865A;&#x62DF;&#x8BBE;&#x5907;&#x3002;&#x6240;&#x4EE5;&#x865A;&#x62DF;&#x673A;&#x4E5F;&#x80FD;&#x9694;&#x79BB;&#x4F5C;&#x7528;&#xFF0C;&#x4F46;&#x662F;&#x5F00;&#x9500;&#x592A;&#x5927;&#xFF0C;&#x592A;&#x91CD;&#x4E86;&#xFF0C;&#x4E00;&#x4E2A;&#x6700;&#x5C0F;&#x7684;CentOS KVM&#x865A;&#x673A;&#x542F;&#x52A8;&#x540E;&#x5DEE;&#x4E0D;&#x591A;&#x9700;&#x8981;100-200M&#x5185;&#x5B58;&#xFF0C;&#x6240;&#x6709;&#x5BF9;&#x8D44;&#x6E90;&#x7684;&#x4F7F;&#x7528;&#x90FD;&#x5F97;&#x7ECF;&#x8FC7;&#x5E8F;&#x96C6;&#x5408;&#x8F6F;&#x4EF6;&#xFF0C;&#x53C8;&#x662F;&#x4E00;&#x5C42;&#x635F;&#x8017;&#x3002;  </p>
+<p>&#x53F3;&#x8FB9;&#x662F;&#x5BB9;&#x5668;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#xFF0C;Docker&#x7684;&#x4F4D;&#x7F6E;&#x662F;&#x4E2A;&#x5E94;&#x7528;&#x4E00;&#x4E2A;&#x7EA7;&#x522B;&#x7684;&#xFF0C;&#x548C;&#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x5176;&#x4ED6;&#x5E94;&#x7528;&#x8FDB;&#x7A0B;&#x662F;&#x76F8;&#x540C;&#x7EA7;&#x522B;&#x7684;&#xFF0C;&#x7531;&#x5BBF;&#x4E3B;&#x673A;&#x7EDF;&#x4E00;&#x7BA1;&#x7406;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x88AB;&#x9694;&#x79BB;&#x7684;&#x8FDB;&#x7A0B;&#xFF0C;&#x989D;&#x5916;&#x8BBE;&#x7F6E;&#x4E86;Namespace&#x53C2;&#x6570;&#xFF0C;Docker&#x626E;&#x6F14;&#x7684;&#x89D2;&#x8272;&#x662F;&#x8F85;&#x52A9;&#x548C;&#x7BA1;&#x7406;&#xFF0C;&#x548C;Hypervisor&#x5B8C;&#x5168;&#x4E0D;&#x540C;&#x3002;&#x5BB9;&#x5668;&#x76F8;&#x5BF9;&#x4E8E;&#x865A;&#x673A;&#x673A;&#x6765;&#x8BF4;&#x51E0;&#x4E4E;&#x65E0;&#x635F;&#x8017;&#xFF0C;&#x4E5F;&#x65E0;&#x9700;&#x5355;&#x72EC;&#x7684;Guest OS&#x3002;&#x4F46;&#x662F;&#x5BB9;&#x5668;&#x4E5F;&#x6709;&#x5F0A;&#x7AEF;&#xFF0C;&#x6240;&#x6709;&#x5BB9;&#x5668;&#x4E4B;&#x95F4;&#x9694;&#x79BB;&#x7684;&#x4E0D;&#x5F7B;&#x5E95;&#xFF0C;&#x6240;&#x6709;&#x5BB9;&#x5668;&#x5171;&#x7528;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5185;&#x6838;&#xFF0C;&#x5185;&#x6838;&#x6709;&#x5F88;&#x591A;&#x8D44;&#x6E90;&#x662F;&#x4E0D;&#x80FD;&#x88AB;Namespace&#x5316;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x65F6;&#x95F4;&#x3002;&#x865A;&#x673A;&#x673A;&#x91CC;&#x9762;&#x5C31;&#x53EF;&#x4EE5;&#x968F;&#x4FBF;&#x8FD9;&#x5957;&#x4E86;&#x3002;&#x6240;&#x6709;&#x5E94;&#x7528;&#x5BB9;&#x5668;&#x5316;&#x540E;&#x4EC0;&#x4E48;&#x53EF;&#x4EE5;&#x505A;&#x4EC0;&#x4E48;&#x4E0D;&#x53EF;&#x4EE5;&#x505A;&#x662F;&#x9700;&#x8981;&#x8003;&#x8651;&#x7684;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x5BF9;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x4F7F;&#x7528;&#x4E0A;&#x3002;</p>
+<h2 id="&#x8D44;&#x6E90;&#x9650;&#x5236;&#x6280;&#x672F;-cgroups">&#x8D44;&#x6E90;&#x9650;&#x5236;&#x6280;&#x672F; Cgroups</h2>
+<p>&#x901A;&#x8FC7;Namespace&#x6280;&#x672F;&#x867D;&#x7136;&#x5B9E;&#x73B0;&#x4E86;&#x5BB9;&#x5668;&#x7684;&#x8D44;&#x6E90;&#x9694;&#x79BB;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#x8FD8;&#x662F;&#x5728;&#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x8DD1;&#x7684;&#xFF0C;&#x548C;&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x5171;&#x4EAB;CPU&#x548C;&#x5185;&#x5B58;&#x7684;&#xFF0C;&#x6709;&#x53EF;&#x80FD;&#x628A;&#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x7684;CPU&#x548C;&#x5185;&#x5B58;&#x5403;&#x5B8C;&#xFF0C;Cgroups&#x5C31;&#x662F;&#x7528;&#x6765;&#x5BF9;&#x8FDB;&#x7A0B;&#x8BBE;&#x7F6E;&#x8D44;&#x6E90;&#x9650;&#x5236;&#x7684;&#x4E3B;&#x8981;&#x529F;&#x80FD;&#x3002;  </p>
+<p>Linux Cgroups &#x5168;&#x79F0; Linux Control Group&#xFF0C;&#x9650;&#x5236;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x4F7F;&#x7528;&#x7684;&#x8D44;&#x6E90;&#x4E0A;&#x9650;&#xFF0C;&#x5305;&#x62EC;CPU&#xFF0C;&#x5185;&#x5B58;&#xFF0C;&#x78C1;&#x76D8;&#xFF0C;&#x7F51;&#x7EDC;&#x5E26;&#x5BBD;&#x7B49;&#x3002;&#x8FD8;&#x53EF;&#x4EE5;&#x5BF9;&#x8FDB;&#x7A0B;&#x8FDB;&#x884C;&#x4F18;&#x5148;&#x7EA7;&#x8BBE;&#x7F6E;&#xFF0C;&#x5BA1;&#x8BA1;&#xFF0C;&#x5C06;&#x8FDB;&#x7A0B;&#x6302;&#x8D77;&#x548C;&#x6062;&#x590D;&#x7B49;&#x64CD;&#x4F5C;&#x3002;  </p>
+<p>Cgroups &#x7ED9;&#x7528;&#x6237;&#x66B4;&#x9732;&#x51FA;&#x6765;&#x7684;&#x64CD;&#x4F5C;&#x63A5;&#x53E3;&#x662F;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF0C;&#x5728;/sys/fs/cgroup&#x8DEF;&#x5F84;&#x4E0B;&#xFF0C;&#x5305;&#x62EC;&#x4E86;&#x5404;&#x79CD;&#x9650;&#x5236;&#x8D44;&#x6E90;&#x7C7B;&#x3002;  </p>
+<pre><code>[root@yzw ~]# mount -t cgroup
+cgroup on /sys/fs/cgroup/systemd type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd)
+cgroup on /sys/fs/cgroup/hugetlb type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,hugetlb)
+cgroup on /sys/fs/cgroup/freezer type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,freezer)
+cgroup on /sys/fs/cgroup/pids type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,pids)
+cgroup on /sys/fs/cgroup/cpu,cpuacct type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,cpuacct,cpu)
+cgroup on /sys/fs/cgroup/blkio type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,blkio)
+cgroup on /sys/fs/cgroup/devices type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,devices)
+cgroup on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,cpuset)
+cgroup on /sys/fs/cgroup/net_cls,net_prio type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,net_prio,net_cls)
+cgroup on /sys/fs/cgroup/memory type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,memory)
+cgroup on /sys/fs/cgroup/perf_event type cgroup (rw,nosuid,nodev,noexec,relatime,seclabel,perf_event)
+[root@yzw cgroup]# ll /sys/fs/cgroup/
+total 0
+drwxr-xr-x. 5 root root  0 Sep 10 22:48 blkio
+lrwxrwxrwx. 1 root root 11 Sep 10 22:48 cpu -&gt; cpu,cpuacct
+lrwxrwxrwx. 1 root root 11 Sep 10 22:48 cpuacct -&gt; cpu,cpuacct
+drwxr-xr-x. 5 root root  0 Sep 10 22:48 cpu,cpuacct
+drwxr-xr-x. 3 root root  0 Sep 10 22:48 cpuset
+drwxr-xr-x. 5 root root  0 Sep 10 22:48 devices
+drwxr-xr-x. 3 root root  0 Sep 10 22:48 freezer
+drwxr-xr-x. 3 root root  0 Sep 10 22:48 hugetlb
+drwxr-xr-x. 5 root root  0 Sep 10 22:48 memory
+lrwxrwxrwx. 1 root root 16 Sep 10 22:48 net_cls -&gt; net_cls,net_prio
+drwxr-xr-x. 3 root root  0 Sep 10 22:48 net_cls,net_prio
+lrwxrwxrwx. 1 root root 16 Sep 10 22:48 net_prio -&gt; net_cls,net_prio
+drwxr-xr-x. 3 root root  0 Sep 10 22:48 perf_event
+drwxr-xr-x. 5 root root  0 Sep 10 22:48 pids
+drwxr-xr-x. 5 root root  0 Sep 10 22:48 systemd
+</code></pre><p>&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;<br>cfs_period&#x548C;cfs_quota&#x7EC4;&#x5408;&#x4F7F;&#x7528;&#xFF0C;&#x9650;&#x5236;&#x8FDB;&#x7A0B;&#x5728;cfs_period&#x7684;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#xFF0C;&#x53EA;&#x80FD;&#x88AB;&#x5206;&#x5230;&#x603B;&#x91CF;&#x4E3A;cfs_quota&#x7684;CPU&#x65F6;&#x95F4;&#x3002;<br>&#x5728;/sys/fs/cgroup/cpu&#x76EE;&#x5F55;&#x4E0B;&#x521B;&#x5EFA;container&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x7CFB;&#x7EDF;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x5806;&#x8D44;&#x6E90;&#x9650;&#x5236;&#x6587;&#x4EF6;&#x3002;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x5C31;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x201C;&#x63A7;&#x5236;&#x7EC4;&#x201D;&#x3002;</p>
+<pre><code>[root@yzw cpu]# mkdir container
+[root@yzw cpu]# ls container/
+cgroup.clone_children  cgroup.procs  cpuacct.usage         cpu.cfs_period_us  cpu.rt_period_us   cpu.shares  notify_on_release
+cgroup.event_control   cpuacct.stat  cpuacct.usage_percpu  cpu.cfs_quota_us   cpu.rt_runtime_us  cpu.stat    tasks
+</code></pre><p>&#x6211;&#x4EEC;&#x540E;&#x53F0;&#x6267;&#x884C;&#x4E2A;&#x6B7B;&#x5FAA;&#x73AF;,top&#x53D1;&#x73B0;CPU1&#x88AB;&#x5403;&#x5B8C;&#x4E86;&#xFF0C;container&#x63A7;&#x5236;&#x7EC4;quota&#x6CA1;&#x6709;&#x9650;&#x5236;&#xFF0C;period&#x662F;100ms&#xFF08;100000us&#xFF09;&#x3002;<br>&#x6211;&#x4EEC;&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#xFF0C;quota&#x5199;&#x5165;20ms&#x5C31;&#x662F;&#x8BF4;100ms&#x8BE5;&#x63A7;&#x5236;&#x7EC4;&#x7684;&#x8FDB;&#x7A0B;&#x53EA;&#x80FD;&#x4F7F;&#x7528;20ms&#x7684;CPU&#xFF0C;&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#x53EA;&#x4F7F;&#x7528;20%&#x7684;CPU&#x5E26;&#x5BBD;&#xFF0C;&#x6211;&#x4EEC;&#x628A;&#x9650;&#x5236;&#x7684;&#x8FDB;&#x7A0B;PID&#x5199;&#x5165;&#x8BE5;&#x63A7;&#x5236;&#x7EC4;&#x3002;<br>&#x518D;&#x6B21;top&#x53D1;&#x73B0;CPU1&#x7684;&#x4F7F;&#x7528;&#x7387;&#x964D;&#x4E0B;&#x6765;&#x4E86;&#x3002;</p>
+<pre><code>[root@yzw cpu]# while :; do : ;done &amp;
+[1] 3592
+
+[root@yzw cpu]# top
+%Cpu1  :100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+
+[root@yzw container]# cat cpu.cfs_period_us 
+100000
+[root@yzw container]# cat cpu.cfs_quota_us 
+-1
+
+[root@yzw container]# echo 20000 &gt; cpu.cfs_quota_us 
+[root@yzw container]# echo 3592 &gt; tasks 
+[root@yzw container]# top
+%Cpu1  : 17.4 us,  0.0 sy,  0.0 ni, 82.6 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+</code></pre><p>Cgroups&#x7684;&#x8BBE;&#x8BA1;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x7C97;&#x66B4;&#xFF0C;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5B50;&#x7CFB;&#x7EDF;&#x76EE;&#x5F55;&#x52A0;&#x4E0A;&#x4E00;&#x7EC4;&#x8D44;&#x6E90;&#x9650;&#x5236;&#x6587;&#x4EF6;&#x7684;&#x7EC4;&#x5408;&#x3002;Docker&#x7B49;&#x5BB9;&#x5668;&#x9879;&#x76EE;&#x6765;&#x8BF4;&#x5C31;&#x662F;&#x5728;&#x5404;&#x4E2A;&#x5B50;&#x7CFB;&#x7EDF;&#x4E0B;&#xFF0C;&#x4E3A;&#x6BCF;&#x4E2A;&#x5BB9;&#x5668;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x63A7;&#x5236;&#x7EC4;&#xFF08;&#x5C31;&#x662F;&#x65B0;&#x5EFA;&#x4E2A;&#x76EE;&#x5F55;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x542F;&#x52A8;&#x5BB9;&#x5668;&#x8FDB;&#x7A0B;&#x540E;&#xFF0C;&#x628A;&#x5BB9;&#x5668;&#x8FDB;&#x7A0B;&#x7684;PID&#x5199;&#x5165;&#x5BF9;&#x5E94;&#x63A7;&#x5236;&#x7EC4;&#x7684;tasks&#x6587;&#x4EF6;&#x4E2D;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</p>
+<pre><code>[root@yzw docker]# docker run -it --cpu-period=100000 --cpu-quota=20000 centos:7 /bin/bash
+[root@90c9fd20daf8 /]# 
+
+[root@yzw ~]# cd /sys/fs/cgroup/cpu/docker/90c9fd20daf8f4f9ad384d349d37ca1542490d78daf4e3fe6b79f3ad6d7179bd/
+[root@yzw 90c9fd20daf8f4f9ad384d349d37ca1542490d78daf4e3fe6b79f3ad6d7179bd]# cat cpu.cfs_quota_us 
+20000
+[root@yzw 90c9fd20daf8f4f9ad384d349d37ca1542490d78daf4e3fe6b79f3ad6d7179bd]# cat cpu.cfs_period_us 
+100000
+[root@yzw 90c9fd20daf8f4f9ad384d349d37ca1542490d78daf4e3fe6b79f3ad6d7179bd]#
+</code></pre><h1 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h1>
+<p>&#x5BB9;&#x5668;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x542F;&#x52A8;&#x4E86;&#x591A;&#x4E2A;Namespace&#x7684;&#x5E94;&#x7528;&#x8FDB;&#x7A0B;&#xFF0C;&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#x80FD;&#x591F;&#x4F7F;&#x7528;&#x7684;&#x8D44;&#x6E90;&#x91CF;&#xFF0C;&#x901A;&#x8FC7;Cgroups&#x914D;&#x7F6E;&#x9650;&#x5236;&#x3002;
+<strong>&#x5BB9;&#x5668;&#x6280;&#x672F;&#x4E2D;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5BB9;&#x5668;&#x662F;&#x4E00;&#x4E2A;&#x5355;&#x8FDB;&#x7A0B;&#x6A21;&#x578B;&#x3002;</strong> &#x7528;&#x6237;&#x7684;&#x5E94;&#x7528;&#x8FDB;&#x7A0B;&#x5C31;&#x662F;&#x5BB9;&#x5668;&#x91CC;&#x9762;PID=1&#x7684;&#x8FDB;&#x7A0B;&#xFF0C;&#x5176;&#x4ED6;&#x540E;&#x7EED;&#x521B;&#x5EFA;&#x7684;&#x8FDB;&#x7A0B;&#x90FD;&#x662F;&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#x7684;&#x5B50;&#x8FDB;&#x7A0B;&#xFF0C;&#x610F;&#x5473;&#x7740;&#x4F60;&#x6CA1;&#x6CD5;&#x8FD0;&#x884C;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x5E94;&#x7528;&#xFF0C;&#x9664;&#x975E;&#x627E;&#x5230;&#x4E00;&#x4E2A;&#x516C;&#x5171;&#x7684;PID=1&#x7684;&#x7A0B;&#x5E8F;&#x6765;&#x5145;&#x5F53;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7A0B;&#x5E8F;&#x7684;&#x7236;&#x8FDB;&#x7A0B;&#x3002;&#x597D;&#x591A;&#x4EBA;&#x4F7F;&#x7528;systemd&#x6216;&#x8005;superviord&#x6765;&#x5145;&#x5F53;&#x5BB9;&#x5668;&#x7684;&#x542F;&#x52A8;&#x8FDB;&#x7A0B;&#x3002; &#x5BB9;&#x5668;&#x7684;&#x8BBE;&#x8BA1;&#x5E0C;&#x671B;&#x5BB9;&#x5668;&#x548C;&#x8FDB;&#x7A0B;&#x5E94;&#x7528;&#x540C;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;&#x5BF9;&#x540E;&#x7EED;&#x7F16;&#x6392;&#x5F88;&#x91CD;&#x8981;&#xFF0C;&#x5982;&#x679C;&#x5BB9;&#x5668;&#x662F;&#x6B63;&#x5E38;&#x8FD0;&#x884C;&#x7684;&#xFF0C;&#x91CC;&#x9762;&#x7684;&#x5E94;&#x7528;&#x6302;&#x4E86;&#xFF0C;&#x5904;&#x7406;&#x8D77;&#x6765;&#x5C31;&#x5F88;&#x9EBB;&#x70E6;&#x3002;  </p>
+<h1 id="issue">issue</h1>
+<p>&#x8DDF;Namespace&#x4E00;&#x6837;&#xFF0C;Cgroups&#x4E5F;&#x6709;&#x7F3A;&#x9677;&#xFF0C;&#x63D0;&#x8D77;&#x6700;&#x591A;&#x7684;&#x5C31;&#x662F;/proc&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7684;&#x95EE;&#x9898;&#x3002;/proc&#x5B58;&#x50A8;&#x7684;&#x662F;&#x5185;&#x6838;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x7684;&#x4E00;&#x7CFB;&#x5217;&#x7279;&#x6B8A;&#x6587;&#x4EF6;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#x67E5;&#x770B;&#x5F53;&#x524D;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x6BD4;&#x5982;CPU&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF0C;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF0C;&#x8FD9;&#x4E9B;&#x662F;top&#x7684;&#x4E3B;&#x8981;&#x6570;&#x636E;&#x6765;&#x6E90;&#x3002;&#x4F46;&#x662F;/proc&#x4E0D;&#x4E86;&#x89E3;Cgroups&#x7684;&#x5B58;&#x5728;&#xFF0C;&#x5C31;&#x662F;&#x5BB9;&#x5668;&#x91CC;&#x9762;&#x8BFB;&#x53D6;&#x7684;CPU&#x6838;&#x6570;&#xFF0C;&#x5185;&#x5B58;&#x72B6;&#x6001;&#x5176;&#x5B9E;&#x662F;&#x5BBF;&#x4E3B;&#x673A;&#x7684;&#xFF0C;&#x4F1A;&#x5E26;&#x6765;&#x5F88;&#x591A;&#x56F0;&#x60D1;&#x548C;&#x98CE;&#x9669;&#x3002;<br>lxcfs&#x53EF;&#x4EE5;&#x589E;&#x5F3A;docker&#x8D44;&#x6E90;&#x7684;&#x53EF;&#x89C1;&#x6027;&#xFF0C;&#x53EF;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;&#x505A;&#x6CD5;&#x662F;&#x628A;&#x5BBF;&#x4E3B;&#x673A;&#x7684; /var/lib/lxcfs/proc/memoinfo &#x6587;&#x4EF6;&#x6302;&#x8F7D;&#x5230;Docker&#x5BB9;&#x5668;&#x7684;/proc/meminfo&#x4F4D;&#x7F6E;&#x540E;&#x3002;&#x5BB9;&#x5668;&#x4E2D;&#x8FDB;&#x7A0B;&#x8BFB;&#x53D6;&#x76F8;&#x5E94;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x65F6;&#xFF0C;LXCFS&#x7684;FUSE&#x5B9E;&#x73B0;&#x4F1A;&#x4ECE;&#x5BB9;&#x5668;&#x5BF9;&#x5E94;&#x7684;Cgroup&#x4E2D;&#x8BFB;&#x53D6;&#x6B63;&#x786E;&#x7684;&#x5185;&#x5B58;&#x9650;&#x5236;&#x3002;&#x4ECE;&#x800C;&#x4F7F;&#x5F97;&#x5E94;&#x7528;&#x83B7;&#x5F97;&#x6B63;&#x786E;&#x7684;&#x8D44;&#x6E90;&#x7EA6;&#x675F;&#x8BBE;&#x5B9A;&#x3002;kubernetes&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x4E5F;&#x80FD;&#x7528;&#xFF0C;&#x4EE5;ds &#x65B9;&#x5F0F;&#x8FD0;&#x884C; lxcfs &#xFF0C;&#x81EA;&#x52A8;&#x7ED9;&#x5BB9;&#x5668;&#x6CE8;&#x5165;&#x4E89;&#x53D6;&#x7684; proc &#x4FE1;&#x606F;&#x3002;  </p>
+<p>/proc&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7684;&#x95EE;&#x9898;&#x6211;&#x597D;&#x50CF;&#x9047;&#x5230;&#x8FC7;&#x8FD9;&#x4E2A;&#x5751;..&#x5F53;&#x65F6;&#x5728;&#x5BB9;&#x5668;&#x4E0A;&#x8FD0;&#x884C;&#x7684;java&#x5E94;&#x7528;&#xFF0C;&#x7531;&#x4E8E;&#x5F53;&#x65F6;jvm&#x53C2;&#x6570;&#x6CA1;&#x6B63;&#x786E;&#x914D;&#x7F6E;&#x4E0A;&#xFF0C;&#x5C31;&#x7528;&#x9ED8;&#x8BA4;&#x7684;&#xFF0C;&#x800C;&#x5BB9;&#x5668;&#x8BBE;&#x7F6E;&#x7684;&#x5185;&#x5B58;&#x4E3A;4g&#xFF0C;&#x6700;&#x540E;oom&#x4E86;&#xFF0C;&#x5F53;&#x65F6;&#x7528;&#x547D;&#x4EE4;&#x67E5;&#x770B;&#x5BB9;&#x5668;&#x7684;&#x5185;&#x5B58;&#x5360;&#x7528;&#x60C5;&#x51B5;&#xFF0C;&#x7ADF;&#x7136;&#x53D1;&#x73B0;&#x5185;&#x5B58;&#x7ADF;&#x7136;&#x6709;60&#x591A;g&#x3002; &#x90A3;&#x5E94;&#x8BE5;&#x663E;&#x793A;&#x7684;&#x662F;&#x5BBF;&#x4E3B;&#x673A;&#x7684;&#x5185;&#x5B58;&#x4E86;&#xFF0C;jvm&#x6309;&#x7167;&#x5BBF;&#x4E3B;&#x673A;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x5206;&#x914D;&#x7684;&#x9ED8;&#x8BA4;&#x5185;&#x5B58;&#x5E94;&#x8BE5;&#x5927;&#x4E8E;4g &#x6240;&#x4EE5;&#x8FD8;&#x6CA1;full gc &#x5C31;oom&#x4E86; </p>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">Updated:
+2019-01-14 14:17:27
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="command.html" class="navigation navigation-prev " aria-label="Previous page: Docker Commands">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="namespace.html" class="navigation navigation-next " aria-label="Next page: Namespace">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Namespace && Cgroup","level":"2.2","depth":1,"next":{"title":"Namespace","level":"2.2.1","depth":2,"path":"docker/namespace.md","ref":"docker/namespace.md","articles":[]},"previous":{"title":"Docker Commands","level":"2.1","depth":1,"path":"docker/command.md","ref":"docker/command.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":2,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":3,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":5,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":6,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":7,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":8,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":9,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"docker/cgroups-namepspace.md","mtime":"2019-01-14T06:17:27.266Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-14T08:28:49.793Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
