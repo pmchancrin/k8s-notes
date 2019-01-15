@@ -46,4 +46,4 @@ Deleted Containers:
 ...
 ```
 
-> none 镜像叫悬挂 dangling 镜像
+> &lt;none&gt; 镜像叫悬挂 dangling 镜像

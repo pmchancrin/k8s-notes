@@ -1,0 +1,1598 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Declarative API · Kubernetes Notes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Zhiwei Yin">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-image-captions/image-captions.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-local-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../app/etcd.html" />
+    
+    
+    <link rel="prev" href="../kubernetes/kubernetes-RBAC.html" />
+    
+
+    
+        <link rel="shortcut icon" href='../favicon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../favicon.ico' type="image/x-icon">
+    
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://zhiweiyin318.github.io/" target="_blank" class="custom-link">My Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://jimmysong.io/kubernetes-handbook" target="_blank" class="custom-link">Kubernetes-handbook(Jimmysong)</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://kubernetes.io/" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../content/concept.html">
+            
+                <a href="../content/concept.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    IaaS PaaS SaaS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../content/kubernetes.html">
+            
+                <a href="../content/kubernetes.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Kubernetes
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Docker</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../docker/command.html">
+            
+                <a href="../docker/command.html">
+            
+                    
+                        <b>2.1.</b>
+                    
+                    Docker Commands
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../docker/cgroups-namepspace.html">
+            
+                <a href="../docker/cgroups-namepspace.html">
+            
+                    
+                        <b>2.2.</b>
+                    
+                    Namespace && Cgroup
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../docker/namespace.html">
+            
+                <a href="../docker/namespace.html">
+            
+                    
+                        <b>2.2.1.</b>
+                    
+                    Namespace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="../docker/exec-and-volume.html">
+            
+                <a href="../docker/exec-and-volume.html">
+            
+                    
+                        <b>2.2.2.</b>
+                    
+                    Docker exec and Docker volume
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../docker/user-in-docker.html">
+            
+                <a href="../docker/user-in-docker.html">
+            
+                    
+                        <b>2.3.</b>
+                    
+                    User
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../docker/user-and-group.html">
+            
+                <a href="../docker/user-and-group.html">
+            
+                    
+                        <b>2.3.1.</b>
+                    
+                    User and Group
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../docker/non-root-user.html">
+            
+                <a href="../docker/non-root-user.html">
+            
+                    
+                        <b>2.3.2.</b>
+                    
+                    Non-root User
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../docker/docker-image.html">
+            
+                <a href="../docker/docker-image.html">
+            
+                    
+                        <b>2.4.</b>
+                    
+                    Images
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../docker/command.html">
+            
+                <a href="../docker/command.html">
+            
+                    
+                        <b>2.5.</b>
+                    
+                    Dockerfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Kubernetes</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" >
+            
+                <span>
+            
+                    
+                        <b>3.1.</b>
+                    
+                    Install
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.1" data-path="../kubernetes/kubeadm-v1.13.0.html">
+            
+                <a href="../kubernetes/kubeadm-v1.13.0.html">
+            
+                    
+                        <b>3.1.1.</b>
+                    
+                    Kubeadm Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" >
+            
+                <span>
+            
+                    
+                        <b>3.2.</b>
+                    
+                    Component
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.2.1" data-path="../kubernetes/kube.html">
+            
+                <a href="../kubernetes/kube.html">
+            
+                    
+                        <b>3.2.1.</b>
+                    
+                    kube
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.2" data-path="../kubernetes/kubectl.html">
+            
+                <a href="../kubernetes/kubectl.html">
+            
+                    
+                        <b>3.2.2.</b>
+                    
+                    Kubectl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.3" data-path="../kubernetes/kube-apiserver.html">
+            
+                <a href="../kubernetes/kube-apiserver.html">
+            
+                    
+                        <b>3.2.3.</b>
+                    
+                    Kube-apiserver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.4" data-path="../kubernetes/kube-dns.html">
+            
+                <a href="../kubernetes/kube-dns.html">
+            
+                    
+                        <b>3.2.4.</b>
+                    
+                    Kube-dns
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" >
+            
+                <span>
+            
+                    
+                        <b>3.3.</b>
+                    
+                    Resource
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.3.1" data-path="../kubernetes/pod.html">
+            
+                <a href="../kubernetes/pod.html">
+            
+                    
+                        <b>3.3.1.</b>
+                    
+                    Pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.2" data-path="../kubernetes/deployment.html">
+            
+                <a href="../kubernetes/deployment.html">
+            
+                    
+                        <b>3.3.2.</b>
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.3" data-path="../kubernetes/daemonset.html">
+            
+                <a href="../kubernetes/daemonset.html">
+            
+                    
+                        <b>3.3.3.</b>
+                    
+                    DaemonSet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.4" data-path="../kubernetes/job-cronJob.html">
+            
+                <a href="../kubernetes/job-cronJob.html">
+            
+                    
+                        <b>3.3.4.</b>
+                    
+                    Job CronJob
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../kubernetes/authentication-authorization-admission.html">
+            
+                <a href="../kubernetes/authentication-authorization-admission.html">
+            
+                    
+                        <b>3.4.</b>
+                    
+                    Authentication Authorization Admission
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.4.1" data-path="../kubernetes/tls-ca.html">
+            
+                <a href="../kubernetes/tls-ca.html">
+            
+                    
+                        <b>3.4.1.</b>
+                    
+                    TLS CA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.2" data-path="../kubernetes/secret.html">
+            
+                <a href="../kubernetes/secret.html">
+            
+                    
+                        <b>3.4.2.</b>
+                    
+                    Secret
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.3" data-path="../kubernetes/service-account.html">
+            
+                <a href="../kubernetes/service-account.html">
+            
+                    
+                        <b>3.4.3.</b>
+                    
+                    Service Account
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.4" data-path="../kubernetes/configmap.html">
+            
+                <a href="../kubernetes/configmap.html">
+            
+                    
+                        <b>3.4.4.</b>
+                    
+                    ConfigMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.5" data-path="../kubernetes/kubernetes-RBAC.html">
+            
+                <a href="../kubernetes/kubernetes-RBAC.html">
+            
+                    
+                        <b>3.4.5.</b>
+                    
+                    RBAC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Operator</li>
+        
+        
+    
+        <li class="chapter active" data-level="4.1" data-path="declarative-api.html">
+            
+                <a href="declarative-api.html">
+            
+                    
+                        <b>4.1.</b>
+                    
+                    Declarative API
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Istio</li>
+        
+        
+    
+
+    
+        
+        <li class="header">APP</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../app/etcd.html">
+            
+                <a href="../app/etcd.html">
+            
+                    
+                        <b>6.1.</b>
+                    
+                    Etcd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../app/calico.html">
+            
+                <a href="../app/calico.html">
+            
+                    
+                        <b>6.2.</b>
+                    
+                    Calico
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../app/helm.html">
+            
+                <a href="../app/helm.html">
+            
+                    
+                        <b>6.3.</b>
+                    
+                    Helm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Declarative API</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x547D;&#x4EE4;&#x5F0F;&#xFF08;imperative-&#xFF09;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;-vs-declarative-api&#xFF08;&#x58F0;&#x660E;&#x5F0F;api&#xFF09;">&#x547D;&#x4EE4;&#x5F0F;&#xFF08;Imperative &#xFF09;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x64CD;&#x4F5C; vs. Declarative API&#xFF08;&#x58F0;&#x660E;&#x5F0F;API&#xFF09;</h1>
+<blockquote>
+<p><a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#understanding-kubernetes-objects" target="_blank">https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#understanding-kubernetes-objects</a></p>
+</blockquote>
+<pre><code>$ kubectl create -f nginx.yaml
+$ kubectl replace -f nginx.yaml
+</code></pre><p>&#x901A;&#x8FC7;&#x5148;create&#x518D;replace&#x64CD;&#x4F5C;&#xFF0C;&#x53EB;&#x505A;<strong>&#x547D;&#x4EE4;&#x5F0F;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;</strong>&#x3002;&#x544A;&#x8BC9;&#x673A;&#x5668;&#x5148;&#x5E72;&#x4EC0;&#x4E48;&#xFF0C;&#x518D;&#x5E72;&#x4EC0;&#x4E48;&#xFF0C;&#x673A;&#x5668;&#x6309;&#x7167;&#x4E00;&#x6761;&#x4E00;&#x6761;&#x547D;&#x4EE4;&#x53BB;&#x5E72;&#x3002;</p>
+<pre><code>$ kubectl apply -f nginx.yaml
+</code></pre><p>&#x901A;&#x8FC7;apply&#x8FDB;&#x884C;&#x521B;&#x5EFA;&#x548C;&#x6EDA;&#x52A8;&#x66F4;&#x65B0;&#xFF0C;&#x53EB;&#x505A;<strong>&#x58F0;&#x660E;&#x5F0F;API&#x64CD;&#x4F5C;</strong>&#x3002;&#x544A;&#x8BC9;&#x673A;&#x5668;&#x53BB;&#x5E72;&#x4EC0;&#x4E48;&#xFF0C;&#x4E0D;&#x544A;&#x8BC9;&#x5177;&#x4F53;&#x6307;&#x4EE4;&#xFF0C;&#x673A;&#x5668;&#x81EA;&#x52A8;&#x8BC6;&#x522B;&#x5B8C;&#x6210;&#x4EFB;&#x52A1;&#x3002;</p>
+<p>replace&#x7684;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#xFF0C;&#x662F;&#x4F7F;&#x7528;&#x65B0;&#x7684;YAML&#x6587;&#x4EF6;&#x4E2D;&#x7684;API&#x5BF9;&#x8C61;&#xFF0C;<strong>&#x66FF;&#x6362;&#x539F;&#x6709;&#x7684;API&#x5BF9;&#x8C61;</strong>&#x3002;  kube-apiserver&#x5728;&#x54CD;&#x5E94;&#x547D;&#x4EE4;&#x5F0F;&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;&#x4E00;&#x6B21;&#x53EA;&#x80FD;&#x5904;&#x7406;&#x4E00;&#x4E2A;&#x5199;&#x8BF7;&#x6C42;&#xFF0C;&#x5426;&#x5219;&#x5C31;&#x4F1A;&#x4EA7;&#x751F;&#x51B2;&#x7A81;&#x7684;&#x53EF;&#x80FD;&#xFF0C;&#x4E00;&#x6761;&#x4E00;&#x6761;&#x6309;&#x987A;&#x5E8F;&#x6267;&#x884C;&#x54CD;&#x5E94;&#x3002;  </p>
+<p>apply&#xFF0C;&#x662F;&#x6267;&#x884C;&#x4E86;&#x4E00;&#x4E2A;<strong>&#x5BF9;&#x539F;&#x6709;API&#x5BF9;&#x8C61;&#x7684;PATCH&#x64CD;&#x4F5C;</strong>&#x3002;&#x7C7B;&#x4F3C;&#x8FD8;&#x8981;set image&#x548C;edit&#x3002; kube-apiserver&#x5728;&#x54CD;&#x5E94;&#x58F0;&#x660E;&#x5F0F;&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;&#x4E00;&#x6B21;&#x80FD;&#x5904;&#x7406;&#x591A;&#x4E2A;&#x5199;&#x64CD;&#x4F5C;&#xFF0C;&#x5E76;&#x4E14;&#x5177;&#x5907;Merge&#x7684;&#x80FD;&#x529B;&#x3002;</p>
+<blockquote>
+<p>A <code>declarative API</code> allows you to declare or specify the desired state of your resource and tries to match the actual state to this desired state. Here, the controller interprets the structured data as a record of the user&#x2019;s desired state, and continually takes action to achieve and maintain this state.</p>
+</blockquote>
+<h1 id="&#x58F0;&#x660E;&#x5F0F;api-&#x539F;&#x7406;">&#x58F0;&#x660E;&#x5F0F;API &#x539F;&#x7406;</h1>
+<blockquote>
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/overview/kubernetes-api/" target="_blank">https://kubernetes.io/docs/concepts/overview/kubernetes-api/</a> </li>
+<li><a href="https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/" target="_blank">https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/</a>  </li>
+<li><a href="https://github.com/resouer/k8s-controller-custom-resource" target="_blank">https://github.com/resouer/k8s-controller-custom-resource</a>  </li>
+<li><a href="https://github.com/trstringer/k8s-controller-custom-resource" target="_blank">https://github.com/trstringer/k8s-controller-custom-resource</a>  </li>
+<li><a href="https://medium.com/@trstringer/create-kubernetes-controllers-for-core-and-custom-resources-62fc35ad64a3" target="_blank">https://medium.com/@trstringer/create-kubernetes-controllers-for-core-and-custom-resources-62fc35ad64a3</a>  </li>
+</ul>
+</blockquote>
+<p>Kubernetes&#x7684;&#x6240;&#x6709;API&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x4E0B;&#x9762;&#x6811;&#x72B6;&#x56FE;&#xFF1A;</p>
+<figure id="fig4.1.1"><img src="../images/kubernetes-api.png" alt="kubernetes api"><figcaption>Image - kubernetes api</figcaption></figure>
+<p>&#x4E00;&#x4E2A;API&#x5BF9;&#x8C61;&#x5728;Etcd&#x91CC;&#x9762;&#x5B8C;&#x6574;&#x7684;&#x8D44;&#x6E90;&#x8DEF;&#x5F84;&#x7531;&#xFF1A;Group&#xFF08;API&#x7EC4;&#xFF09;&#x3001;verison&#xFF08;API&#x7248;&#x672C;&#xFF09;&#x548C;Resource&#xFF08;API&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#xFF09;&#x4E09;&#x4E2A;&#x90E8;&#x95E8;&#x7EC4;&#x6210;&#x3002;</p>
+<p>&#x4E3E;&#x4F8B;&#xFF1A;<br>CronJob &#x5C31;&#x662F;API&#x7684;Resource&#xFF0C;batch&#x662F;&#x5B83;&#x7684;Group&#xFF0C;v2alpha1&#x5C31;&#x662F;&#x5B83;&#x7684;Version&#x3002;</p>
+<pre><code>apiVersion: batch/v2alpha1
+kind: CronJob
+...
+</code></pre><p>Kubernetes&#x5BF9;Resource&#xFF0C;Group&#xFF0C;Version&#x89E3;&#x6790;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<ul>
+<li>&#x5148;&#x5339;&#x914D;API&#x5BF9;&#x8C61;&#x7684;Group&#x3002;</li>
+<li>&#x518D;&#x5339;&#x914D;&#x5230;API&#x5BF9;&#x8C61;&#x7684;Version&#x3002;</li>
+<li>&#x6700;&#x540E;&#x5339;&#x914D;API&#x5BF9;&#x8C61;&#x7684;Resource&#x3002;</li>
+</ul>
+<p>Kubernetes&#x7684;Core API &#x5BF9;&#x8C61;&#x6BD4;&#x5982;Pod&#xFF0C;Node&#x7B49;&#x5728;Core Group&#x4E0B;&#xFF0C;&#x5176;&#x4ED6;&#x5BF9;&#x8C61;&#x5728;Named Group&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>Core Group&#xFF1A;REST path is <code>/api/v1</code> and use <code>apiVersion:v1</code></li>
+<li>Named Group: REST path is <code>/apis/$GROUP_NAME/$VERSION</code> and use <code>apiVersion: $GROUP_NAME/$VERSION</code></li>
+</ul>
+<p>&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<figure id="fig4.1.2"><img src="../images/kubernetes-api-process.png" alt="kubernetes api process"><figcaption>Image - kubernetes api process</figcaption></figure>
+<ul>
+<li>&#x53D1;&#x8D77;&#x521B;&#x5EFA;CronJob&#x7684;POST&#x8BF7;&#x6C42;&#x540E;&#xFF0C;YAML&#x4FE1;&#x606F;&#x88AB;&#x63D0;&#x4EA4;&#x7ED9;APIServer&#xFF0C;APIServer&#x7B2C;&#x4E00;&#x4E2A;&#x529F;&#x80FD;&#x5C31;&#x662F;&#x8FC7;&#x6EE4;&#x8FD9;&#x4E2A;&#x8BF7;&#x6C42;&#xFF0C;&#x5B8C;&#x6210;&#x4E00;&#x4E9B;&#x524D;&#x7F6E;&#x6027;&#x5DE5;&#x4F5C;&#xFF0C;&#x6388;&#x6743;&#xFF0C;&#x8D85;&#x65F6;&#x5904;&#x7406;&#xFF0C;&#x5BA1;&#x8BA1;&#x7B49;&#x3002;  </li>
+<li>&#x8BF7;&#x6C42;&#x8FDB;&#x5165;MUX&#x548C;Routes&#x6D41;&#x7A0B;&#x3002;&#x5B8C;&#x6210;URL&#x548C;Handler&#x7ED1;&#x5B9A;&#x3002;  </li>
+<li>APIServer&#x6839;&#x636E;&#x5B9A;&#x4E49;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;CronJob&#x5BF9;&#x8C61;&#x3002;&#x5728;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;APIServer&#x4F1A;&#x8FDB;&#x884C;&#x4E00;&#x4E2A;Convert&#x5DE5;&#x4F5C;&#xFF0C;&#x628A;YAML&#x6587;&#x4EF6;&#x8F6C;&#x6362;&#x6210;Super Version&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x662F;&#x8BE5;API&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x6240;&#x6709;&#x7248;&#x672C;&#x7684;&#x5B57;&#x6BB5;&#x5168;&#x96C6;&#xFF0C;&#x7528;&#x6237;&#x63D0;&#x4EA4;&#x7684;&#x4E0D;&#x540C;&#x7248;&#x672C;&#x7684;YAML&#x6587;&#x4EF6;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x7528;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x6765;&#x5904;&#x7406;&#x3002;</li>
+<li>APIServer&#x5148;&#x540E;&#x8FDB;&#x884C;Admission&#x548C;Validation&#x64CD;&#x4F5C;&#x3002;Validation&#x8D1F;&#x8D23;&#x9A8C;&#x8BC1;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x5404;&#x4E2A;&#x5B57;&#x6BB5;&#x662F;&#x5426;&#x5408;&#x6CD5;&#xFF0C;&#x9A8C;&#x8BC1;&#x901A;&#x8FC7;&#x7684;API&#x5BF9;&#x8C61;&#xFF0C;&#x4FDD;&#x5B58;&#x5728;API&#x7684;&#x4E00;&#x4E2A;&#x53EB;Registry&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x91CC;&#x3002;&#x53EA;&#x8981;&#x4E00;&#x4E2A;API&#x5BF9;&#x8C61;&#x5728;Registry&#x91CC;&#x9762;&#x80FD;&#x67E5;&#x5230;&#xFF0C;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x6548;&#x7684;API&#x5BF9;&#x8C61;&#x3002;</li>
+<li>APIServer&#x5C06;API&#x5BF9;&#x8C61;&#x8F6C;&#x6362;&#x6210;&#x7528;&#x6237;&#x6700;&#x521D;&#x63D0;&#x4EA4;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x8FDB;&#x884C;&#x5E8F;&#x5217;&#x5316;&#x64CD;&#x4F5C;&#xFF0C;&#x8C03;&#x7528;ETCD&#x7684;API&#x4FDD;&#x5B58;&#x3002;</li>
+</ul>
+<p>Declarative API&#x662F;Kubernetes&#x9879;&#x76EE;&#x7684;&#x91CD;&#x4E2D;&#x4E4B;&#x91CD;&#xFF0C;&#x662F;Google Borg&#x8BBE;&#x8BA1;&#x601D;&#x60F3;&#x7684;&#x96C6;&#x4E2D;&#x4F53;&#x73B0;&#xFF0C;&#x4E5F;&#x662F;Kubernetes&#x9879;&#x76EE;&#x4E2D;&#x552F;&#x4E00;&#x4E00;&#x4E2A;&#x88AB;Google&#x548C;RedHat&#x516C;&#x53F8;&#x53CC;&#x91CD;&#x63A7;&#x5236;&#xFF0C;&#x5176;&#x4ED6;&#x52BF;&#x529B;&#x65E0;&#x6CD5;&#x4ECE;&#x53C2;&#x4E0E;&#x7684;&#x7EC4;&#x4EF6;&#x3002;</p>
+<p>&#x7531;&#x4E8E;&#x9700;&#x8981;&#x76D1;&#x63A7;&#x6027;&#x80FD;&#xFF0C;API&#x5B8C;&#x5907;&#x6027;&#xFF0C;&#x7248;&#x672C;&#x5316;&#xFF0C;&#x5411;&#x540E;&#x517C;&#x5BB9;&#x7B49;&#x591A;&#x79CD;&#x5DE5;&#x7A0B;&#x5316;&#x6307;&#x6807;&#xFF0C;&#x6240;&#x4F7F;&#x7528;APIServer&#x9879;&#x76EE;&#x4E2D;&#x5927;&#x91CF;&#x4F7F;&#x7528;&#x4E86;Go&#x8BED;&#x8A00;&#x7684;&#x4EE3;&#x7801;&#x751F;&#x6210;&#x529F;&#x80FD;&#xFF0C;&#x6BD4;&#x5982;&#x81EA;&#x52A8;&#x5316;Convert&#xFF0C;DeepCopy&#x7B49;&#x4E0E;API&#x8D44;&#x6E90;&#x76F8;&#x5173;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<h2 id="custom-resource">Custom Resource</h2>
+<blockquote>
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/" target="_blank">https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/</a></li>
+<li><a href="https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/" target="_blank">https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#understanding-kubernetes-objects" target="_blank">https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/#understanding-kubernetes-objects</a></li>
+</ul>
+</blockquote>
+<h3 id="custom-controller">Custom Controller</h3>
+<p><strong>Custom resource</strong> simply let you store and retrieve structured data. It is combined with a controller that they become a true <code>declarative API</code>.  </p>
+<p><strong>Custom controller</strong> is a controller that users can deploy and  update on a running cluster,independently of the cluster&apos;s own lifecycle.  </p>
+<p><strong>Custom controller</strong> can work any kind of resource, but they are especially effective  when combined with <code>custom resources</code>. The <code>Operator</code> pattern is one example of such combination.</p>
+<h3 id="adding-custom-resources">Adding custom resources</h3>
+<ul>
+<li><strong>CRD(Custom Resource Definition)</strong> is simple and can be created without and programming.</li>
+<li><strong>API Aggregation</strong> requires programming,but allows more over API behaviors like how data is stored and convertion between API versions.</li>
+</ul>
+<h3 id="customresourcedefinition">CustomResourceDefinition</h3>
+<p>CRD API resource allows you to define custom resources.</p>
+<h2 id="demo---add-new-resource-using-crd">Demo - Add new resource using CRD</h2>
+<blockquote>
+<p>Demo &#x6587;&#x4EF6;&#xFF1A;<a href="https://github.com/resouer/k8s-controller-custom-resource" target="_blank">https://github.com/resouer/k8s-controller-custom-resource</a></p>
+</blockquote>
+<p>&#x4E3A;Kubernetes&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x53EB;Network&#x7684;API&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x3002;  &#x4F5C;&#x7528;&#x662F;&#x7528;&#x6237;&#x4E00;&#x65E6;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Network&#x5BF9;&#x8C61;&#xFF0C;Kubernetes&#x5C31;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x5B9A;&#x4E49;&#x7684;&#x7F51;&#x7EDC;&#x53C2;&#x6570;&#xFF0C;&#x8C03;&#x7528;&#x771F;&#x5B9E;&#x7684;&#x7F51;&#x7EDC;&#x63D2;&#x4EF6;&#xFF0C;&#x4E3A;&#x7528;&#x6237;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x771F;&#x6B63;&#x7684;&#x7F51;&#x7EDC;&#xFF0C;&#x7528;&#x6237;&#x521B;&#x5EFA;Pod&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x7F51;&#x7EDC;&#x4E86;&#x3002;</p>
+<p>Network&#x5BF9;&#x8C61;&#x7684;YAML&#x6587;&#x4EF6;&#xFF1A;</p>
+<pre><code>apiVersion: samplecrd.k8s.io/v1
+kind: Network
+metadata:
+  name: example-network
+spec:
+  cidr: &quot;192.168.0.0/16&quot;
+  gateway: &quot;192.168.0.1&quot;
+</code></pre><p>&#x4E0A;&#x9762;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x5C31;&#x662F;&#x4E00;&#x4E2A;CR&#xFF08;Custom Resource&#xFF09;&#xFF0C;&#x4E3A;&#x4E86;&#x80FD;&#x8BA9;Kubernetes&#x8BA4;&#x8BC6;&#x8FD9;&#x4E2A;CR&#xFF0C;&#x9700;&#x8981;&#x8BA9;Kubernetes&#x660E;&#x767D;&#x8FD9;&#x4E2A;CR&#x7684;&#x5B9A;&#x4E49;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x5C31;&#x662F;CRD&#xFF08;Custom Resource Definition&#xFF09;</p>
+<p>CRD&#x7684;YAML&#xFF1A;</p>
+<pre><code>apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  # &lt;plural&gt;:&lt;group&gt;
+  name: networks.samplecrd.k8s.io
+spec:
+  #  to use for REST API:/apis/&lt;group&gt;/&lt;version&gt;
+  group: samplecrd.k8s.io
+  version: v1
+  names:
+    # CamelCased singular. CR manifests use &lt;kind&gt;.
+    kind: Network
+    # to use for the URL:/apis/&lt;group&gt;/&lt;verison&gt;/&lt;plural&gt;
+    plural: networks
+  # Namespaced or Cluster
+  scope: Namespaced
+</code></pre><p>scope&#x662F;Namespaced&#xFF0C;&#x5B9A;&#x4E49;&#x8FD9;&#x4E2A;Network&#x662F;&#x4E00;&#x4E2A;&#x5C5E;&#x4E8E;Namespace&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x7C7B;&#x4F3C;Pod&#x3002;</p>
+<p>&#x521B;&#x5EFA;CRD&#x548C;CR</p>
+<pre><code>yzw@yzw-vm:~$ kubectl apply -f network.yaml 
+customresourcedefinition.apiextensions.k8s.io/networks.samplecrd.k8s.io created
+
+yzw@yzw-vm:~$ kubectl apply -f example-network.yaml 
+network.samplecrd.k8s.io/example-network created
+
+yzw@yzw-vm:~$ kubectl get network
+NAME              AGE
+example-network   13s
+
+yzw@yzw-vm:~$ kubectl describe network example-network 
+Name:         example-network
+Namespace:    default
+Labels:       &lt;none&gt;
+Annotations:  kubectl.kubernetes.io/last-applied-configuration:
+                {&quot;apiVersion&quot;:&quot;samplecrd.k8s.io/v1&quot;,&quot;kind&quot;:&quot;Network&quot;,&quot;metadata&quot;:{&quot;annotations&quot;:{},&quot;name&quot;:&quot;example-network&quot;,&quot;namespace&quot;:&quot;default&quot;},&quot;spec&quot;:{...
+API Version:  samplecrd.k8s.io/v1
+Kind:         Network
+Metadata:
+  Creation Timestamp:  2019-01-04T09:01:10Z
+  Generation:          1
+  Resource Version:    768534
+  Self Link:           /apis/samplecrd.k8s.io/v1/namespaces/default/networks/example-network
+  UID:                 47d514b4-0fff-11e9-9e53-080027c2b927
+Spec:
+  Cidr:     192.168.0.0/16
+  Gateway:  192.168.0.1
+Events:     &lt;none&gt;
+</code></pre><h2 id="controller-pattern">Controller Pattern</h2>
+<p>Controller&#x90FD;&#x653E;&#x5728; <em>pkg/controller</em> &#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x90FD;&#x9075;&#x5FAA;Kubernetes&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x901A;&#x7528;&#x7F16;&#x6392;&#x6A21;&#x5F0F;&#xFF1A;&#x63A7;&#x5236;&#x5FAA;&#x73AF;&#xFF08;control loop&#xFF09;</p>
+<pre><code>for {
+  &#x5B9E;&#x9645;&#x72B6;&#x6001; := &#x83B7;&#x53D6;&#x96C6;&#x7FA4;&#x4E2D;&#x5BF9;&#x8C61; X &#x7684;&#x5B9E;&#x9645;&#x72B6;&#x6001;&#xFF08;Actual State&#xFF09;
+  &#x671F;&#x671B;&#x72B6;&#x6001; := &#x83B7;&#x53D6;&#x96C6;&#x7FA4;&#x4E2D;&#x5BF9;&#x8C61; X &#x7684;&#x671F;&#x671B;&#x72B6;&#x6001;&#xFF08;Desired State&#xFF09;
+  if &#x5B9E;&#x9645;&#x72B6;&#x6001; == &#x671F;&#x671B;&#x72B6;&#x6001;{
+    &#x4EC0;&#x4E48;&#x90FD;&#x4E0D;&#x505A;
+  } else {
+    &#x6267;&#x884C;&#x7F16;&#x6392;&#x52A8;&#x4F5C;&#xFF0C;&#x5C06;&#x5B9E;&#x9645;&#x72B6;&#x6001;&#x8C03;&#x6574;&#x4E3A;&#x671F;&#x671B;&#x72B6;&#x6001;
+  }
+}
+</code></pre><p>&#x5B9E;&#x9645;&#x72B6;&#x6001;&#x4E00;&#x822C;&#x6765;&#x81EA;&#x4E8E;Kubernetes&#x96C6;&#x7FA4;&#x672C;&#x8EAB;&#x3002;<br>&#x671F;&#x671B;&#x72B6;&#x6001;&#x4E00;&#x822C;&#x6765;&#x81EA;&#x4E8E;&#x7528;&#x6237;&#x63D0;&#x4EA4;&#x7684;YAML&#x6587;&#x4EF6;&#x3002;</p>
+<p>Deployment &#x63A7;&#x5236;&#x5668;&#x7684;&#x5B9E;&#x73B0;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ol>
+<li>Deployment &#x63A7;&#x5236;&#x5668;&#x4ECE;Etcd&#x91CC;&#x9762;&#x83B7;&#x53D6;&#x6240;&#x6709;&#x643A;&#x5E26;&#x201C;app:nginx&#x201D;&#x6807;&#x7B7E;&#x7684;Pod&#xFF0C;&#x7EDF;&#x8BA1;&#x4ED6;&#x4EEC;&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x8FD9;&#x662F;&#x5B9E;&#x9645;&#x72B6;&#x6001;&#xFF1B;</li>
+<li>Deployment &#x5BF9;&#x8C61;&#x7684;Replicas&#x5B57;&#x6BB5;&#x662F;&#x671F;&#x671B;&#x72B6;&#x6001;&#xFF1B;</li>
+<li>Deployment &#x63A7;&#x5236;&#x5668;&#x8BB2;&#x4E24;&#x4E2A;&#x72B6;&#x6001;&#x8FDB;&#x884C;&#x5BF9;&#x6BD4;&#xFF0C;&#x6839;&#x636E;&#x5BF9;&#x6BD4;&#x7ED3;&#x679C;&#xFF0C;&#x786E;&#x5B9A;&#x5220;&#x9664;&#x8FD8;&#x662F;&#x521B;&#x5EFA;Pod&#x3002; &#x8FD9;&#x79CD;&#x5BF9;&#x6BD4;&#x64CD;&#x4F5C;&#x53EB;&#x8C03;&#x8C10;&#xFF08;Reconcile&#xFF09;&#xFF0C;&#x8FD9;&#x54E5;&#x8C03;&#x8C10;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x79F0;&#x4F5C;&#x8C03;&#x8C10;&#x5FAA;&#x73AF;&#xFF08;Reconcile Loop&#xFF09;&#x6216;&#x8005;&#x540C;&#x6B65;&#x5FAA;&#x73AF;&#xFF08;Sync Loop&#xFF09;&#x3002;</li>
+</ol>
+<figure id="fig4.1.3"><img src="../images/kubernetes-deployment-yaml.png" alt="kubernetes deployment yaml"><figcaption>Image - kubernetes deployment yaml</figcaption></figure>
+<ul>
+<li>&#x4E0A;&#x534A;&#x90E8;&#x5206;&#x662F;&#x63A7;&#x5236;&#x5668;&#x5B9A;&#x4E49;&#xFF0C;&#x5305;&#x62EC;&#x671F;&#x671B;&#x72B6;&#x6001;&#xFF1B;</li>
+<li>&#x4E0B;&#x534A;&#x90E8;&#x5206;&#x662F;&#x88AB;&#x63A7;&#x5236;&#x5BF9;&#x8C61;&#x7684;&#x6A21;&#x677F;&#x53EB;PodTemplete&#x7EC4;&#x6210;&#x3002;</li>
+</ul>
+<h2 id="custom-controller">Custom Controller</h2>
+<blockquote>
+<p><a href="https://github.com/kubernetes/sample-controller" target="_blank">https://github.com/kubernetes/sample-controller</a><br><a href="https://github.com/resouer/k8s-controller-custom-resource" target="_blank">https://github.com/resouer/k8s-controller-custom-resource</a>
+<a href="https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/" target="_blank">https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/</a></p>
+</blockquote>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;GO&#x9879;&#x76EE;&#xFF1A;</p>
+<pre><code>$ tree ~/go/src/github.com/resouer/k8s-controller-custom-resource
+.
+&#x251C;&#x2500;&#x2500; controller.go
+&#x251C;&#x2500;&#x2500; crd
+&#x2502;   &#x2514;&#x2500;&#x2500; network.yaml
+&#x251C;&#x2500;&#x2500; example
+&#x2502;   &#x2514;&#x2500;&#x2500; example-network.yaml
+&#x251C;&#x2500;&#x2500; main.go
+&#x2514;&#x2500;&#x2500; pkg
+    &#x2514;&#x2500;&#x2500; apis
+        &#x2514;&#x2500;&#x2500; samplecrd
+            &#x251C;&#x2500;&#x2500; register.go
+            &#x2514;&#x2500;&#x2500; v1
+                &#x251C;&#x2500;&#x2500; doc.go
+                &#x251C;&#x2500;&#x2500; register.go
+                &#x2514;&#x2500;&#x2500; types.go
+</code></pre><p><code>pkg/apis/samplecrd/</code>&#x4E0B;&#x521B;&#x5EFA;<code>register.go</code> &#x7528;&#x6765;&#x653E;&#x5168;&#x5C40;&#x53D8;&#x91CF;</p>
+<pre><code>package samplecrd
+
+const (
+    GroupName = &quot;samplecrd.k8s.io&quot;
+    Version   = &quot;v1&quot;
+)
+</code></pre><p><code>pkg/apis/samplecrd/v1</code> &#x4E0B;&#x521B;&#x5EFA;<code>doc.go</code> (Golang&#x7684;&#x6587;&#x6863;&#x6E90;&#x6587;&#x4EF6;)</p>
+<pre><code>// +k8s:deepcopy-gen=package
+
+// +groupName=samplecrd.k8s.io
+package v1
+</code></pre><ul>
+<li><code>+&lt;tag_name&gt;[=value]</code> &#x683C;&#x5F0F;&#x7684;&#x6CE8;&#x91CA;&#xFF0C;&#x662F;K8s&#x8FDB;&#x884C;&#x4EE3;&#x7801;&#x751F;&#x6210;&#x8981;&#x7528;&#x5230;&#x7684;Annotation&#x98CE;&#x683C;&#x7684;&#x6CE8;&#x91CA;&#x3002;  </li>
+<li><code>+k8s:deepcopy-gen=package</code> &#x4E3A;&#x6574;&#x4E2A;v1&#x5305;&#x91CC;&#x9762;&#x7684;&#x6240;&#x6709;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x81EA;&#x52A8;&#x751F;&#x6210;DeepCopy&#x65B9;&#x6CD5;&#x3002;  </li>
+<li><code>+groupName=samplecrd.k8s.io</code> &#x5B9A;&#x4E49;&#x8FD9;&#x4E2A;&#x5305;&#x5BF9;&#x5E94;&#x7684;API&#x7EC4;&#x7684;&#x540D;&#x5B57;&#x3002;</li>
+<li>&#x8FD9;&#x4E9B;&#x6CE8;&#x91CA;&#x53C8;&#x53EB; <strong>Global Tags</strong> &#x3002;</li>
+</ul>
+<p><code>pkg/apis/samplecrd/v1</code> &#x4E0B;&#x521B;&#x5EFA;<code>types.go</code>,&#x5B9A;&#x4E49;CDR&#x7C7B;&#x578B;&#x6709;&#x54EA;&#x4E9B;&#x5B57;&#x6BB5;&#xFF0C;spec&#x5B57;&#x6BB5;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
+<pre><code>package v1
+
+import (
+    metav1 &quot;k8s.io/apimachinery/pkg/apis/meta/v1&quot;
+)
+
+// +genclient
+// +genclient:noStatus
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// Network describes a Network resource
+type Network struct {
+    // TypeMeta is the metadata for the resource, like kind and apiversion
+    metav1.TypeMeta `json:&quot;,inline&quot;`
+    // ObjectMeta contains the metadata for the particular object, including
+    // things like...
+    //  - name
+    //  - namespace
+    //  - self link
+    //  - labels
+    //  - ... etc ...
+    metav1.ObjectMeta `json:&quot;metadata,omitempty&quot;`
+
+    // Spec is the custom resource spec
+    Spec NetworkSpec `json:&quot;spec&quot;`
+}
+
+// NetworkSpec is the spec for a Network resource
+type NetworkSpec struct {
+    // Cidr and Gateway are example custom spec fields
+    //
+    // this is where you would put your custom resource data
+    Cidr    string `json:&quot;cidr&quot;`
+    Gateway string `json:&quot;gateway&quot;`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// NetworkList is a list of Network resources
+type NetworkList struct {
+    metav1.TypeMeta `json:&quot;,inline&quot;`
+    metav1.ListMeta `json:&quot;metadata&quot;`
+
+    Items []Network `json:&quot;items&quot;`
+}
+</code></pre><ul>
+<li><code>TypeMeta</code>&#xFF08;API&#x5143;&#x6570;&#x636E;&#xFF09;&#x548C;<code>ObjectMeta</code>&#xFF08;&#x5BF9;&#x8C61;&#x5143;&#x6570;&#x636E;&#xFF09;&#xFF0C;&#x6807;&#x51C6;K8s&#x5BF9;&#x8C61;&#x90FD;&#x6709;&#x7684;&#x5B57;&#x6BB5;&#xFF1B; </li>
+<li><code>NetworkSpec</code> &#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x578B;&#x7684;&#x5B57;&#x6BB5;&#xFF1B;  </li>
+<li><code>NetworkList</code> &#x7C7B;&#x578B;&#x7528;&#x6765;&#x63CF;&#x8FF0;&#x4E00;&#x7EC4;Network&#x5BF9;&#x8C61;&#xFF0C;&#x56E0;&#x4E3A;Kubernetes&#x83B7;&#x53D6;&#x6240;&#x6709;&#x5BF9;&#x8C61;&#x7684;List()&#x65B9;&#x6CD5;&#xFF0C;&#x8FD4;&#x56DE;&#x503C;&#x662F;List&#x7C7B;&#x578B;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5BF9;&#x8C61;&#x7684;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x7EC4;&#x3002;</li>
+<li><code>+genclient</code> &#x4E3A;&#x4E0B;&#x9762;API&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x751F;&#x6210;&#x5BF9;&#x5E94;&#x7684;Client&#x4EE3;&#x7801;&#x3002;</li>
+<li><code>+genclient:noStatus</code> &#x8FD9;&#x4E2A;API&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x6CA1;&#x6709;Status&#x5B57;&#x6BB5;&#xFF0C;&#x5426;&#x6B63;&#x751F;&#x6210;&#x7684;Client&#x5C31;&#x4F1A;&#x81EA;&#x52A8;&#x5E26;&#x4E0A;UpdateStatus&#x5B57;&#x6BB5;&#x3002;</li>
+<li><code>+genclient</code> &#x53EA;&#x9700;&#x8981;&#x5199;&#x5728;Network&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x662F;&#x4E3B;&#x7C7B;&#x578B;&#xFF1B;&#x4E0D;&#x7528;&#x5199;&#x5728;NetworkList&#x4E0A;&#xFF0C;&#x8FD9;&#x662F;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x3002;</li>
+<li>&#x4E0D;&#x7528;&#x52A0;<code>+k8s:deepcopy-gen=</code>,Global Tags&#x91CC;&#x9762;&#x5DF2;&#x7ECF;&#x5B9A;&#x4E49;&#x4E86;&#x3002;</li>
+<li><code>+k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object</code> &#x751F;&#x6210;DeepCopy&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B9E;&#x73B0;K8s&#x63D0;&#x4F9B;&#x7684;runtime.Object&#x63A5;&#x53E3;&#x3002;&#x5426;&#x5219;&#x4F1A;&#x6709;&#x7F16;&#x8BD1;&#x9519;&#x8BEF;&#xFF0C;&#x56FA;&#x5B9A;&#x64CD;&#x4F5C;&#x3002;</li>
+</ul>
+<p><code>pkg/apis/samplecrd/v1</code> &#x4E0B;&#x521B;&#x5EFA;<code>register.go</code>&#x6587;&#x4EF6;</p>
+<pre><code>package v1
+
+import (
+    metav1 &quot;k8s.io/apimachinery/pkg/apis/meta/v1&quot;
+    &quot;k8s.io/apimachinery/pkg/runtime&quot;
+    &quot;k8s.io/apimachinery/pkg/runtime/schema&quot;
+
+    &quot;github.com/resouer/k8s-controller-custom-resource/pkg/apis/samplecrd&quot;
+)
+
+// GroupVersion is the identifier for the API which includes
+// the name of the group and the version of the API
+var SchemeGroupVersion = schema.GroupVersion{
+    Group:   samplecrd.GroupName,
+    Version: samplecrd.Version,
+}
+
+// create a SchemeBuilder which uses functions to add types to
+// the scheme
+var (
+    SchemeBuilder = runtime.NewSchemeBuilder(addKnownTypes)
+    AddToScheme   = SchemeBuilder.AddToScheme
+)
+
+// Resource takes an unqualified resource and returns a Group qualified GroupResource
+func Resource(resource string) schema.GroupResource {
+    return SchemeGroupVersion.WithResource(resource).GroupResource()
+}
+
+// Kind takes an unqualified kind and returns back a Group qualified GroupKind
+func Kind(kind string) schema.GroupKind {
+    return SchemeGroupVersion.WithKind(kind).GroupKind()
+}
+
+// addKnownTypes adds our types to the API scheme by registering
+// Network and NetworkList
+func addKnownTypes(scheme *runtime.Scheme) error {
+    scheme.AddKnownTypes(
+        SchemeGroupVersion,
+        &amp;Network{},
+        &amp;NetworkList{},
+    )
+
+    // register the type in the scheme
+    metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
+    return nil
+}
+</code></pre><ul>
+<li>&#x901A;&#x8FC7;<code>addKnownTypes</code>&#x8BA9;&#x751F;&#x6210;&#x7684;client&#x6307;&#x5B9A;Network&#x548C;NetworkList&#x7C7B;&#x578B;&#x7684;&#x5B9A;&#x4E49;&#x3002;</li>
+<li>&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x5C5E;&#x4E8E;&#x6A21;&#x677F;&#x5199;&#x6CD5;&#x3002;</li>
+</ul>
+<p>&#x901A;&#x8FC7;<code>k8s.io/code-generator</code>&#x5DE5;&#x5177;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code># &#x4EE3;&#x7801;&#x751F;&#x6210;&#x7684;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x7684;&#x9879;&#x76EE;&#x8DEF;&#x5F84;
+$ ROOT_PACKAGE=&quot;github.com/resouer/k8s-controller-custom-resource&quot;
+# API Group
+$ CUSTOM_RESOURCE_NAME=&quot;samplecrd&quot;
+# API Version
+$ CUSTOM_RESOURCE_VERSION=&quot;v1&quot;
+
+# &#x5B89;&#x88C5; k8s.io/code-generator
+$ go get -u k8s.io/code-generator/...
+$ cd $GOPATH/src/k8s.io/code-generator
+
+# &#x6267;&#x884C;&#x4EE3;&#x7801;&#x81EA;&#x52A8;&#x751F;&#x6210;&#xFF0C;&#x5176;&#x4E2D; pkg/client &#x662F;&#x751F;&#x6210;&#x76EE;&#x6807;&#x76EE;&#x5F55;&#xFF0C;pkg/apis &#x662F;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;&#x76EE;&#x5F55;
+$ ./generate-groups.sh all &quot;$ROOT_PACKAGE/pkg/client&quot; &quot;$ROOT_PACKAGE/pkg/apis&quot; &quot;$CUSTOM_RESOURCE_NAME:$CUSTOM_RESOURCE_VERSION&quot;
+enerating deepcopy funcs
+Generating clientset for samplecrd:v1 at github.com/resouer/k8s-controller-custom-resource/pkg/client/clientset
+Generating listers for samplecrd:v1 at github.com/resouer/k8s-controller-custom-resource/pkg/client/listers
+Generating informers for samplecrd:v1 at github.com/resouer/k8s-controller-custom-resource/pkg/client/informers
+</code></pre><p><code>./generate-groups.sh</code>&#x53C2;&#x6570;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x8DDF;import&#x4E00;&#x6837;&#x7684;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;</p>
+<p>&#x751F;&#x6210;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>$ tree
+.
+&#x251C;&#x2500;&#x2500; controller.go
+&#x251C;&#x2500;&#x2500; crd
+&#x2502;   &#x2514;&#x2500;&#x2500; network.yaml
+&#x251C;&#x2500;&#x2500; example
+&#x2502;   &#x2514;&#x2500;&#x2500; example-network.yaml
+&#x251C;&#x2500;&#x2500; main.go
+&#x2514;&#x2500;&#x2500; pkg
+    &#x251C;&#x2500;&#x2500; apis
+    &#x2502;   &#x2514;&#x2500;&#x2500; samplecrd
+    &#x2502;       &#x251C;&#x2500;&#x2500; constants.go
+    &#x2502;       &#x2514;&#x2500;&#x2500; v1
+    &#x2502;           &#x251C;&#x2500;&#x2500; doc.go
+    &#x2502;           &#x251C;&#x2500;&#x2500; register.go
+    &#x2502;           &#x251C;&#x2500;&#x2500; types.go
+    &#x2502;           &#x2514;&#x2500;&#x2500; zz_generated.deepcopy.go
+    &#x2514;&#x2500;&#x2500; client
+        &#x251C;&#x2500;&#x2500; clientset
+        &#x251C;&#x2500;&#x2500; informers
+        &#x2514;&#x2500;&#x2500; listers
+</code></pre><ul>
+<li><code>zz_generated.deepcopy.go</code> &#x81EA;&#x52A8;&#x751F;&#x6210;&#x7684;DeepCopy&#x4EE3;&#x7801;&#x6587;&#x4EF6;&#x3002;</li>
+<li>&#x751F;&#x6210;client&#x76EE;&#x5F55;&#xFF0C;K8s&#x4E3A;Network&#x7C7B;&#x578B;&#x751F;&#x6210;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x5E93;&#xFF0C;&#x540E;&#x9762;&#x5199;&#x81EA;&#x5B9A;&#x4E49;&#x63A7;&#x5236;&#x5668;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x7528;&#x5230;&#x3002;</li>
+</ul>
+<p><code>main.go</code> &#x91CC;&#x9762;&#x5B8C;&#x6210;&#x521D;&#x59CB;&#x5316;&#x548C;&#x542F;&#x52A8;&#x4E00;&#x5171;&#x81EA;&#x5B9A;&#x4E49;controller&#x3002;</p>
+<figure id="fig4.1.4"><img src="../images/kubernetes-custom-controller.png" alt="kubernetes custom controller"><figcaption>Image - kubernetes custom controller</figcaption></figure>
+<pre><code>package main
+
+var (
+    masterURL  string
+    kubeconfig string
+)
+
+func main() {
+    flag.Parse()
+
+    // set up signals so we handle the first shutdown signal gracefully
+    stopCh := signals.SetupSignalHandler()
+
+    cfg, err := clientcmd.BuildConfigFromFlags(masterURL, kubeconfig)
+    if err != nil {
+        glog.Fatalf(&quot;Error building kubeconfig: %s&quot;, err.Error())
+    }
+
+    kubeClient, err := kubernetes.NewForConfig(cfg)
+    if err != nil {
+        glog.Fatalf(&quot;Error building kubernetes clientset: %s&quot;, err.Error())
+    }
+
+    networkClient, err := clientset.NewForConfig(cfg)
+    if err != nil {
+        glog.Fatalf(&quot;Error building example clientset: %s&quot;, err.Error())
+    }
+
+    networkInformerFactory := informers.NewSharedInformerFactory(networkClient, time.Second*30)
+
+    controller := NewController(kubeClient, networkClient,
+        networkInformerFactory.Samplecrd().V1().Networks())
+
+    go networkInformerFactory.Start(stopCh)
+
+    if err = controller.Run(2, stopCh); err != nil {
+        glog.Fatalf(&quot;Error running controller: %s&quot;, err.Error())
+    }
+}
+
+func init() {
+    flag.StringVar(&amp;kubeconfig, &quot;kubeconfig&quot;, &quot;&quot;, &quot;Path to a kubeconfig. Only required if out-of-cluster.&quot;)
+    flag.StringVar(&amp;masterURL, &quot;master&quot;, &quot;&quot;, &quot;The address of the Kubernetes API server. Overrides any value in kubeconfig. Only required if out-of-cluster.&quot;)
+}
+</code></pre><ul>
+<li>Informer&#x548C;API&#x5BF9;&#x8C61;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#xFF0C;&#x6211;&#x4EEC;&#x81EA;&#x5B9A;&#x4E49;Network&#x5BF9;&#x8C61;&#x7684;Informer&#x5C31;&#x662F;Network Informer&#x3002;</li>
+<li>networkInformerFactory&#x901A;&#x8FC7;networkClient&#x8DDF;APIServer&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#xFF0C;&#x8D1F;&#x8D23;&#x7EF4;&#x62A4;&#x8FD9;&#x4E2A;&#x8FDE;&#x63A5;&#x7684;&#x662F;Relflector&#x5305;&#xFF0C;&#x901A;&#x8FC7;ListAndWatch&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x548C;&#x76D1;&#x542C;Network&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#x5316;&#x7684;&#x53D8;&#x5316;&#x3002;</li>
+<li>ListAndWatch&#x4E00;&#x65E6;&#x76D1;&#x63A7;&#x76D7;APIServer&#x7AEF;&#x6709;&#x4FE1;&#x7684;Network&#x5B9E;&#x4F8B;&#x88AB;&#x521B;&#x5EFA;&#xFF0C;&#x5220;&#x9664;&#x6216;&#x8005;&#x66F4;&#x65B0;&#xFF0C;Reflector&#x5C31;&#x4F1A;&#x6536;&#x5230;&#x201C;&#x4E8B;&#x4EF6;&#x901A;&#x77E5;&#x201D;&#x3002;&#x8BE5;&#x4E8B;&#x4EF6;&#x53CA;&#x5B83;&#x5BF9;&#x5E94;&#x7684;API&#x5BF9;&#x8C61; &#x53EB;&#x589E;&#x91CF;&#xFF08;Delta&#xFF09;&#xFF0C;&#x653E;&#x8FDB;FIFO&#x4E2D;&#x3002;</li>
+<li>Informer&#x4E0D;&#x65AD;&#x4ECE;FIFO&#x4E2D;Pop&#x589E;&#x91CF;&#xFF0C;&#x5224;&#x65AD;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#xFF0C;&#x521B;&#x5EFA;&#x6216;&#x66F4;&#x65B0;&#x672C;&#x5730;&#x5BF9;&#x8C61;&#x7F13;&#x5B58;&#xFF08;Store&#xFF09;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x4E8B;&#x4EF6;&#x662F;Added&#xFF0C;Informer&#x4F1A;&#x901A;&#x8FC7;Indexer&#x628A;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#x4FDD;&#x5B58;&#x5230;&#x672C;&#x5730;&#x7F13;&#x5B58;&#xFF0C;&#x5E76;&#x521B;&#x5EFA;&#x7D22;&#x5F15;&#xFF1B;&#x5982;&#x679C;&#x662F;Deleted&#xFF0C;&#x5219;&#x4F1A;&#x4ECE;&#x672C;&#x5730;&#x7F13;&#x5B58;&#x5220;&#x6389;&#x3002;</li>
+<li>Informer&#x6839;&#x636E;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#xFF0C;&#x89E6;&#x53D1;&#x4E8B;&#x5148;&#x6CE8;&#x518C;&#x597D;&#x7684;ResourceEventHandler&#xFF08;AddFunc&#xFF0C;DeleteFunc&#xFF0C;UpdateFunc&#xFF09;&#x3002;  </li>
+<li>main &#x91CC;&#x9762;&#x521B;&#x5EFA;2&#x4E2A;client&#x548C;Informer&#xFF0C;&#x5B8C;&#x6210;&#x521D;&#x59CB;&#x5316;&#x63A7;&#x5236;&#x5668;&#x3002;</li>
+<li>Informer&#x9664;&#x4E86;&#x76D1;&#x542C;&#x76D7;&#x4E8B;&#x4EF6;&#x4F1A;&#x540C;&#x6B65;&#x672C;&#x5730;&#x7F13;&#x5B58;&#x5916;&#xFF0C;&#x8FD8;&#x4F1A;&#x7ECF;&#x8FC7;resyncPeriod&#x6307;&#x5B9A;&#x4E8B;&#x4EF6;&#xFF0C;&#x7EF4;&#x62A4;&#x7F13;&#x5B58;&#xFF0C;&#x4F7F;&#x7528;&#x6700;&#x8FD1;&#x4E00;&#x6B21;LIST&#x7ED3;&#x679C;&#x5F3A;&#x5236;&#x66F4;&#x65B0;&#x4E00;&#x6B21;&#x3002;&#x5728;K8s&#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;&#x7F13;&#x5B58;&#x5F3A;&#x5236;&#x66F4;&#x65B0;&#x7684;&#x64CD;&#x4F5C;&#x53EB;<strong>resync</strong>&#x3002;   </li>
+</ul>
+<p>&#x603B;&#x4E4B;&#xFF1A;<strong>Informer&#x6709;&#x4E24;&#x4E2A;&#x804C;&#x8D23;&#xFF1A;1.&#x7EF4;&#x62A4;&#x672C;&#x5730;&#x7F13;&#x5B58;&#xFF08;store&#xFF09;&#xFF1B;2.&#x89E6;&#x53D1;Handler&#x3002;Informer&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5E26;&#x672C;&#x5730;&#x7F13;&#x5B58;&#x548C;&#x7D22;&#x5F15;&#x673A;&#x5236;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x6CE8;&#x518C;EventHandler&#x7684;client&#x3002;</strong>&#xFF1B;</p>
+<pre><code>func NewController(
+  kubeclientset kubernetes.Interface,
+  networkclientset clientset.Interface,
+  networkInformer informers.NetworkInformer) *Controller {
+  ...
+  controller := &amp;Controller{
+    kubeclientset:    kubeclientset,
+    networkclientset: networkclientset,
+    networksLister:   networkInformer.Lister(),
+    networksSynced:   networkInformer.Informer().HasSynced,
+    workqueue:        workqueue.NewNamedRateLimitingQueue(...,  &quot;Networks&quot;),
+    ...
+  }
+    networkInformer.Informer().AddEventHandler(cache.ResourceEventHandlerFuncs{
+    AddFunc: controller.enqueueNetwork,
+    UpdateFunc: func(old, new interface{}) {
+      oldNetwork := old.(*samplecrdv1.Network)
+      newNetwork := new.(*samplecrdv1.Network)
+      if oldNetwork.ResourceVersion == newNetwork.ResourceVersion {
+        return
+      }
+      controller.enqueueNetwork(new)
+    },
+    DeleteFunc: controller.enqueueNetworkForDelete,
+ return controller
+}
+</code></pre><ul>
+<li>&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;work queue&#xFF0C;&#x540C;&#x6B65;Informer&#x548C;&#x63A7;&#x5236;&#x5FAA;&#x73AF;&#x4E4B;&#x95F4;&#x7684;&#x6570;&#x636E;&#x3002;</li>
+<li>&#x4E3A;networkInformer&#x6CE8;&#x518C;3&#x4E2A;Handler&#x3002;</li>
+<li>&#x5B9E;&#x9645;&#x5165;&#x961F;&#x7684;&#x4E0D;&#x662F;API&#x5BF9;&#x8C61;&#x672C;&#x8EAB;&#xFF0C;&#x662F;Key&#xFF0C;<namespace>/<name>&#x3002;</name></namespace></li>
+<li>&#x63A7;&#x5236;&#x5FAA;&#x73AF;&#x4E0D;&#x505C;&#x7684;&#x4ECE;queue&#x91CC;&#x9762;&#x62FF;Key&#xFF0C;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x771F;&#x6B63;&#x7684;&#x63A7;&#x5236;&#x903B;&#x8F91;&#x3002;</li>
+</ul>
+<pre><code>func (c *Controller) Run(threadiness int, stopCh &lt;-chan struct{}) error {
+ ...
+  if ok := cache.WaitForCacheSync(stopCh, c.networksSynced); !ok {
+    return fmt.Errorf(&quot;failed to wait for caches to sync&quot;)
+  }
+
+  ...
+  for i := 0; i &lt; threadiness; i++ {
+    go wait.Until(c.runWorker, time.Second, stopCh)
+  }
+
+  ...
+  return nil
+}
+</code></pre><ul>
+<li>main &#x4E2D;&#x8C03;&#x7528;controller.Run()&#x542F;&#x52A8;&#x63A7;&#x5236;&#x5FAA;&#x73AF;&#x3002;</li>
+<li>&#x7B49;&#x5F85;Informer&#x5B8C;&#x6210;&#x4E00;&#x6B21;&#x672C;&#x5730;&#x7F13;&#x5B58;&#x6570;&#x636E;&#x540C;&#x6B65;&#x540E;&#xFF0C;&#x542F;&#x52A8;&#x591A;&#x4E2A;&#x65E0;&#x9650;&#x5FAA;&#x73AF;&#x7684;&#x4EFB;&#x52A1;&#x3002;</li>
+</ul>
+<pre><code>func (c *Controller) runWorker() {
+  for c.processNextWorkItem() {
+  }
+}
+
+func (c *Controller) processNextWorkItem() bool {
+  obj, shutdown := c.workqueue.Get()
+
+  ...
+
+  err := func(obj interface{}) error {
+    ...
+    if err := c.syncHandler(key); err != nil {
+     return fmt.Errorf(&quot;error syncing &apos;%s&apos;: %s&quot;, key, err.Error())
+    }
+
+    c.workqueue.Forget(obj)
+    ...
+    return nil
+  }(obj)
+
+  ...
+
+  return true
+}
+
+func (c *Controller) syncHandler(key string) error {
+
+  namespace, name, err := cache.SplitMetaNamespaceKey(key)
+  ...
+
+  network, err := c.networksLister.Networks(namespace).Get(name)
+  if err != nil {
+    if errors.IsNotFound(err) {
+      glog.Warningf(&quot;Network does not exist in local cache: %s/%s, will delete it from Neutron ...&quot;,
+      namespace, name)
+
+      glog.Warningf(&quot;Network: %s/%s does not exist in local cache, will delete it from Neutron ...&quot;,
+    namespace, name)
+
+     // FIX ME: call Neutron API to delete this network by name.
+     //
+     // neutron.Delete(namespace, name)
+
+     return nil
+  }
+    ...
+
+    return err
+  }
+
+  glog.Infof(&quot;[Neutron] Try to process network: %#v ...&quot;, network)
+
+  // FIX ME: Do diff().
+  //
+  // actualNetwork, exists := neutron.Get(namespace, name)
+  //
+  // if !exists {
+  //   neutron.Create(namespace, name)
+  // } else if !reflect.DeepEqual(actualNetwork, network) {
+  //   neutron.Update(namespace, name)
+  // }
+
+  return nil
+}
+</code></pre><ul>
+<li>&#x4ECE;workqueue.Get&#x4E00;&#x4E2A;Key&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x8FD4;&#x56DE;IsNotFound&#xFF0C;&#x5219;&#x6807;&#x8BC6;&#x8FD9;&#x4E2A;Key&#x662F;&#x524D;&#x9762;&#x901A;&#x8FC7;&#x5220;&#x9664;&#x4E8B;&#x4EF6;&#x52A0;&#x5165;&#x5230;&#x961F;&#x5217;&#x7684;&#xFF0C;&#x867D;&#x7136;&#x961F;&#x5217;&#x6709;&#x8FD9;&#x4E2A;Key&#xFF0C;&#x4F46;&#x662F;&#x5B9E;&#x4F8B;&#x5DF2;&#x7ECF;&#x88AB;&#x5220;&#x4E86;&#x3002;</li>
+<li>&#x63A7;&#x5236;&#x5668;&#x62FF;&#x5230;&#x7684;&#x8FD9;&#x4E2A;Key&#x5BF9;&#x5E94;&#x7684;Network&#x5BF9;&#x8C61;&#xFF0C;&#x662F;APIServer&#x91CC;&#x4FDD;&#x5B58;&#x7684;&#x201C;&#x671F;&#x671B;&#x72B6;&#x6001;&#x201D;</li>
+<li>&#x201C;&#x5B9E;&#x9645;&#x72B6;&#x6001;&#x201D;&#x5F97;&#x901A;&#x8FC7;&#x8BBF;&#x95EE;&#x96C6;&#x7FA4;&#x83B7;&#x53D6;&#x3002;</li>
+<li>&#x901A;&#x8FC7;&#x5BF9;&#x6BD4;&#x671F;&#x671B;&#x72B6;&#x6001;&#x548C;&#x5B9E;&#x9645;&#x72B6;&#x6001;&#x7684;&#x5DEE;&#x5F02;&#xFF0C;&#x5B8C;&#x6210;&#x4E00;&#x6B21;&#x534F;&#x8C03;&#x7684;&#x8FC7;&#x7A0B;&#x3002;</li>
+</ul>
+<pre><code># Clone repo
+
+$ go build -o samplecrd-controller .
+
+$ ./samplecrd-controller -kubeconfig=$HOME/.kube/config -alsologtostderr=true
+I0915 12:50:29.051349   27159 controller.go:84] Setting up event handlers
+I0915 12:50:29.051615   27159 controller.go:113] Starting Network control loop
+I0915 12:50:29.051630   27159 controller.go:116] Waiting for informer caches to sync
+E0915 12:50:29.066745   27159 reflector.go:134] github.com/resouer/k8s-controller-custom-resource/pkg/client/informers/externalversions/factory.go:117: Failed to list *v1.Network: the server could not find the requested resource (get networks.samplecrd.k8s.io)
+...
+</code></pre><p>&#x7F16;&#x8BD1;&#x5DE5;&#x7A0B;&#xFF0C;&#x6267;&#x884C;&#x63A7;&#x5236;&#x5668;&#xFF0C;&#x521B;&#x5EFA;,&#x66F4;&#x65B0;&#xFF0C;&#x5220;&#x9664;Network,&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6253;&#x5370;&#x4FE1;&#x606F;&#x3002;</p>
+<p><strong>&#x6574;&#x4E2A;&#x6D41;&#x7A0B;&#x4E0D;&#x4EC5;&#x53EF;&#x4EE5;&#x7528;&#x5728;&#x81EA;&#x5B9A;&#x4E49;API&#x8D44;&#x6E90;&#xFF0C;&#x800C;&#x4E14;&#x53EF;&#x4EE5;&#x7528;&#x5728;K8s&#x539F;&#x751F;&#x7684;&#x9ED8;&#x8BA4;API&#x5BF9;&#x8C61;&#x4E0A;&#x5B8C;&#x6210;&#x590D;&#x6742;&#x7684;&#x7F16;&#x6392;&#x529F;&#x80FD;&#xFF0C;&#x6BD4;&#x5982;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;Deployment&#x7684;Informer&#x7B49;</strong></p>
+<h1 id="demo---istio">Demo - Istio</h1>
+<p>Istio&#x9879;&#x76EE;&#x65F6;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E;Kubernetes&#x9879;&#x76EE;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x6CBB;&#x7406;&#x6846;&#x67B6;&#xFF1A;</p>
+<figure id="fig4.1.5"><img src="../images/kubernetes-istio-demo.jpg" alt="kubernetes istio"><figcaption>Image - kubernetes istio</figcaption></figure>
+<p>Istio&#x6700;&#x6839;&#x672C;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x65F6;&#x8FD0;&#x884C;&#x5728;&#x6BCF;&#x4E2A;&#x5E94;&#x7528;Pod&#x91CC;&#x9762;&#x7684;Envoy&#x5BB9;&#x5668;&#x3002;   </p>
+<p>Envoy&#x9879;&#x76EE;&#x662F;&#x4E00;&#x4E2A;&#x9AD8;&#x6027;&#x80FD;C++&#x7F51;&#x7EDC;&#x4EE3;&#x7406;&#xFF0C;&#x8FD9;&#x4E2A;&#x4EE3;&#x7406;&#x670D;&#x52A1;&#x4EE5;sidecar&#x5BB9;
+&#x5668;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x8FD0;&#x884C;&#x5728;&#x6BCF;&#x4E2A;&#x88AB;&#x6CBB;&#x7406;&#x7684;&#x5E94;&#x7528;Pod&#x4E2D;&#xFF0C;&#x5171;&#x4EAB;Network Namespace&#xFF0C;Envoy&#x5BB9;&#x5668;&#x901A;&#x8FC7;Pod&#x7684;iptables&#xFF0C;&#x628A;&#x6574;&#x4E2A;Pod&#x7684;&#x8FDB;&#x51FA;&#x6D41;&#x91CF;&#x63A5;&#x7BA1;&#x4E0B;&#x6765;&#x3002;  </p>
+<p>Istio&#x7684;&#x63A7;&#x5236;&#x5C42;&#xFF08;Control Plane&#xFF09;&#x91CC;&#x7684;Pilot&#x7EC4;&#x4EF6;&#xFF0C;&#x901A;&#x8FC7;&#x8C03;&#x7528;Envoy&#x5BB9;&#x5668;&#x7684;API&#xFF0C;&#x5BF9;Envoy&#x4EE3;&#x7406;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#xFF0C;&#x5B9E;&#x73B0;&#x5FAE;&#x670D;&#x52A1;&#x6CBB;&#x7406;&#x3002;  </p>
+<h2 id="dynamic-admission-control--initializer">Dynamic Admission Control / Initializer</h2>
+<p>&#x5F53;&#x4E00;&#x4E2A;Pod&#x6216;&#x8005;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;API&#x5BF9;&#x8C61;&#x88AB;&#x63D0;&#x4EA4;&#x7ED9;APIServer&#x540E;&#xFF0C;&#x603B;&#x7531;&#x4E00;&#x4E9B;&#x201C;&#x521D;&#x59CB;&#x5316;&#x201D;&#x6027;&#x8D28;&#x7684;&#x5DE5;&#x4F5C;&#x9700;&#x8981;&#x5728;&#x5B83;&#x4EEC;&#x88AB;Kubernetes&#x9879;&#x76EE;&#x6B63;&#x5F0F;&#x5904;&#x7406;&#x4E4B;&#x524D;&#x8FDB;&#x884C;&#xFF0C;&#x6BD4;&#x5982;&#x81EA;&#x52A8;&#x52A0;Lables&#x3002;  </p>
+<p>&#x201C;&#x521D;&#x59CB;&#x5316;&#x201D;&#x64CD;&#x4F5C;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x501F;&#x52A9;&#x4E00;&#x4E2A;&#x53EB;Admission&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x5C31;&#x662F;Kubernetes&#x9879;&#x76EE;&#x91CC;&#x4E00;&#x7EC4;&#x88AB;&#x6210;&#x4E3A;Admission Controller&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x6027;&#x88AB;&#x7F16;&#x8BD1;&#x8FDB;APIServer&#x4E2D;&#xFF0C;&#x5728;API&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x4E4B;&#x521D;&#x540E;&#x88AB;&#x7ACB;&#x523B;&#x8C03;&#x7528;&#x3002;  </p>
+<p>Kubernetes&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x79CD;&#x4E0D;&#x7528;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;APIServer&#x7684;&#x201C;&#x70ED;&#x63D2;&#x62D4;&#x201D;&#x5F0F;&#x7684;Admisson&#x673A;&#x5236;&#xFF0C;&#x53EB;Dynamic Admission Control&#xFF0C;&#x53C8;&#x53EB;Initializer&#x3002;</p>
+<p><strong>&#x4E3E;&#x4F8B;&#xFF1A;</strong></p>
+<blockquote>
+<p>demo &#x5730;&#x5740;&#xFF1A;<a href="https://github.com/resouer/kubernetes-initializer-tutorial" target="_blank">https://github.com/resouer/kubernetes-initializer-tutorial</a></p>
+</blockquote>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Pod&#xFF0C;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x5BB9;&#x5668;&#xFF1A;</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox
+    command: [&apos;sh&apos;, &apos;-c&apos;, &apos;echo Hello Kubernetes! &amp;&amp; sleep 3600&apos;]
+</code></pre><p>Istio&#x9879;&#x76EE;&#x8981;&#x505A;&#x7684;&#xFF0C;&#x5C31;&#x662F;&#x5728;&#x8FD9;&#x4E2A;Pod YAML&#x88AB;&#x63D0;&#x4EA4;&#x7ED9;Kubernetes&#x4E4B;&#x540E;&#xFF0C;&#x5728;&#x5B83;&#x5BF9;&#x5E94;&#x7684;API&#x5BF9;&#x8C61;&#x91CC;&#x9762;&#x81EA;&#x52A8;&#x52A0;&#x4E0A;Envoy&#x5BB9;&#x5668;&#x7684;&#x914D;&#x7F6E;&#xFF1A;</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox
+    command: [&apos;sh&apos;, &apos;-c&apos;, &apos;echo Hello Kubernetes! &amp;&amp; sleep 3600&apos;]
+  - name: envoy
+    image: lyft/envoy:845747b88f102c0fd262ab234308e9e22f693a1
+    command: [&quot;/usr/local/bin/envoy&quot;]
+    ...
+</code></pre><p>&#x88AB;Istio&#x5904;&#x7406;&#x540E;&#xFF0C;&#x8FD9;&#x4E2A;Pod&#x91CC;&#x9762;&#xFF0C;&#x591A;&#x4E86;&#x4E00;&#x4E2A;&#x53EB;Envoy&#x7684;&#x5BB9;&#x5668;&#x3002;  </p>
+<p>Istio&#x8981;&#x505A;&#x7684;&#x5C31;&#x662F;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x7528;&#x6765;&#x4E3A;Pod&#x201C;&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x201D;Envoy &#x5BB9;&#x5668;&#x7684;Initializer&#x3002;</p>
+<p>&#x5148;Istio&#x5C06;&#x8FD9;&#x4E2A;Envoy&#x5BB9;&#x5668;&#x672C;&#x8EAB;&#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x4EE5;ConfigMap&#x7684;&#x65B9;&#x5F0F;&#x4FDD;&#x5B58;&#x5728;Kubernetes&#x4E2D;, data&#x90E8;&#x5206;&#x5F0F;&#x4E00;&#x4E2A;Pod&#x5BF9;&#x8C61;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x5B9A;&#x4E49;&#xFF1A;</p>
+<pre><code>apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: envoy-initializer
+data:
+  config: |
+    containers:
+      - name: envoy
+        image: lyft/envoy:845747db88f102c0fd262ab234308e9e22f693a1
+        command: [&quot;/usr/local/bin/envoy&quot;]
+        args:
+          - &quot;--concurrency 4&quot;
+          - &quot;--config-path /etc/envoy/envoy.json&quot;
+          - &quot;--mode serve&quot;
+        ports:
+          - containerPort: 80
+            protocol: TCP
+        resources:
+          limits:
+            cpu: &quot;1000m&quot;
+            memory: &quot;512Mi&quot;
+          requests:
+            cpu: &quot;100m&quot;
+            memory: &quot;64Mi&quot;
+        volumeMounts:
+          - name: envoy-conf
+            mountPath: /etc/envoy
+    volumes:
+      - name: envoy-conf
+        configMap:
+          name: envoy
+</code></pre><p>Initializer&#x8981;&#x5E72;&#x7684;&#x5DE5;&#x4F5C;&#x5C31;&#x662F;&#x628A;Envoy&#x76F8;&#x5173;&#x5B57;&#x6BB5;&#xFF0C;&#x81EA;&#x52A8;&#x6DFB;&#x52A0;&#x5230;&#x7528;&#x6237;&#x63D0;&#x4EA4;&#x7684;Pod&#x7684;API&#x5BF9;&#x8C61;&#x91CC;&#x3002;  </p>
+<p>&#x7528;&#x6237;&#x63D0;&#x4EA4;&#x7684;Pod&#x91CC;&#x9762;&#x672C;&#x6765;&#x5C31;&#x6709;Containers&#xFF0C;volume&#x5B57;&#x6BB5;&#xFF0C;Kubernetes&#x5728;&#x5904;&#x7406;&#x8FD9;&#x4E9B;&#x7684;&#x66F4;&#x65B0;&#x8BF7;&#x6C42;&#x65F6;&#xFF0C;&#x5C31;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x7C7B;&#x4F3C;git merge&#x8FD9;&#x6837;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5C06;&#x4E24;&#x90E8;&#x5206;&#x5185;&#x5BB9;&#x5408;&#x5E76;&#x3002;</p>
+<p>Initializer&#x66F4;&#x65B0;&#x7528;&#x6237;Pod&#x5BF9;&#x8C61;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;PATCH API&#x6765;&#x5B8C;&#x6210;&#x3002;&#x8FD9;&#x79CD;PATCH API&#x662F;&#x58F0;&#x660E;&#x5F0F;API&#x6700;&#x4E3B;&#x8981;&#x7684;&#x80FD;&#x529B;&#x3002;  </p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#xFF0C;Istio&#x5C06;&#x4E00;&#x4E2A;&#x7F16;&#x5199;&#x597D;&#x7684;Initializer&#xFF0C;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;Pod&#x90E8;&#x7F72;&#x5728;Kubernetes&#x4E2D;&#xFF1A;</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: envoy-initializer
+  name: envoy-initializer
+spec:
+  containers:
+    - name: envoy-initializer
+      image: envoy-initializer:0.0.1
+      imagePullPolicy: Always
+</code></pre><p>Kubernetes&#x7684;Controller&#x7684;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x6B7B;&#x5FAA;&#x73AF;&#xFF0C;&#x4E0D;&#x65AD;&#x83B7;&#x53D6;&#x5B9E;&#x9645;&#x72B6;&#x6001;&#xFF0C;&#x4E0E;&#x671F;&#x671B;&#x72B6;&#x6001;&#x4F5C;&#x5BF9;&#x6BD4;&#x3002;  </p>
+<p>envoy-initializer&#x4F7F;&#x7528;&#x7684;&#x955C;&#x50CF;&#x662F;&#x4E00;&#x4E2A;&#x4E8B;&#x5148;&#x7F16;&#x8BD1;&#x597D;&#x7684;Custom Controller&#xFF0C;&#x4E3B;&#x8981;&#x529F;&#x80FD;&#x662F;&#xFF1A;<br>&#x4E0D;&#x65AD;&#x83B7;&#x53D6;&#x5230;&#x201C;&#x5B9E;&#x9645;&#x72B6;&#x6001;&#x201D;&#xFF0C;&#x5C31;&#x662F;&#x7528;&#x6237;&#x65B0;&#x521B;&#x5EFA;&#x7684;Pod&#x3002;&#x5B83;&#x7684;&#x201C;&#x671F;&#x671B;&#x72B6;&#x6001;&#x201D;&#xFF0C;&#x5219;&#x662F;&#xFF1A;&#x8FD9;&#x4E2A;Pod&#x91CC;&#x88AB;&#x6DFB;&#x52A0;Envoy&#x5BB9;&#x5668;&#x7684;&#x5B9A;&#x4E49;&#x3002;</p>
+<pre><code>for {
+  // &#x83B7;&#x53D6;&#x65B0;&#x521B;&#x5EFA;&#x7684; Pod
+  pod := client.GetLatestPod()
+  // Diff &#x4E00;&#x4E0B;&#xFF0C;&#x68C0;&#x67E5;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x521D;&#x59CB;&#x5316;&#x8FC7;
+  if !isInitialized(pod) {
+    // &#x6CA1;&#x6709;&#xFF1F;&#x90A3;&#x5C31;&#x6765;&#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E0B;
+    doSomething(pod)
+  }
+}
+
+func doSomething(pod) {
+  cm := client.Get(ConfigMap, &quot;envoy-initializer&quot;)
+
+  newPod := Pod{}
+  newPod.Spec.Containers = cm.Containers
+  newPod.Spec.Volumes = cm.Volumes
+
+  // &#x751F;&#x6210; patch &#x6570;&#x636E;
+  patchBytes := strategicpatch.CreateTwoWayMergePatch(pod, newPod)
+
+  // &#x53D1;&#x8D77; PATCH &#x8BF7;&#x6C42;&#xFF0C;&#x4FEE;&#x6539;&#x8FD9;&#x4E2A; pod &#x5BF9;&#x8C61;
+  client.Patch(pod.Name, patchBytes)
+}
+</code></pre><p>&#x5224;&#x65AD;&#x5982;&#x679C;Pod&#x91CC;&#x9762;&#x6CA1;&#x6709;&#x6DFB;&#x52A0;&#x8FC7;Envoy&#x5BB9;&#x5668;&#xFF0C;&#x5219;&#x8FDB;&#x884C;Initialize&#x64CD;&#x4F5C;&#xFF0C;&#x4FEE;&#x6539;Pod&#x7684;API&#xFF08;doSomething&#xFF09;&#x3002;  </p>
+<p>Initializer&#xFF1A;  </p>
+<ul>
+<li>&#x5148;&#x4ECE;APIServer&#x91CC;&#x62FF;&#x5230;ConfigMap&#xFF1B;  </li>
+<li>&#x628A;ConfigMap&#x91CC;&#x9762;&#x7684;containers&#x548C;volumes&#x5B57;&#x6BB5;&#xFF0C;&#x76F4;&#x63A5;&#x6DFB;&#x52A0;&#x8FDB;&#x4E00;&#x4E2A;&#x7A7A;Pod&#x5BF9;&#x8C61;&#x91CC;&#x9762;&#xFF1B;  </li>
+<li>&#x8C03;&#x7528;Kubernetes API&#x5E93;&#x63D0;&#x4F9B;&#x7684;&#x5408;&#x5E76;&#x4E24;&#x4E2A;Pod&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5;CreateTwoWayMergePatch&#x751F;&#x6210;woWayMergePatch&#xFF1B;  </li>
+<li>&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;patch&#x6570;&#x636E;&#xFF0C;&#x8C03;&#x7528;Client&#xFF0C;&#x53D1;&#x8D77;&#x4E00;&#x4E2A;PATCH&#x8BF7;&#x6C42;&#x3002;</li>
+</ul>
+<p>&#x8FD9;&#x6837;&#x5C31;&#x5B8C;&#x6210;&#x4E86;&#x5BF9;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x63D0;&#x4EA4;&#x7684;Pod&#xFF0C;&#x81EA;&#x52A8;&#x52A0;&#x4E0A;Envoy&#x5BB9;&#x5668;&#x76F8;&#x5173;&#x5B57;&#x6BB5;&#x3002;</p>
+<p>Kubernetes&#x8FD8;&#x5141;&#x8BB8;&#x4F60;&#x901A;&#x8FC7;&#x914D;&#x7F6E;&#xFF0C;&#x6765;&#x6307;&#x5B9A;&#x8981;&#x5BF9;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x8D44;&#x6E90;&#x8FDB;&#x884C;Initialize&#x64CD;&#x4F5C;&#xFF1A;</p>
+<pre><code>apiVersion: admissionregistration.k8s.io/v1alpha1
+kind: InitializerConfiguration
+metadata:
+  name: envoy-config
+initializers:
+  // &#x8FD9;&#x4E2A;&#x540D;&#x5B57;&#x5FC5;&#x987B;&#x81F3;&#x5C11;&#x5305;&#x62EC;&#x4E24;&#x4E2A; &quot;.&quot;
+  - name: envoy.initializer.kubernetes.io
+    rules:
+      - apiGroups:
+          - &quot;&quot; // &#x524D;&#x9762;&#x8BF4;&#x8FC7;&#xFF0C; &quot;&quot; &#x5C31;&#x662F; core API Group &#x7684;&#x610F;&#x601D;
+        apiVersions:
+          - v1
+        resources:
+          - pods
+</code></pre><p>&#x8FD9;&#x4E2A;&#x914D;&#x7F6E;&#x5BF9;&#x6240;&#x6709;Pod&#x8FDB;&#x884C;Initialize&#x64CD;&#x4F5C;&#xFF0C;&#x6307;&#x5B9A;&#x8D1F;&#x8D23;&#x64CD;&#x4F5C;&#x7684;Initializer&#x53EB;envoy-initializer&#x3002;  </p>
+<p>&#x4E00;&#x65E6;&#x8FD9;&#x4E2A;InitializerConfiguration&#x88AB;&#x521B;&#x5EFA;&#xFF0C;Kubernetes&#x5C31;&#x4F1A;&#x628A;&#x8FD9;&#x4E2A;Initializer&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x52A0;&#x5230;&#x65B0;Pod&#x7684;Metadata&#x4E0A;&#xFF1A;</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  initializers:
+    pending:
+      - name: envoy.initializer.kubernetes.io
+  name: myapp-pod
+  labels:
+    app: myapp
+...
+</code></pre><p>&#x6BCF;&#x4E00;&#x4E2A;&#x65B0;&#x521B;&#x7684;Pod&#xFF0C;&#x90FD;&#x4F1A;&#x81EA;&#x52A8;&#x643A;&#x5E26;metadata.initializers.pending&#x7684;Metadata&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;Metadata&#xFF0C;&#x5C31;&#x662F;Initializer&#x7684;&#x63A7;&#x5236;&#x5668;&#x5224;&#x65AD;&#x8FD9;&#x4E2A;Pod&#x6709;&#x6CA1;&#x6709;&#x6267;&#x884C;&#x8FC7;&#x6240;&#x8D1F;&#x8D23;&#x7684;&#x521D;&#x59CB;&#x5316;&#x7684;&#x64CD;&#x4F5C;&#x7684;&#x91CD;&#x8981;&#x4E00;&#x53E5;&#xFF0C;&#x5C31;&#x662F;isInitialized&#x65B9;&#x6CD5;&#x7684;&#x542B;&#x4E49;&#x3002;  </p>
+<p>&#x6211;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x5728;&#x5177;&#x4F53;Pod&#x7684;Annotation&#x91CC;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#xFF0C;&#x58F0;&#x660E;&#x8981;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;Initializer&#xFF1A;</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata
+  annotations:
+    &quot;initializer.kubernetes.io/envoy&quot;: &quot;true&quot;
+    ...
+</code></pre><p>&#x5C31;&#x4F1A;&#x4F7F;&#x7528;&#x5230;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x5B9A;&#x4E49;&#x7684;envoy-initializer&#x4E86;&#x3002;</p>
+<p><strong>Istio&#x9879;&#x76EE;&#x7684;&#x6838;&#x5FC3;&#xFF0C;&#x5C31;&#x662F;&#x7531;&#x65E0;&#x6570;&#x4E2A;&#x8FD0;&#x884C;Pod&#x4E2D;&#x7684;Envoy&#x5BB9;&#x5668;&#x7EC4;&#x6210;&#x7684;&#x670D;&#x52A1;&#x4EE3;&#x7406;&#x7F51;&#x7EDC;&#xFF0C;&#x8FD9;&#x6B63;&#x662F;Service Mesh&#x7684;&#x542B;&#x6709;&#x3002;</strong>  </p>
+<p>Kubernetes &#x58F0;&#x660E;&#x5F0F;API&#x5177;&#x6709;&#x5BF9;API&#x5BF9;&#x8C61;&#x8FDB;&#x884C;&#x5728;&#x7EBF;&#x7684;&#x66F4;&#x65B0;&#x7684;&#x80FD;&#x529B;&#xFF1A;</p>
+<ul>
+<li>&#x58F0;&#x660E;&#x5F0F;&#xFF0C;&#x6307;&#x7684;&#x662F;&#x6211;&#x804C;&#x987B;&#x63D0;&#x4EA4;&#x4E00;&#x4E2A;&#x5B9A;&#x4E49;&#x597D;&#x7684;API&#x5BF9;&#x8C61;&#x6765;&#x58F0;&#x660E;&#xFF0C;&#x6211;&#x6240;&#x671F;&#x671B;&#x7684;&#x72B6;&#x6001;&#x662F;&#x4EC0;&#x4E48;&#x6837;&#x5B50;&#x3002;</li>
+<li>&#x58F0;&#x660E;&#x5F0F;API&#x8FD0;&#x884C;&#x6709;&#x591A;&#x4E2A;API&#x5199;&#x7AEF;&#xFF0C;&#x4EE5;PATCH&#x7684;&#x65B9;&#x5F0F;&#x5BF9;API&#x5BF9;&#x8C61;&#x8FDB;&#x884C;&#x4FEE;&#x6539;&#xFF0C;&#x65E0;&#x9700;&#x5173;&#x5FC3;&#x672C;&#x539F;&#x59CB;YAML&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x3002;</li>
+<li>&#x6709;&#x4E86;&#x4E0A;&#x9762;&#x4E24;&#x4E2A;&#x80FD;&#x529B;&#xFF0C;Kubernetes&#x9879;&#x76EE;&#x624D;&#x53EF;&#x4EE5;&#x57FA;&#x4E8E;&#x5BF9;API&#x5BF9;&#x8C61;&#x7684;&#x589E;&#x5220;&#x6539;&#x67E5;&#xFF0C;&#x5728;&#x5B8C;&#x5168;&#x65E0;&#x9700;&#x5916;&#x754C;&#x5E72;&#x9884;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5B9E;&#x73B0;&#x5BF9;&#x5B9E;&#x9645;&#x72B6;&#x6001;&#x548C;&#x671F;&#x671B;&#x72B6;&#x6001;&#x7684;&#x8C03;&#x8C10;&#xFF08;Reconcile&#xFF09;&#x8FC7;&#x7A0B;&#x3002;  </li>
+</ul>
+<p><strong>&#x65E0;&#x8BBA;&#x5BF9;sidecar&#x5BB9;&#x5668;&#x7684;&#x5DE7;&#x5999;&#x8BBE;&#x8BA1;&#xFF0C;&#x8FD8;&#x662F;&#x5BF9;Initializer&#x7684;&#x5408;&#x7406;&#x5229;&#x7528;&#xFF0C;Istio&#x9879;&#x76EE;&#x7684;&#x8BBE;&#x8BA1;&#x548C;&#x5B9E;&#x73B0;&#xFF0C;&#x90FD;&#x4F9D;&#x6258;&#x4E8E;Kubernetes&#x7684;&#x58F0;&#x660E;&#x5F0F;API&#x548C;&#x5B83;&#x6240;&#x63D0;&#x4F9B;&#x7684;&#x5404;&#x79CD;&#x7F16;&#x6392;&#x80FD;&#x529B;</strong></p>
+<h1 id="note">Note</h1>
+<ul>
+<li>kubectl apply &#x662F;&#x901A;&#x8FC7;mvcc&#x5B9E;&#x73B0;&#x5E76;&#x53D1;&#x5199;&#x7684;&#x3002;</li>
+<li><a href="https://www.envoyproxy.io/docs/envoy/latest/intro/comparison" target="_blank">https://www.envoyproxy.io/docs/envoy/latest/intro/comparison</a></li>
+<li>Initializer&#x548C;Preset&#x90FD;&#x80FD;&#x6CE8;&#x5165;Pod&#x914D;&#x7F6E;&#xFF0C;Preset&#x662F;Initializer&#x7684;&#x5B50;&#x96C6;&#xFF0C;&#x6BD4;&#x8F83;&#x9002;&#x5408;&#x53D1;&#x5E03;&#x6D41;&#x7A0B;&#x79BB;&#x5904;&#x7406;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x7684;&#x60C5;&#x51B5;&#xFF0C;Initializer&#x662F;&#x9700;&#x8981;&#x5199;&#x4EE3;&#x7801;&#x7684;&#x3002;</li>
+<li>Envoy&#x76F8;&#x5BF9;Nginx&#xFF0C;HAProxy&#x7684;&#x4F18;&#x52BF;&#x5728;&#x4E8E;&#x7F16;&#x7A0B;&#x53CB;&#x597D;&#x7684;API&#xFF0C;&#x65B9;&#x4FBF;&#x5BB9;&#x5668;&#x5316;&#xFF0C;&#x914D;&#x7F6E;&#x65B9;&#x4FBF;&#x3002;</li>
+</ul>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">Updated:
+2019-01-15 09:38:12
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../kubernetes/kubernetes-RBAC.html" class="navigation navigation-prev " aria-label="Previous page: RBAC">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../app/etcd.html" class="navigation navigation-next " aria-label="Next page: Etcd">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Declarative API","level":"4.1","depth":1,"next":{"title":"Etcd","level":"6.1","depth":1,"path":"app/etcd.md","ref":"app/etcd.md","articles":[]},"previous":{"title":"RBAC","level":"3.4.5","depth":2,"path":"kubernetes/kubernetes-RBAC.md","ref":"kubernetes/kubernetes-RBAC.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"operator/declarative-api.md","mtime":"2019-01-15T01:38:12.519Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-15T02:32:07.983Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

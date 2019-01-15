@@ -1,0 +1,980 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Job CronJob · Kubernetes Notes</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Zhiwei Yin">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-image-captions/image-captions.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-local-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="authentication-authorization-admission.html" />
+    
+    
+    <link rel="prev" href="daemonset.html" />
+    
+
+    
+        <link rel="shortcut icon" href='../favicon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../favicon.ico' type="image/x-icon">
+    
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://zhiweiyin318.github.io/" target="_blank" class="custom-link">My Blog</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://jimmysong.io/kubernetes-handbook" target="_blank" class="custom-link">Kubernetes-handbook(Jimmysong)</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://kubernetes.io/" target="_blank" class="custom-link">Kubernetes</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                        <b>1.1.</b>
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../content/concept.html">
+            
+                <a href="../content/concept.html">
+            
+                    
+                        <b>1.2.</b>
+                    
+                    IaaS PaaS SaaS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../content/kubernetes.html">
+            
+                <a href="../content/kubernetes.html">
+            
+                    
+                        <b>1.3.</b>
+                    
+                    Kubernetes
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Docker</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../docker/command.html">
+            
+                <a href="../docker/command.html">
+            
+                    
+                        <b>2.1.</b>
+                    
+                    Docker Commands
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../docker/cgroups-namepspace.html">
+            
+                <a href="../docker/cgroups-namepspace.html">
+            
+                    
+                        <b>2.2.</b>
+                    
+                    Namespace && Cgroup
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.2.1" data-path="../docker/namespace.html">
+            
+                <a href="../docker/namespace.html">
+            
+                    
+                        <b>2.2.1.</b>
+                    
+                    Namespace
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2.2" data-path="../docker/exec-and-volume.html">
+            
+                <a href="../docker/exec-and-volume.html">
+            
+                    
+                        <b>2.2.2.</b>
+                    
+                    Docker exec and Docker volume
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../docker/user-in-docker.html">
+            
+                <a href="../docker/user-in-docker.html">
+            
+                    
+                        <b>2.3.</b>
+                    
+                    User
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.3.1" data-path="../docker/user-and-group.html">
+            
+                <a href="../docker/user-and-group.html">
+            
+                    
+                        <b>2.3.1.</b>
+                    
+                    User and Group
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3.2" data-path="../docker/non-root-user.html">
+            
+                <a href="../docker/non-root-user.html">
+            
+                    
+                        <b>2.3.2.</b>
+                    
+                    Non-root User
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../docker/docker-image.html">
+            
+                <a href="../docker/docker-image.html">
+            
+                    
+                        <b>2.4.</b>
+                    
+                    Images
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../docker/command.html">
+            
+                <a href="../docker/command.html">
+            
+                    
+                        <b>2.5.</b>
+                    
+                    Dockerfile
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Kubernetes</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" >
+            
+                <span>
+            
+                    
+                        <b>3.1.</b>
+                    
+                    Install
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.1.1" data-path="kubeadm-v1.13.0.html">
+            
+                <a href="kubeadm-v1.13.0.html">
+            
+                    
+                        <b>3.1.1.</b>
+                    
+                    Kubeadm Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" >
+            
+                <span>
+            
+                    
+                        <b>3.2.</b>
+                    
+                    Component
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.2.1" data-path="kube.html">
+            
+                <a href="kube.html">
+            
+                    
+                        <b>3.2.1.</b>
+                    
+                    kube
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.2" data-path="kubectl.html">
+            
+                <a href="kubectl.html">
+            
+                    
+                        <b>3.2.2.</b>
+                    
+                    Kubectl
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.3" data-path="kube-apiserver.html">
+            
+                <a href="kube-apiserver.html">
+            
+                    
+                        <b>3.2.3.</b>
+                    
+                    Kube-apiserver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2.4" data-path="kube-dns.html">
+            
+                <a href="kube-dns.html">
+            
+                    
+                        <b>3.2.4.</b>
+                    
+                    Kube-dns
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" >
+            
+                <span>
+            
+                    
+                        <b>3.3.</b>
+                    
+                    Resource
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.3.1" data-path="pod.html">
+            
+                <a href="pod.html">
+            
+                    
+                        <b>3.3.1.</b>
+                    
+                    Pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.2" data-path="deployment.html">
+            
+                <a href="deployment.html">
+            
+                    
+                        <b>3.3.2.</b>
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.3" data-path="daemonset.html">
+            
+                <a href="daemonset.html">
+            
+                    
+                        <b>3.3.3.</b>
+                    
+                    DaemonSet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="3.3.4" data-path="job-cronJob.html">
+            
+                <a href="job-cronJob.html">
+            
+                    
+                        <b>3.3.4.</b>
+                    
+                    Job CronJob
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="authentication-authorization-admission.html">
+            
+                <a href="authentication-authorization-admission.html">
+            
+                    
+                        <b>3.4.</b>
+                    
+                    Authentication Authorization Admission
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.4.1" data-path="tls-ca.html">
+            
+                <a href="tls-ca.html">
+            
+                    
+                        <b>3.4.1.</b>
+                    
+                    TLS CA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.2" data-path="secret.html">
+            
+                <a href="secret.html">
+            
+                    
+                        <b>3.4.2.</b>
+                    
+                    Secret
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.3" data-path="service-account.html">
+            
+                <a href="service-account.html">
+            
+                    
+                        <b>3.4.3.</b>
+                    
+                    Service Account
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.4" data-path="configmap.html">
+            
+                <a href="configmap.html">
+            
+                    
+                        <b>3.4.4.</b>
+                    
+                    ConfigMap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4.5" data-path="kubernetes-RBAC.html">
+            
+                <a href="kubernetes-RBAC.html">
+            
+                    
+                        <b>3.4.5.</b>
+                    
+                    RBAC
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Operator</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../operator/declarative-api.html">
+            
+                <a href="../operator/declarative-api.html">
+            
+                    
+                        <b>4.1.</b>
+                    
+                    Declarative API
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Istio</li>
+        
+        
+    
+
+    
+        
+        <li class="header">APP</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../app/etcd.html">
+            
+                <a href="../app/etcd.html">
+            
+                    
+                        <b>6.1.</b>
+                    
+                    Etcd
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../app/calico.html">
+            
+                <a href="../app/calico.html">
+            
+                    
+                        <b>6.2.</b>
+                    
+                    Calico
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../app/helm.html">
+            
+                <a href="../app/helm.html">
+            
+                    
+                        <b>6.3.</b>
+                    
+                    Helm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Job CronJob</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="job-&#x5206;&#x7C7B;">Job &#x5206;&#x7C7B;</h1>
+<p><strong>Batch Job:</strong> &#x8BA1;&#x7B97;&#x4E1A;&#x52A1;/&#x79BB;&#x7EBF;&#x4E1A;&#x52A1;&#xFF0C;&#x8DD1;&#x5B8C;&#x5C31;&#x9000;&#x51FA;&#xFF1B;<br><strong>Long Running Job</strong>&#xFF1A;&#x957F;&#x4F5C;&#x4E1A;&#x3002;</p>
+<h1 id="job">Job</h1>
+<pre><code>apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: resouer/ubuntu-bc 
+        command: [&quot;sh&quot;, &quot;-c&quot;, &quot;echo &apos;scale=10000; 4*a(1)&apos; | bc -l &quot;]
+      restartPolicy: Never
+  backoffLimit: 4
+</code></pre><p><strong>restartPolicy</strong> &#x5728;Job&#x91CC;&#x9762;&#x53EA;&#x5141;&#x8BB8;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;Never&#x548C;OnFailure&#xFF1B;&#x800C;&#x5728;Deployment&#x5BF9;&#x8C61;&#x91CC;&#xFF0C;&#x53EA;&#x9700;&#x8FD0;&#x884C;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;Always&#x3002;  </p>
+<p>restartPolicy&#x4E3A;Never&#xFF0C;&#x5F53;Job&#x5931;&#x8D25;&#x4F1A;&#x4E0D;&#x65AD;&#x5C1D;&#x8BD5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;Pod&#x3002;  </p>
+<p>restartPolicy&#x4E3A;OnFailure&#xFF0C;&#x5F53;Job&#x5931;&#x8D25;&#x540E;&#xFF0C;&#x4F1A;&#x5C1D;&#x8BD5;&#x91CD;&#x542F;Pod&#xFF0C;&#x4E0D;&#x4F1A;&#x91CD;&#x65B0;&#x521B;&#x5EFA;&#x3002;  </p>
+<p>spec.backoffLimit&#x5B57;&#x6BB5;&#x53EF;&#x4EE5;&#x9650;&#x5236;&#x521B;&#x5EFA;&#x7684;&#x6B21;&#x6570;&#xFF0C;Job&#x91CD;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#x95F4;&#x9694;&#x662F;&#x6307;&#x6570;&#x589E;&#x957F;&#x7684;&#x3002;   </p>
+<p>spec.activeDeadlineSeconds&#x662F;&#x8BBE;&#x7F6E;&#x6700;&#x957F;&#x8FD0;&#x884C;&#x65F6;&#x95F4;&#xFF0C;&#x8D85;&#x8FC7;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x5C31;&#x4F1A;&#x88AB;&#x7EC8;&#x6B62;&#x3002; </p>
+<p>spec.parallelism&#xFF0C;Job&#x4EFB;&#x610F;&#x65F6;&#x95F4;&#x6700;&#x591A;&#x53EF;&#x4EE5;&#x542F;&#x52A8;&#x591A;&#x5C11;&#x4E2A;Pod&#x540C;&#x65F6;&#x8FD0;&#x884C;&#x3002;<br>spec.completions&#xFF0C;Job&#x5B8C;&#x6210;&#x7684;Pod&#x6570;&#x76EE;&#xFF0C;&#x5C31;&#x662F;&#x6700;&#x7EC8;&#x7528;&#x6237;&#x9700;&#x8981;&#x7684;Pod&#x6570;&#x76EE;&#x3002;</p>
+<h2 id="demo">Demo</h2>
+<h3 id="demo-1">Demo 1</h3>
+<p>&#x5916;&#x90E8;&#x7BA1;&#x7406;&#x5668;+Job&#x6A21;&#x677F;</p>
+<p>&#x6700;&#x901A;&#x7528;&#x7684;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<pre><code>apiVersion: batch/v1
+kind: Job
+metadata:
+  name: process-item-$ITEM
+  labels:
+    jobgroup: jobexample
+spec:
+  template:
+    metadata:
+      name: jobexample
+      labels:
+        jobgroup: jobexample
+    spec:
+      containers:
+      - name: c
+        image: busybox
+        command: [&quot;sh&quot;, &quot;-c&quot;, &quot;echo Processing item $ITEM &amp;&amp; sleep 5&quot;]
+      restartPolicy: Never
+</code></pre><p>&#x5916;&#x90E8;&#x811A;&#x672C;&#x6216;&#x8005;&#x7A0B;&#x5E8F;&#x63A7;&#x5236;$ITEM&#x53D8;&#x91CF;&#xFF0C;&#x8FD9;&#x4E9B;Job&#x90FD;&#x53C8;&#x540C;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#x3002;</p>
+<pre><code>$ mkdir ./jobs
+$ for i in apple banana cherry
+do
+  cat job-tmpl.yaml | sed &quot;s/\$ITEM/$i/&quot; &gt; ./jobs/job-$i.yaml
+done
+</code></pre><h3 id="demo-2">demo 2</h3>
+<p>&#x62E5;&#x6709;&#x56FA;&#x5B9A;&#x4EFB;&#x52A1;&#x6570;&#x76EE;&#x7684;&#x5E76;&#x884C;Job</p>
+<pre><code>apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-wq-1
+spec:
+  completions: 8
+  parallelism: 2
+  template:
+    metadata:
+      name: job-wq-1
+    spec:
+      containers:
+      - name: c
+        image: myrepo/job-wq-1
+        env:
+        - name: BROKER_URL
+          value: amqp://guest:guest@rabbitmq-service:5672
+        - name: QUEUE
+          value: job1
+      restartPolicy: OnFailure
+</code></pre><p>&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x53EA;&#x5173;&#x5FC3;&#x6307;&#x5B9A;&#x4EFB;&#x52A1;&#x6570; completions&#xFF0C;&#x4E0D;&#x5173;&#x5FC3;parallelism&#x6570;&#x3002; &#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x4ECE;&#x5DE5;&#x4F5C;&#x961F;&#x5217;&#x91CC;&#x9762;&#x83B7;&#x53D6;&#xFF0C;&#x751F;&#x6210;&#x8005;-&#x6D88;&#x8D39;&#x8005;&#x6A21;&#x5F0F;&#x3002;</p>
+<pre><code>/* job-wq-1 &#x7684;&#x4F2A;&#x4EE3;&#x7801; */
+queue := newQueue($BROKER_URL, $QUEUE)
+task := queue.Pop()
+process(task)
+exit
+</code></pre><h1 id="cronjob">CronJob</h1>
+<p>CronJob &#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;Job&#x5BF9;&#x8C61;&#x63A7;&#x5236;&#x5668;&#x3002;</p>
+<pre><code>apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: &quot;*/1 * * * *&quot;
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
+</code></pre><p><em>/1 </em> <em> </em> *  &#x4ECE;0&#x5F00;&#x59CB;&#xFF0C;&#x6BCF;1&#x4E2A;&#x5355;&#x4F4D;&#x65F6;&#x95F4;&#x6267;&#x884C;&#x4E00;&#x6B21;&#xFF0C;&#x5206;&#xFF0C;&#x65F6;&#xFF0C;&#x65E5;&#xFF0C;&#x6708;&#xFF0C;&#x661F;&#x671F;</p>
+<p>concurrencyPolicy=Allow&#xFF0C;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#xFF0C;Job&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x5B58;&#x5728;&#xFF1B;<br>concurrencyPolicy=Forbid&#xFF0C;&#x4E0D;&#x4F1A;&#x521B;&#x5EFA;&#x65B0;Pod&#xFF0C;&#x8BE5;&#x521B;&#x5EFA;&#x5468;&#x671F;&#x88AB;&#x8DF3;&#x8FC7;&#xFF1B;<br>concurrencyPolicy=Replace&#xFF0C;&#x65B0;&#x4EA7;&#x751F;&#x7684;Job&#x4F1A;&#x66FF;&#x6362;&#x65E7;&#x7684;&#x3001;&#x6CA1;&#x6267;&#x884C;&#x5B8C;&#x7684;Job&#x3002;<br>spec.startingDeadlineSeconds&#xFF0C;&#x591A;&#x5C11;&#x79D2;&#x91CC;&#xFF0C;miss&#x7684;&#x6570;&#x76EE;&#x8FBE;&#x5230;100&#x6B21;&#xFF0C;&#x8FD9;&#x4E2A;Job&#x5C31;&#x4E0D;&#x4F1A;&#x518D;&#x88AB;&#x521B;&#x5EFA;&#x3002; &#xFF08;Job&#x521B;&#x5EFA;&#x5931;&#x8D25;&#xFF0C;&#x5C31;&#x4F1A;&#x88AB;&#x8BB0;miss&#xFF09;  </p>
+<footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">Updated:
+2019-01-15 09:38:12
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="daemonset.html" class="navigation navigation-prev " aria-label="Previous page: DaemonSet">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="authentication-authorization-admission.html" class="navigation navigation-next " aria-label="Next page: Authentication Authorization Admission">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Job CronJob","level":"3.3.4","depth":2,"next":{"title":"Authentication Authorization Admission","level":"3.4","depth":1,"path":"kubernetes/authentication-authorization-admission.md","ref":"kubernetes/authentication-authorization-admission.md","articles":[{"title":"TLS CA","level":"3.4.1","depth":2,"path":"kubernetes/tls-ca.md","ref":"kubernetes/tls-ca.md","articles":[]},{"title":"Secret","level":"3.4.2","depth":2,"path":"kubernetes/secret.md","ref":"kubernetes/secret.md","articles":[]},{"title":"Service Account","level":"3.4.3","depth":2,"path":"kubernetes/service-account.md","ref":"kubernetes/service-account.md","articles":[]},{"title":"ConfigMap","level":"3.4.4","depth":2,"path":"kubernetes/configmap.md","ref":"kubernetes/configmap.md","articles":[]},{"title":"RBAC","level":"3.4.5","depth":2,"path":"kubernetes/kubernetes-RBAC.md","ref":"kubernetes/kubernetes-RBAC.md","articles":[]}]},"previous":{"title":"DaemonSet","level":"3.3.3","depth":2,"path":"kubernetes/daemonset.md","ref":"kubernetes/daemonset.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"kubernetes/job-cronJob.md","mtime":"2019-01-15T01:38:12.451Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-15T02:32:07.983Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

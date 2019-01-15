@@ -246,7 +246,7 @@ devicemapper是基于块设备的，不是基于文件的。它质量上有优�
 
 Overlay是一个联合文件系统，它的概念较之aufs的分支模型更为简单。Overlay通过三个概念来实现它的文件系统：一个“下层目录（lower-dir）”，一个“上层目录（upper-dir）”，将着两个layers联合挂载后就是一个做为文件系统合并视图的“合并（merged）”目录。镜像层和容器曾可以有相同的文件，这中情况下，upperdir中的文件覆盖lowerdir中的文件。  
 
-![image](/images/overlay_constructs.jpg)  
+![Overlay Constructs](/images/overlay_constructs.jpg)  
 
 受限于只有一个“下层目录”，需要额外的工作来让“下层目录”递归嵌套（下层目录自己又是另外一个overlay的联合），或者按照Docker的实现，将所有位于下层的内容都硬链接到“下层目录”中。正是这种可能潜在的inode爆炸式增长（因为有大量的分层和硬连接）阻碍了很多人采用Overlay。  
 Overlay2支持多个下层目录，最多128个，解决了Overlay的inode耗尽的问题，继承了Overlay很多优点，包括包括在同一个引擎的多个容器间从同一个分层中加载内库从而达到内存共享。  
@@ -360,11 +360,11 @@ workdir：是用来完成如copy-on_write的操作。
 
 init层，这个位于只读层和读写层之间，docker项目单独生成的一个内部层，专门用来存/etc/hosts，/etc/resolv.conf等信息，这些原本属于ubuntu镜像一部分，但是用户往往需要在启动容器时写入一些指定的值比如hostname，需要在可读性层对他们进行修改。  这些修改支队当前容器有效，在docker commit时，不会把这一层提交掉，只会提交读写层。  
 
-/etc/hosts, /etc/resolv.conf和/etc/hostname，容器中的这三个文件不存在于镜像，而是存在于/var/lib/docker/containers/<container_id>，在启动容器的时候，通过mount的形式将这些文件挂载到容器内部。  
+/etc/hosts, /etc/resolv.conf和/etc/hostname，容器中的这三个文件不存在于镜像，而是存在于/var/lib/docker/containers/&lt;container_id&gt;，在启动容器的时候，通过mount的形式将这些文件挂载到容器内部。  
 
 修改容器里面/etc/hostname的内容，会在/var/lib/docker/containers/xxx/hostname看到修改。  
 
-![image](/images/ubuntu-image-layer.png) 
+![Ubuntu Image Layer](/images/ubuntu-image-layer.png) 
 
 
 容器内部的所有修改都在可读写层，docker commit和push保存的也是这个可读写层。
