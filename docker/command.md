@@ -1,3 +1,6 @@
+
+# Docker Dommands
+
 **docker images**
 
 > https://docs.docker.com/v1.11/engine/reference/commandline/images/
@@ -46,4 +49,64 @@ Deleted Containers:
 ...
 ```
 
-> &lt;none&gt; 镜像叫悬挂 dangling 镜像
+> `<none>` 镜像叫悬挂 dangling 镜像
+
+# APP Commands
+
+**yum server**
+
+```
+docker run --name nginx_yum -v /data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -v /data/yum:/opt:ro -p 8082:80 --restart always -d nginx
+```
+
+**file server**
+
+```
+docker run --name nginx_file -v /data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -v /data/file/:/opt:ro -p 8083:80 --restart always -d nginx
+```
+
+**pip server**
+
+```
+docker run --name pypiserver -v /data/pip/:/packages -p 8084:3141 --restart always -d pypiserver
+```
+
+**docker registry**
+
+```
+docker run -d -p 80:5000 -v /media/sf_share/registry:/var/lib/registry --restart always --name registry registry:latest
+
+curl -X GET http://localhost:80/v2/_catalog
+
+docker run -d --name registry_frontend -e ENV_DOCKER_REGISTRY_HOST=172.17.0.3 -e ENV_DOCKER_REGISTRY_PORT=5000 -p 8081:80 --restart always konradkleine/docker-registry-frontend:v2
+
+docker run -it -d -p 8081:8080 --name registry_web --link registry -e REGISTRY_URL=http://registry:5000/v2 -e REGISTRY_NAME=localhost:5000 hyper/docker-registry-web
+
+docker run --name nginx_web -v /media/sf_share/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -v /media/sf_share/nginx/web:/opt:ro -p 8080:80 --restart always -d nginx
+nginx 访问403 原因目录没有权限  
+/etc/fstab
+share /media/sf_share vboxsf defaults 0 0 
+```
+
+**jenkins**
+
+```
+docker run -u root -d -p 8080:8080 -p 50000:50000 -v /srv/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --env JAVA_OPTS="-Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai" --name jenkins --restart always jenkinsci/blueocean
+```
+
+**gitlab**
+
+```
+docker run --detach  --hostname 192.168.137.102  --publish 20443:443  --publish 20080:80  --publish 20022:22  --name gitlab  --restart always --volume /srv/gitlab/config:/etc/gitlab  --volume /srv/gitlab/logs:/var/log/gitlab  --volume /srv/gitlab/data:/var/opt/gitlab  gitlab/gitlab-ce
+
+修改配置文件 /srv/gitlab/config/gitlab.rb
+external_url 'http://192.168.137.102:20080'
+nginx['listen_port'] = 80
+gitlab_rails['gitlab_shell_ssh_port'] = 20022
+gitlab_rails['gitlab_ssh_host'] = '192.168.137.102'
+
+docker exec -it gitlab /bin/bash
+gitlab-ctl reconfigure 
+gitlab-ctl restart
+
+```
