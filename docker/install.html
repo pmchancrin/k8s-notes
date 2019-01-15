@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Docker Commands · Kubernetes Notes</title>
+        <title>Install · Kubernetes Notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -86,10 +86,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="cgroups-namepspace.html" />
+    <link rel="next" href="command.html" />
     
     
-    <link rel="prev" href="install.html" />
+    <link rel="prev" href="../content/kubernetes.html" />
     
 
     
@@ -198,7 +198,7 @@
         
         
     
-        <li class="chapter " data-level="2.1" data-path="install.html">
+        <li class="chapter active" data-level="2.1" data-path="install.html">
             
                 <a href="install.html">
             
@@ -213,7 +213,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.2" data-path="command.html">
+        <li class="chapter " data-level="2.2" data-path="command.html">
             
                 <a href="command.html">
             
@@ -345,7 +345,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.6" data-path="command.html">
+        <li class="chapter " data-level="2.6" data-path="command.html">
             
                 <a href="command.html">
             
@@ -772,7 +772,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Docker Commands</a>
+        <a href=".." >Install</a>
     </h1>
 </div>
 
@@ -787,87 +787,94 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="docker-dommands">Docker Dommands</h1>
-<p><strong>docker images</strong></p>
+                                <h1 id="install-docker">Install Docker</h1>
 <blockquote>
-<p><a href="https://docs.docker.com/v1.11/engine/reference/commandline/images/" target="_blank">https://docs.docker.com/v1.11/engine/reference/commandline/images/</a></p>
+<p>docker-io &#x662F;&#x4EE5;&#x524D;&#x65E9;&#x671F;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x7248;&#x672C;&#x53F7;&#x662F; 1.<em>&#xFF0C;&#x800C; docker-ce &#x662F;&#x65B0;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x5206;&#x4E3A;&#x793E;&#x533A;&#x7248; docker-ce &#x548C;&#x4F01;&#x4E1A;&#x7248; docker-ee&#xFF0C;&#x7248;&#x672C;&#x53F7;&#x662F; 17.</em> &#x3002;
+Docker CE 17.03&#xFF0C;&#x53EF;&#x7406;&#x89E3;&#x4E3A;Docker 1.13.1&#x7684;Bug&#x4FEE;&#x590D;&#x7248;&#x672C;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x4ECE;Docker 1.13&#x5347;&#x7EA7;&#x5230;Docker CE 17.03&#x98CE;&#x9669;&#x76F8;&#x5BF9;&#x662F;&#x8F83;&#x5C0F;&#x7684;&#x3002;</p>
 </blockquote>
-<pre><code>[root@yzw kolla]# docker images -f &quot;label=kolla_version&quot;  --format &quot;{{.Repository}}:{{.Tag}}&quot; | grep -E source-base
-kolla-test/centos-source-base:1.1.1
-[root@yzw kolla]# 
-[root@yzw kolla]# docker images -f &quot;label=kolla_version&quot;  -q 
-7cff68b428c8
-f8140ec6ff6d
-[root@yzw kolla]# docker images --format &quot;table {{.Repository}}\t{{.ID}}\t{{.Tag}}&quot;
-REPOSITORY                                             IMAGE ID            TAG
-kolla-test/centos-source-neutron-server-opendaylight   7cff68b428c8        1.1.1
-kolla-test/centos-source-neutron-server-ovn            f8140ec6ff6d        1.1.1
-</code></pre><p><strong>docker system</strong></p>
+<h2 id="&#x5B98;&#x7F51;install">&#x5B98;&#x7F51;install</h2>
+<p><strong>install docker on Ubuntu</strong></p>
 <blockquote>
-<p><a href="https://docs.docker.com/engine/reference/commandline/system/#description" target="_blank">https://docs.docker.com/engine/reference/commandline/system/#description</a></p>
+<p><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1" target="_blank">https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1</a></p>
 </blockquote>
-<pre><code>root@yzw-vm:/home/yzw# docker system df 
-TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE
-Images              2                   0                   131.3MB             131.3MB (100%)
-Containers          0                   0                   0B                  0B
-Local Volumes       4                   0                   19.85MB             19.85MB (100%)
-Build Cache         0                   0                   0B                  0B
-root@yzw-vm:/home/yzw# docker system prune --help
-
-Usage:    docker system prune [OPTIONS]
-
-Remove unused data
-
-Options:
-  -a, --all             Remove all unused images not just dangling ones
-      --filter filter   Provide filter values (e.g. &apos;label=&lt;key&gt;=&lt;value&gt;&apos;)
-  -f, --force           Do not prompt for confirmation
-      --volumes         Prune volumes
-
-#running&#x7684;&#x5BB9;&#x5668;&#x7684;&#x955C;&#x50CF;&#x4E0D;&#x4F1A;&#x88AB;&#x5220;&#xFF0C;stop&#x7684;&#x5BB9;&#x5668;&#x548C;&#x955C;&#x50CF;&#x4E00;&#x5757;&#x88AB;&#x5220;
-[root@kolla ~]# docker system prune -af --filter &apos;label=kolla_version=5.0.4&apos;
-Deleted Containers:
-6d597715565466e545c27e23a65da172bb74a909e95f747452d748d7cf072714
-...
+<p><strong>install docker on Centos</strong></p>
+<blockquote>
+<p><a href="https://docs.docker.com/install/linux/docker-ce/centos/#install-docker-ce-1" target="_blank">https://docs.docker.com/install/linux/docker-ce/centos/#install-docker-ce-1</a></p>
+</blockquote>
+<pre><code>[root@master]# yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+[root@master]# yum-config-manager --add-repo  https://download.docker.com/linux/centos/docker-ce.repo
+Loaded plugins: fastestmirror
+adding repo from: https://download.docker.com/linux/centos/docker-ce.repo
+grabbing file https://download.docker.com/linux/centos/docker-ce.repo to /etc/yum.repos.d/docker-ce.repo
+Could not fetch/save url https://download.docker.com/linux/centos/docker-ce.repo to file /etc/yum.repos.d/docker-ce.repo: [Errno 12] Timeout on https://download.docker.com/linux/centos/docker-ce.repo: (28, &apos;Operation timed out after 30001 milliseconds with 0 out of 0 bytes received&apos;)
 </code></pre><blockquote>
-<p><code>&lt;none&gt;</code> &#x955C;&#x50CF;&#x53EB;&#x60AC;&#x6302; dangling &#x955C;&#x50CF;</p>
+<p><strong>Note:</strong> &#x7531;&#x4E8E;&#x6709;GW&#x7684;&#x7F18;&#x6545;&#xFF0C;&#x4E00;&#x822C;&#x90FD;&#x4F1A;install &#x5931;&#x8D25;&#x3002;</p>
 </blockquote>
-<h1 id="app-commands">APP Commands</h1>
-<p><strong>yum server</strong></p>
-<pre><code>docker run --name nginx_yum -v /data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -v /data/yum:/opt:ro -p 8082:80 --restart always -d nginx
-</code></pre><p><strong>file server</strong></p>
-<pre><code>docker run --name nginx_file -v /data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -v /data/file/:/opt:ro -p 8083:80 --restart always -d nginx
-</code></pre><p><strong>pip server</strong></p>
-<pre><code>docker run --name pypiserver -v /data/pip/:/packages -p 8084:3141 --restart always -d pypiserver
-</code></pre><p><strong>docker registry</strong></p>
-<pre><code>docker run -d -p 80:5000 -v /media/sf_share/registry:/var/lib/registry --restart always --name registry registry:latest
+<h2 id="&#x5176;&#x4ED6;&#x6E90;install">&#x5176;&#x4ED6;&#x6E90;install</h2>
+<p><strong>&#x6E05;&#x534E;&#x6E90; install</strong></p>
+<blockquote>
+<p><a href="https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/" target="_blank">https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/</a></p>
+</blockquote>
+<p><strong>aliyuan install</strong></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/doegoo/article/details/80062132" target="_blank">https://blog.csdn.net/doegoo/article/details/80062132</a></p>
+</blockquote>
+<pre><code>[root@master]# sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+</code></pre><h2 id="docker-registry">Docker Registry</h2>
+<p><strong>aliyuan registry</strong></p>
+<blockquote>
+<p><a href="https://cr.console.aliyun.com/?spm=a2c4e.11153940.blogcont29941.9.4cc569d6IVqmDa#/accelerator" target="_blank">https://cr.console.aliyun.com/?spm=a2c4e.11153940.blogcont29941.9.4cc569d6IVqmDa#/accelerator</a></p>
+</blockquote>
+<pre><code>[root@master]# sudo mkdir -p /etc/docker
+[root@master]# sudo tee /etc/docker/daemon.json &lt;&lt;-&apos;EOF&apos;
+{
+  &quot;registry-mirrors&quot;: [&quot;https://q89qk1rw.mirror.aliyuncs.com&quot;]
+}
+EOF
+[root@master]# sudo systemctl daemon-reload
+[root@master]# sudo systemctl restart docker
+</code></pre><p><strong>Docker Hub cn</strong></p>
+<pre><code>[root@master]# sudo tee /etc/docker/daemon.json &lt;&lt;-&apos;EOF&apos;
+{
+  &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]
+}
+EOF
+[root@master]# sudo systemctl daemon-reload
+[root@master]# sudo systemctl restart docker
+</code></pre><p><strong>Private Registry</strong></p>
+<pre><code>[root@master]# cat /etc/docker/daemon.json 
+{
+  &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;],
+  &quot;insecure-registries&quot;: [&quot;192.0.0.0/8&quot;]
+}
 
-curl -X GET http://localhost:80/v2/_catalog
+# or
 
-docker run -d --name registry_frontend -e ENV_DOCKER_REGISTRY_HOST=172.17.0.3 -e ENV_DOCKER_REGISTRY_PORT=5000 -p 8081:80 --restart always konradkleine/docker-registry-frontend:v2
+[root@master]# cat /usr/lib/systemd/system/docker.service
+ExecStart=/usr/bin/dockerd --insecure-registry 192.168.137.100:30060
+</code></pre><h2 id="issues">Issues</h2>
+<p><strong>Issue 1</strong></p>
+<pre><code>[root@master]# yum install docker-ce-17.03.1.ce
+Error: Package: docker-ce-17.03.1.ce-1.el7.centos.x86_64 (docker-ce-stable)
+           Requires: docker-ce-selinux &gt;= 17.03.1.ce-1.el7.centos
+           Available: docker-ce-selinux-17.03.0.ce-1.el7.centos.noarch (docker-ce-stable)
+               docker-ce-selinux = 17.03.0.ce-1.el7.centos
+           Available: docker-ce-selinux-17.03.1.ce-1.el7.centos.noarch (docker-ce-stable)
+               docker-ce-selinux = 17.03.1.ce-1.el7.centos
+           Available: docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch (docker-ce-stable)
+               docker-ce-selinux = 17.03.2.ce-1.el7.centos
+ You could try using --skip-broken to work around the problem
+ You could try running: rpm -Va --nofiles --nodigest
+</code></pre><p>&#x89E3;&#x51B3;&#xFF1A;</p>
+<pre><code>&#x9700;&#x8981;&#x5148;&#x5B89;&#x88C5;&#xFF1A;
+yum install http://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/stable/Packages/docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm
 
-docker run -it -d -p 8081:8080 --name registry_web --link registry -e REGISTRY_URL=http://registry:5000/v2 -e REGISTRY_NAME=localhost:5000 hyper/docker-registry-web
-
-docker run --name nginx_web -v /media/sf_share/nginx/nginx.conf:/etc/nginx/nginx.conf:ro -v /media/sf_share/nginx/web:/opt:ro -p 8080:80 --restart always -d nginx
-nginx &#x8BBF;&#x95EE;403 &#x539F;&#x56E0;&#x76EE;&#x5F55;&#x6CA1;&#x6709;&#x6743;&#x9650;  
-/etc/fstab
-share /media/sf_share vboxsf defaults 0 0
-</code></pre><p><strong>jenkins</strong></p>
-<pre><code>docker run -u root -d -p 8080:8080 -p 50000:50000 -v /srv/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --env JAVA_OPTS=&quot;-Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai&quot; --name jenkins --restart always jenkinsci/blueocean
-</code></pre><p><strong>gitlab</strong></p>
-<pre><code>docker run --detach  --hostname 192.168.137.102  --publish 20443:443  --publish 20080:80  --publish 20022:22  --name gitlab  --restart always --volume /srv/gitlab/config:/etc/gitlab  --volume /srv/gitlab/logs:/var/log/gitlab  --volume /srv/gitlab/data:/var/opt/gitlab  gitlab/gitlab-ce
-
-&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6; /srv/gitlab/config/gitlab.rb
-external_url &apos;http://192.168.137.102:20080&apos;
-nginx[&apos;listen_port&apos;] = 80
-gitlab_rails[&apos;gitlab_shell_ssh_port&apos;] = 20022
-gitlab_rails[&apos;gitlab_ssh_host&apos;] = &apos;192.168.137.102&apos;
-
-docker exec -it gitlab /bin/bash
-gitlab-ctl reconfigure 
-gitlab-ctl restart
+&#x518D;&#x5B89;&#x88C5;&#xFF1A;
+yum install docker-ce-17.03.2.ce
 </code></pre><footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">Updated:
-2019-01-15 15:12:10
+2019-01-15 14:57:33
 </span></footer>
                                 
                                 </section>
@@ -895,12 +902,12 @@ gitlab-ctl restart
 
             
                 
-                <a href="install.html" class="navigation navigation-prev " aria-label="Previous page: Install">
+                <a href="../content/kubernetes.html" class="navigation navigation-prev " aria-label="Previous page: Kubernetes">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="cgroups-namepspace.html" class="navigation navigation-next " aria-label="Next page: Namespace && Cgroup">
+                <a href="command.html" class="navigation navigation-next " aria-label="Next page: Docker Commands">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -911,7 +918,7 @@ gitlab-ctl restart
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Docker Commands","level":"2.2","depth":1,"next":{"title":"Namespace && Cgroup","level":"2.3","depth":1,"path":"docker/cgroups-namepspace.md","ref":"docker/cgroups-namepspace.md","articles":[{"title":"Namespace","level":"2.3.1","depth":2,"path":"docker/namespace.md","ref":"docker/namespace.md","articles":[]},{"title":"Docker exec and Docker volume","level":"2.3.2","depth":2,"path":"docker/exec-and-volume.md","ref":"docker/exec-and-volume.md","articles":[]}]},"previous":{"title":"Install","level":"2.1","depth":1,"path":"docker/install.md","ref":"docker/install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"docker/command.md","mtime":"2019-01-15T07:12:10.233Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-15T07:14:35.787Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Install","level":"2.1","depth":1,"next":{"title":"Docker Commands","level":"2.2","depth":1,"path":"docker/command.md","ref":"docker/command.md","articles":[]},"previous":{"title":"Kubernetes","level":"1.3","depth":1,"path":"content/kubernetes.md","ref":"content/kubernetes.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"docker/install.md","mtime":"2019-01-15T06:57:33.891Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-15T07:14:35.787Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
