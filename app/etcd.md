@@ -1,4 +1,4 @@
-* ETCD
+# ETCD
 
 * kubernetes的所有云数据都保存在/registry目录下，下一层是API对象类型（复数），再下一层是namespace，最后一层是对象名字。
 * calico网络存储是以v2的API来存储的，kubernetes是v3 API。

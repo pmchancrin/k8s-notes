@@ -39,6 +39,7 @@
 ## Operator
 
 * [Declarative API](operator/declarative-api.md)
+* [Operator](operator/operator.md)
 
 ## Istio
 
