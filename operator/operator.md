@@ -72,8 +72,9 @@ $ kubectl apply -f example/example-etcd-cluster.yaml
 1. 对`Pod,Service,PVC,Deployment`等API有所有权限；
 2. 对`CRD`对象有所有权限；
 3. 对属于`etcd.database.coreos.com` 这个API Group的CR对象`etcdbackups，etcdclusters，etcdrestores` 有所有权限。
+
 ```
-$ $ example/rbac/create_role.sh 
+$ example/rbac/create_role.sh 
 Creating role with ROLE_NAME=etcd-operator, NAMESPACE=default
 clusterrole.rbac.authorization.k8s.io/etcd-operator created
 Creating role binding with ROLE_NAME=etcd-operator, ROLE_BINDING_NAME=etcd-operator, NAMESPACE=default
@@ -114,6 +115,7 @@ PolicyRule:
 ### Deploy Etcd Operator
 
 Etcd Operator 本身就是一个Deployment：
+
 ```
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -215,7 +217,6 @@ NAME                              READY   STATUS    RESTARTS   AGE
 example-etcd-cluster-lcxlcf6d8x   1/1     Running   0          55s
 example-etcd-cluster-mg8x9h4xfg   1/1     Running   0          111s
 example-etcd-cluster-z8ckrc7cvd   1/1     Running   0          95s
-
 ```
 
 ### Access Etcd Cluster
