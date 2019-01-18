@@ -144,4 +144,20 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
+ServiceAccount是有namespace的限制的.
+```
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: etcd-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: etcd-operator
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: etcd
+```
+
 # Admission Control
