@@ -1,21 +1,23 @@
-认证Authenticating & 授权Authorization & 准入Admission Control
-==============================================================
+# 认证Authenticating & 授权Authorization & 准入Admission Control
+
 账户分为两类：
-* User Account：普通用户被假定为由外部独立服务管理。管理员分发私钥，用户存储（如Keystone或Google帐户），甚至包含用户名和密码列表的文件。在这方面，kubernetes没有代表普通用户帐户的对象。无法通过API调用的方式向集群中添加普通用户。用户账号为全局设计的。命名必须在一个集群的所有命名空间中唯一。**这个账户是给人用的。**
-* Service Account：service account是由kubernetes API管理的帐户。它们都绑定到了特定的 namespace，并由api-server自动创建，或者通过API调用手动创建。service accoun关联了一套凭证，存储在Secret，这些凭证同时被挂载到pod中，从而允许pod与kubernetes API之间的调用。服务账号是在命名空间里的。**这个账户是给pod中的进程用的。**
 
-概述
-----
-* k8s通过kube-apiserver组件对外提供REST服务，有两类客户端：普通用户和集群内的pod
-* k8s默认https安全端口6443，一个API请求到达该端口后，要经过认证，授权，准入控制，实际API请求。
-* K8s默认非安全端口8080（只能本机访问，绑定的是localhost）
-* **认证**：对客户端的认证，Authenticaton verifies who you are
-* **授权**：对不同用户不同的访问权限，Authorization verifies what you are authorized to do.
-* **准入**：Admission Control 有一个准入控制列表，我们可以通过命令行设置选择执行哪几个准入控制器。只有所有的准入控制器都检查通过之后，apiserver 才执行该请求，否则返回拒绝。
+* **User Account**：普通用户被假定为由外部独立服务管理。管理员分发私钥，用户存储（如Keystone或Google帐户），甚至包含用户名和密码列表的文件。在这方面，kubernetes没有代表普通用户帐户的对象。无法通过API调用的方式向集群中添加普通用户。用户账号为全局设计的。命名必须在一个集群的所有命名空间中唯一。**这个账户是给人用的。**
+* **Service Account**：`service account`是由kubernetes API管理的帐户。它们都绑定到了特定的 `namespace`，并由`api-server`自动创建，或者通过API调用手动创建。`service account`关联了一套凭证，存储在`Secret`，这些凭证同时被挂载到pod中，从而允许pod与kubernetes API之间的调用。服务账号是在命名空间里的。**这个账户是给pod中的进程用的。**
 
-认证
-----
-apiserver认证配置
+## 概述
+
+* k8s通过`kube-apiserver`组件对外提供REST服务，有两类客户端：普通用户和集群内的pod;
+* k8s默认https安全端口6443，一个API请求到达该端口后，要经过认证，授权，准入控制，实际API请求;
+* K8s默认非安全端口8080（只能本机访问，绑定的是localhost）;
+* **认证**：对客户端的认证，Authenticaton verifies who you are;
+* **授权**：对不同用户不同的访问权限，Authorization verifies what you are authorized to do;
+* **准入**：`Admission Control` 有一个准入控制列表，我们可以通过命令行设置选择执行哪几个准入控制器。只有所有的准入控制器都检查通过之后，apiserver 才执行该请求，否则返回拒绝。
+
+## 认证
+
+`apiserver`认证配置:
+
 ```
 [root@node1 manifests]# cat /etc/kubernetes/manifests/kube-apiserver.manifest 
 apiVersion: v1
@@ -69,20 +71,20 @@ spec:
     - --v=2
     - --allow-privileged=true
     - --anonymous-auth=False
-
 ```
-> * **--client-ca-file:** 指定CA根证书文件为 */etc/kubernetes/ssl/ca.pem* ，内置CA公钥用于验证某证书是否是CA签发的证书.
-> * **--tls-private-key-file:**  指定ApiServer私钥文件为 */etc/kubernetes/ssl/apiserver-key.pem* .
-> * **--tls-cert-file:** 指定ApiServer证书文件为 */etc/kubernetes/ssl/apiserver.pem*
-> * **--token-auth-file** 静态token认证
-> * **--basic-auth-file** 用户密码认证
+
+* **--client-ca-file:** 指定CA根证书文件为 `/etc/kubernetes/ssl/ca.pem` ，内置CA公钥用于验证某证书是否是CA签发的证书;
+* **--tls-private-key-file:**  指定ApiServer私钥文件为 `/etc/kubernetes/ssl/apiserver-key.pem`;
+* **--tls-cert-file:** 指定ApiServer证书文件为 `/etc/kubernetes/ssl/apiserver.pem`;
+* **--token-auth-file** 静态token认证;
+* **--basic-auth-file** 用户密码认证;
 
 * user account认证有三种：CA证书，token，Base认证，可以配多种
 * sa 认证
 * 开启了https认证，访问集群，提示unauthorized
 
-
 #### CA认证
+
 ```
 [root@node3 kubernetes]# curl https://node1:6443/api/v1/nodes
 Unauthorized
@@ -131,10 +133,10 @@ Unauthorized
       "metadata": {
         "name": "node1",
         "selfLink": "/api/v1/nodes/node1",
-
-
 ```
-* kubelet 的配置
+
+* `kubelet` 的配置
+
 ```
 [root@node3 kubernetes]# cat node-kubeconfig.yaml 
 apiVersion: v1
@@ -155,9 +157,10 @@ contexts:
     user: kubelet
   name: kubelet-cluster.local
 current-context: kubelet-cluster.local
-
 ```
-* kubeproxy 的配置
+
+* `kubeproxy` 的配置
+
 ```
 [root@node3 kubernetes]# cat kube-proxy-kubeconfig.yaml 
 apiVersion: v1
@@ -179,7 +182,9 @@ contexts:
   name: kube-proxy-cluster.local
 current-context: kube-proxy-cluster.local
 ```
-* kube-scheduler 的配置
+
+* `kube-scheduler` 的配置
+
 ```
 [root@node2 kubernetes]# cat kube-scheduler-kubeconfig.yaml
 apiVersion: v1
@@ -201,7 +206,9 @@ contexts:
   name: kube-scheduler-cluster.local
 current-context: kube-scheduler-cluster.local
 ```
+
 * 手动生成证书和key，可以在集群其他节点上使用
+
 ```
 [root@node1 ssl]# openssl genrsa -out test-key.pem 2048
 Generating RSA private key, 2048 bit long modulus
@@ -227,10 +234,10 @@ test.pem
     "selfLink": "/api/v1/nodes",
     "resourceVersion": "439941"
   },
-
 ```
 
 * 将证书拷贝到非集群节点上，报错
+
 ```
 [root@node test]# curl https://node1:6443/api/v1/nodes --cert ./test.pem --key ./test-key.pem
 curl: (60) Peer's certificate has an invalid signature.
@@ -247,7 +254,9 @@ If this HTTPS server uses a certificate signed by a CA represented in
 If you'd like to turn off curl's verification of the certificate, use
  the -k (or --insecure) option.
 ```
+
 需要将ca根证书拷贝过来
+
 ```
 [root@node test]# curl https://node1:6443/api/v1/nodes --cert ./test.pem --key ./test-key.pem --cacert ./ca.pem 
 {
@@ -263,9 +272,10 @@ If you'd like to turn off curl's verification of the certificate, use
         "name": "node1",
         "selfLink": "/api/v1/nodes/node1",
 ```
-为什么集群节点不需要ca根证书？
-> 因为集群ca证书已经在ca-bundle.crt里面了，curl时不用带cacert。
-> ==但是将ca证书加到ca-bundle里面了也不行，不知道为啥？==
+
+> 为什么集群节点不需要ca根证书？  
+> 因为集群ca证书已经在ca-bundle.crt里面了，curl时不用带cacert。  
+> 但是将ca证书加到ca-bundle里面了也不行，不知道为啥？  
 
 ```
 [root@node3 ssl]# cd /etc/pki/tls/certs/
@@ -273,13 +283,18 @@ If you'd like to turn off curl's verification of the certificate, use
 ca-bundle.crt  ca-bundle.trust.crt  make-dummy-cert  Makefile  renew-dummy-cert
 [root@node3 certs]# cat ca-bundle.crt | grep MIIC9zCCAd+gAwIBAgIJAP+vWZXVLCBqMA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV
 MIIC9zCCAd+gAwIBAgIJAP+vWZXVLCBqMA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV
-
 ```
+
 #### token 认证
+
 和静态密码一样，这种方法也是名存实亡，不推荐使用。
+
 * 查看token  
-token,user,uid,"group1,group2,group3"
-> ==NOTE：如果该静态token文件更改的话，需要重启apiserver==
+
+格式：`token,user,uid,"group1,group2,group3"`
+
+> NOTE：如果该静态token文件更改的话，需要重启apiserver
+
 ```
 [root@node1 tokens]# ls
 known_tokens.csv  system:kubectl-node1.token  system:kubectl-node2.token  system:kubelet-node1.token  system:kubelet-node2.token  system:kubelet-node3.token
@@ -291,9 +306,10 @@ GwpmzUtoIbODKavaNXoNqf4P8XcaUz0K,system:kubelet-node2,system:kubelet-node2
 MjkEgEkG8L9vcmy1zEdF68OXRkriyONL,system:kubelet-node3,system:kubelet-node3
 [root@node1 tokens]# cat system\:kubectl-node1.token 
 UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq
-
 ```
+
 * 访问1
+
 ```
 [root@node3 test]# curl -k --header "Authorization: Bearer UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq" https://node1:6443/api/v1/nodes
 {
@@ -307,9 +323,10 @@ UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq
     {
       "metadata": {
         "name": "node1",
-
 ```
+
 * 访问2
+
 ```
 [root@node3 test]# ./kubectl --server=https://node1:6443  get nodes
 Please enter Username: admin
@@ -320,21 +337,25 @@ NAME      STATUS    AGE       VERSION
 node1     Ready     20d       v1.7.5+coreos.0
 node2     Ready     20d       v1.7.5+coreos.0
 node3     Ready     20d       v1.7.5+coreos.0
-[root@node3 test]# 
-
 ```
+
 #### password file认证
+
 这种方式很不灵活，也不安全，可以说名存实亡，不推荐使用。
+
 * 查看
 
-格式: password,user,uid,"group1,group2,group3"
+格式: `password,user,uid,"group1,group2,group3"`
+
 ```
 [root@node1 users]# ls
 known_users.csv
 [root@node1 users]# cat known_users.csv 
 ekxj0taObdTNTXc,kube,admin,"system:masters"
 ```
+
 * 使用
+
 ```
 [root@node3 test]# ./kubectl --server=https://node1:6443  get nodes
 Please enter Username: kube
@@ -344,50 +365,53 @@ node1     Ready     20d       v1.7.5+coreos.0
 node2     Ready     20d       v1.7.5+coreos.0
 node3     Ready     20d       v1.7.5+coreos.0
 [root@node3 test]# 
-
 ```
+
 #### 参考
+
 * https://kubernetes.feisky.xyz/zh/plugins/auth.html#%20%E8%AE%A4%E8%AF%81
 
 #### SA
 
+[service-account](/kubernetes/service-account.md)
 
+## 授权
 
-授权
-----
+* `AlwaysDeny`：表示拒绝所有的请求，该配置一般用于测试;
+* `AlwaysAllow`：表示接收所有请求，如果集群不需要授权，则可以采取这个策略;
+* `ABAC`：基于属性的访问控制，表示基于配置的授权规则去匹配用户请求，判断是否有权限；
+* `RBAC`：基于角色的访问控制，允许管理员通过 api 动态配置授权策略。
 
-* AlwaysDeny：表示拒绝所有的请求，该配置一般用于测试
-* AlwaysAllow：表示接收所有请求，如果集群不需要授权，则可以采取这个策略
-* ABAC：基于属性的访问控制，表示基于配置的授权规则去匹配用户请求，判断是否有权限。Beta 版本
-* RBAC：基于角色的访问控制，允许管理员通过 api 动态配置授权策略。Beta 版本
+* 参考  
 
-
-* 参考   
 >* https://jimmysong.io/kubernetes-handbook/guide/kubectl-user-authentication-authorization.html
 
 #### RBAC
-> * Role   
-某个ns下的资源
-> * ClusterRole  
-集群范围内的资源(node, endpoint pods)
-> * RoleBinding  
-> * ClusterRoleBinding  
-将role中定义的权限授予users、groups、service accounts
+
+[RBAC 介绍](/kubernetes/kubernetes-RBAC.md)
+
+> * **Role**: 某个ns下的资源
+> * **ClusterRole**: 集群范围内的资源(node, endpoint pods)
+> * **RoleBinding**
+> * **ClusterRoleBinding**: 将role中定义的权限授予users、groups、service accounts
 
 * 参考  
+
 >*  https://mritd.me/2018/03/20/use-rbac-to-control-kubectl-permissions/  
 >*  https://blog.qikqiak.com/post/add-authorization-for-kubernetes-dashboard/
 
 * 配置
+
 ```
 [root@node1 manifests]# cat kube-apiserver.manifest 
 ...
 spec:
  command:
 - --authorization-mode=Node,RBAC
-
 ```
+
 * 查询roles clusterroles
+
 ```
 [root@node1 manifests]# kubectl get roles --all-namespaces
 NAMESPACE     NAME                                             AGE
@@ -414,9 +438,12 @@ system:aggregate-to-view                                               22d
 system:auth-delegator                                                  22d
 ...
 ```
+
 * 查询 rolebinding clusterrolebinding
+
 > RoleBinding把Role绑定到账户主体Subject，让Subject继承Role所在namespace下的权限。 ClusterRoleBinding把ClusterRole绑定到Subject，让Subject集成ClusterRole在整个集群中的权限。
 账户主体Subject在这里还是叫“用户”吧，包含组group，用户user和ServiceAccount。
+
 ```
 [root@node1 manifests]# kubectl get rolebinding --all-namespaces
 NAMESPACE     NAME                                             AGE
@@ -440,9 +467,8 @@ system:controller:attachdetach-controller              22d
 ...
 ```
 
+## 准入
 
-准入
-----
 当前可配置的准入控制器主要有：
 
 * AlwaysAdmit：允许所有请求
@@ -451,16 +477,21 @@ system:controller:attachdetach-controller              22d
 * ServiceAccount：将 secret 信息挂载到 pod 中，比如 service account token，registry key 等
 * ResourceQuota 和 LimitRanger：实现配额控制
 * SecurityContextDeny：禁止创建设置了 Security Context 的 pod
-*
 
-通过kubeconfig配置访问多集群
-----
+## 通过kubeconfig配置访问多集群
+
 * kubeconfig介绍  
-kubeconfig文件用于组织关于集群、用户、命名空间和认证机制的信息。命令行工具kubectl从 kubeconfig文件中得到它要选择的集群以及跟集群api-server交互的信息。  
-默认情况下，kubectl会从$HOME/.kube目录下查找文件名为config的文件。可以通过设置环境变量KUBECONFIG或者通过设置--kubeconfig去指定其它kubeconfig文件。
-* Context  
+
+kubeconfig文件用于组织关于集群、用户、命名空间和认证机制的信息。命令行工具kubectl从 `kubeconfig`文件中得到它要选择的集群以及跟集群`api-server`交互的信息。  
+
+默认情况下，kubectl会从`$HOME/.kube`目录下查找文件名为config的文件。可以通过设置环境变量`KUBECONFIG`或者通过设置`--kubeconfig`去指定其它kubeconfig文件。
+
+* Context
+
 context指定了kubectl命令运行的上下文环境，kubectl与当前context中指定的集群和命名空间进行通信，并且使用当前context中包含的用户凭证。  
-每个context都是一个由（集群、命名空间、用户）描述的三元组。可以使用kubectl config use-context去设置当前的context。
+
+每个context都是一个由（集群、命名空间、用户）描述的三元组。可以使用`kubectl config use-context`去设置当前的context。
+
 ```
 [root@node1 ~]#  kubectl config view
 apiVersion: v1
@@ -487,10 +518,8 @@ CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPAC
 *         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin  
 ```
 
+## 参考
 
-
-参考
-----
 * https://kubernetes.io/docs/reference/access-authn-authz/authentication/
 * https://jimmysong.io/kubernetes-handbook/guide/authentication.html
 * https://zhangchenchen.github.io/2017/08/17/kubernetes-authentication-authorization-admission-control/

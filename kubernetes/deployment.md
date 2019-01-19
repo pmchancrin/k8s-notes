@@ -1,6 +1,6 @@
 # Controller Pattern
 
-Controller都放在 *pkg/controller* 目录下，都遵循Kubernetes项目中的一个通用编排模式：控制循环（control loop）
+Controller都放在 `pkg/controller` 目录下，都遵循Kubernetes项目中的一个通用编排模式：控制循环（`control loop`）
 
 ```
 for {
@@ -19,9 +19,9 @@ for {
 
 Deployment 控制器的实现步骤：
 
-1. Deployment 控制器从Etcd里面获取所有携带“app:nginx”标签的Pod，统计他们的数量，这是实际状态；
-2. Deployment 对象的Replicas字段是期望状态；
-3. Deployment 控制器讲两个状态进行对比，根据对比结果，确定删除还是创建Pod。 这种对比操作叫调谐（Reconcile），这哥调谐的过程，称作调谐循环（Reconcile Loop）或者同步循环（Sync Loop）。
+1. Deployment 控制器从Etcd里面获取所有携带“`app:nginx`”标签的Pod，统计他们的数量，这是实际状态；
+2. Deployment 对象的`replicas`字段是期望状态；
+3. Deployment 控制器讲两个状态进行对比，根据对比结果，确定删除还是创建Pod。 这种对比操作叫调谐（`Reconcile`），这哥调谐的过程，称作调谐循环（`Reconcile Loop`）或者同步循环（`Sync Loop`）。
 
 # Deployment
 
@@ -29,16 +29,16 @@ Deployment 控制器的实现步骤：
 
 ![Kubernetes Deployment Yaml](/images/kubernetes-deployment-yaml.png)
 
-* Deployment用在Stateless Application场景。
+* Deployment用在`Stateless Application`场景。
 * Deployment是个两层控制器。  
-* 上半部分是控制器定义，包括期望状态，下半部分是被控制对象的模板叫PodTemplete组成。
-* Deployment 控制器实际操作的是ReplicaSet对象，而不是Pod对象。
+* 上半部分是控制器定义，包括期望状态，下半部分是被控制对象的模板叫`PodTemplete`组成。
+* Deployment 控制器实际操作的是`replicaSet`对象，而不是`pod`对象。
 
 ![Kubernetes Deployment ReplicaSet](/images/kubernetes-deployment-rs.png)
 
-在所有API对象的Metadata里面，都有一个字段叫作 ownerReference，保持当前这个API对象的拥有者Owner的信息。
+在所有API对象的 `Metadata` 里面，都有一个字段叫作 `ownerReference`，保持当前这个API对象的拥有者Owner的信息。
 
-deployment创建了replicaSet，replicateSet创建了Pod：
+deployment创建了`replicaSet`，`replicateSet`创建了`pod`：
 
 ```
 [root@node11 ~]# kubectl get pods -o yaml nginx-deployment-5896fbb489-4966s
@@ -96,9 +96,9 @@ metadata:
   uid: 6913b1a4-fddd-11e8-a06c-080027c2b927
 ```
 
-ReplicaSet会把这个随机字符串家到它控制的所有Pod的标签里后面带的字符串叫pod-template-hash，ReplicaSet会把这个随机字符串家到它控制的所有Pod的标签里，包子这些Pod不会跟集群里其他Pod混淆。  
+ReplicaSet会把这个随机字符串加到它控制的所有Pod的标签里后面带的字符串叫`pod-template-hash`，ReplicaSet会把这个随机字符串家到它控制的所有Pod的标签里，包子这些Pod不会跟集群里其他Pod混淆。  
 
-ReplicaSet会把pod-template-hash加到自己的Lable里面。
+ReplicaSet会把`pod-template-hash`加到自己的`Lable`里面。
 
 ```
 [root@node11 ~]# kubectl get rs
@@ -154,7 +154,7 @@ Events:
 
 ## RollingUpdateStrategy
 
-deault
+default
 
 ```
 [root@node11 ~]# kubectl describe deployment nginx-deployment
@@ -185,10 +185,10 @@ spec:
 
 ![Kubernetes Deployment ReplicaSet](/images/kubernetes-deployment-rs-2.png)
 
-Deployment控制的是ReplicaSet的数目和属性。  
-一个版本对应的是一个ReplicaSet，这个版本应用的Pod数量，又RecplicaSet来保证。
+Deployment控制的是`ReplicaSet`的数目和属性。  
+一个版本对应的是一个`ReplicaSet`，这个版本应用的`Pod`数量，又`RecplicaSet`来保证。
 
-通过kubectl set image更新image到1.91版本，这个版本不存在，新的ReplicaSet(hash=79dccf98ff)出错停止了，它创建了2个Pod，都没有READY，旧ReplicaSet(hash=76bf4969df)水平收缩，也自动停止了，一个旧Pod被删。
+通过`kubectl set image`更新`image`到1.91版本，这个版本不存在，新的ReplicaSet(hash=79dccf98ff)出错停止了，它创建了2个Pod，都没有READY，旧ReplicaSet(hash=76bf4969df)水平收缩，也自动停止了，一个旧Pod被删。
 
 ```
 [root@node11 ~]# kubectl get deployments.apps nginx-deployment 
@@ -212,7 +212,7 @@ nginx-deployment   3/4     2            3           113s
 Waiting for deployment "nginx-deployment" rollout to finish: 2 out of 4 new replicas have been updated...
 ```
 
-通过kubectl rollout undo 可以回滚到上一个版本
+通过`kubectl rollout undo` 可以回滚到上一个版本
 
 ```
 [root@node11 ~]# kubectl rollout undo deployment/nginx-deployment
@@ -226,7 +226,7 @@ nginx-deployment-76bf4969df   4         4         4       8m54s
 nginx-deployment-79dccf98ff   0         0         0       7m13s
 ```
 
-通过kubectl rollout history 可以查看Deployment变更的版本，指定了--record都会被记录下来。可以查看具体版本，和回滚到具体版本。
+通过`kubectl rollout history` 可以查看Deployment变更的版本，指定了`--record`都会被记录下来。可以查看具体版本，和回滚到具体版本。
 
 ```
 [root@node11 ~]# kubectl rollout history deployment nginx-deployment 
@@ -273,6 +273,6 @@ https://github.com/ContainerSolutions/k8s-deployment-strategies/tree/master/cana
 ## NOTE
 
 1. 不同namespace相同的对象，是完全不同的对象。
-2. Deployment 只允许容器的restartPolicy=Always
-3. 将Deployment的spec.revisionHistoryLimit设置为0，就不能再回滚了。
+2. Deployment 只允许容器的`restartPolicy=Always`
+3. 将Deployment的`spec.revisionHistoryLimit`设置为0，就不能再回滚了。
 

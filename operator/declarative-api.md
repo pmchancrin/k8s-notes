@@ -90,6 +90,9 @@ Declarative API是Kubernetes项目的重中之重，是Google Borg设计思想�
 ### CustomResourceDefinition
 CRD API resource allows you to define custom resources.
 
+**CRD并不是万能的，有很多场景不适用，还有性能瓶颈。比如：不支持protobuf，当API Object 数量 > 1K 或者单个对象 > 1KB，或者高频请求时，CRD的响应都会又问题，所以CRD不能也不应该当作数据库使用。**  
+
+**像Kubernete，或者Etcd本身，最佳使用场景就是作为配置管理的依赖。如果业务需求不能用CRD进行建模的时候，比如需要等待API最终返回，或者需要坚持API的返回值，也是不能用CRD的。同时，当你需要完成的APIServer而不是之关系API对象的时候，需要使用API Aggregator。**
 
 ## Demo - Add new resource using CRD
 
@@ -504,7 +507,7 @@ func NewController(
 ```
 * 创建了一个work queue，同步Informer和控制循环之间的数据。
 * 为networkInformer注册3个Handler。
-* 实际入队的不是API对象本身，是Key，<namespace>/<name>。
+* 实际入队的不是API对象本身，是Key，`<namespace>/<name>`。
 * 控制循环不停的从queue里面拿Key，开始执行真正的控制逻辑。
 
 ```
@@ -619,7 +622,6 @@ E0915 12:50:29.066745   27159 reflector.go:134] github.com/resouer/k8s-controlle
 
 
 **整个流程不仅可以用在自定义API资源，而且可以用在K8s原生的默认API对象上完成复杂的编排功能，比如可以定义一个Deployment的Informer等**
-
 
 # Demo - Istio
 

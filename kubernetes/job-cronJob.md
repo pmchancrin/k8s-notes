@@ -1,8 +1,7 @@
-# Job 分类
-**Batch Job:** 计算业务/离线业务，跑完就退出；  
-**Long Running Job**：长作业。
+# Job 
 
-# Job
+1. **Batch Job:** 计算业务/离线业务，跑完就退出；  
+2. **Long Running Job**：长作业。
 
 ```
 apiVersion: batch/v1
@@ -18,21 +17,16 @@ spec:
         command: ["sh", "-c", "echo 'scale=10000; 4*a(1)' | bc -l "]
       restartPolicy: Never
   backoffLimit: 4
-
 ```
 
-**restartPolicy** 在Job里面只允许被设置为Never和OnFailure；而在Deployment对象里，只需运行被设置为Always。  
+**restartPolicy** 在Job里面只允许被设置为`Never`和`OnFailure`；而在Deployment对象里，只需运行被设置为`Always`。  
 
-restartPolicy为Never，当Job失败会不断尝试创建一个新的Pod。  
-
-restartPolicy为OnFailure，当Job失败后，会尝试重启Pod，不会重新创建。  
-
-spec.backoffLimit字段可以限制创建的次数，Job重新创建的间隔是指数增长的。   
-
-spec.activeDeadlineSeconds是设置最长运行时间，超过这个时间就会被终止。 
-
-spec.parallelism，Job任意时间最多可以启动多少个Pod同时运行。  
-spec.completions，Job完成的Pod数目，就是最终用户需要的Pod数目。
+* `restartPolicy`为`Never`，当Job失败会不断尝试创建一个新的Pod。
+* `restartPolicy`为`OnFailure`，当Job失败后，会尝试重启Pod，不会重新创建。
+* `spec.backoffLimit`字段可以限制创建的次数，Job重新创建的间隔是指数增长的。
+* `spec.activeDeadlineSeconds`是设置最长运行时间，超过这个时间就会被终止。
+* `spec.parallelism`，Job任意时间最多可以启动多少个Pod同时运行。
+* `spec.completions`，Job完成的Pod数目，就是最终用户需要的Pod数目。
 
 ## Demo
 
@@ -63,7 +57,7 @@ spec:
       restartPolicy: Never
 ```
 
-外部脚本或者程序控制$ITEM变量，这些Job都又同一个标签。
+外部脚本或者程序控制`$ITEM`变量，这些Job都又同一个标签。
 
 ```
 $ mkdir ./jobs
@@ -71,7 +65,6 @@ $ for i in apple banana cherry
 do
   cat job-tmpl.yaml | sed "s/\$ITEM/$i/" > ./jobs/job-$i.yaml
 done
-
 ```
 
 ### demo 2
@@ -99,9 +92,9 @@ spec:
         - name: QUEUE
           value: job1
       restartPolicy: OnFailure
-
 ```
-这种方式，只关心指定任务数 completions，不关心parallelism数。 任务可以从工作队列里面获取，生成者-消费者模式。
+
+这种方式，只关心指定任务数`completions`，不关心`parallelism`数。 任务可以从工作队列里面获取，生成者-消费者模式。
 
 ```
 /* job-wq-1 的伪代码 */
@@ -138,9 +131,9 @@ spec:
 
 ```
 
-*/1 * * * *  从0开始，每1个单位时间执行一次，分，时，日，月，星期
+`*/1 * * * *`  从0开始，每1个单位时间执行一次，分，时，日，月，星期
 
-concurrencyPolicy=Allow，默认情况，Job可以同时存在；  
-concurrencyPolicy=Forbid，不会创建新Pod，该创建周期被跳过；  
-concurrencyPolicy=Replace，新产生的Job会替换旧的、没执行完的Job。  
-spec.startingDeadlineSeconds，多少秒里，miss的数目达到100次，这个Job就不会再被创建。 （Job创建失败，就会被记miss）  
+* `concurrencyPolicy=Allow`，默认情况，Job可以同时存在；  
+* `concurrencyPolicy=Forbid`，不会创建新Pod，该创建周期被跳过；  
+* `concurrencyPolicy=Replace`，新产生的Job会替换旧的、没执行完的Job。  
+* `spec.startingDeadlineSeconds`，多少秒里，miss的数目达到100次，这个Job就不会再被创建。 （Job创建失败，就会被记miss）  

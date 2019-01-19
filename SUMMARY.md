@@ -28,6 +28,7 @@
   * [Pod](kubernetes/pod.md)
   * [Deployment](kubernetes/deployment.md)
   * [DaemonSet](kubernetes/daemonset.md)
+  * [StatefullSet](kubernetes/statefullset.md)
   * [Job CronJob](kubernetes/job-cronJob.md)
 * [Authentication Authorization Admission](kubernetes/authentication-authorization-admission.md)
   * [TLS CA](kubernetes/tls-ca.md)
@@ -35,7 +36,11 @@
   * [Service Account](kubernetes/service-account.md)
   * [ConfigMap](kubernetes/configmap.md)
   * [RBAC](kubernetes/kubernetes-RBAC.md)
-
+* Network
+  * [Service]
+* Storage
+  * [PV/PVC]
+  
 ## Operator
 
 * [Declarative API](operator/declarative-api.md)
