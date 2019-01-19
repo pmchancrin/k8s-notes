@@ -545,12 +545,27 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3.4" data-path="job-cronJob.html">
+        <li class="chapter " data-level="3.3.4" data-path="statefullset.html">
+            
+                <a href="statefullset.html">
+            
+                    
+                        <b>3.3.4.</b>
+                    
+                    StatefullSet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.5" data-path="job-cronJob.html">
             
                 <a href="job-cronJob.html">
             
                     
-                        <b>3.3.4.</b>
+                        <b>3.3.5.</b>
                     
                     Job CronJob
             
@@ -651,6 +666,78 @@
                     RBAC
             
                 </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" >
+            
+                <span>
+            
+                    
+                        <b>3.5.</b>
+                    
+                    Network
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.5.1" >
+            
+                <span>
+            
+                    
+                        <b>3.5.1.</b>
+                    
+                    [Service]
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" >
+            
+                <span>
+            
+                    
+                        <b>3.6.</b>
+                    
+                    Storage
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.6.1" >
+            
+                <span>
+            
+                    
+                        <b>3.6.1.</b>
+                    
+                    [PV/PVC]
+            
+                </span>
             
 
             
@@ -805,20 +892,20 @@
                                 <h1 id="&#x8BA4;&#x8BC1;authenticating--&#x6388;&#x6743;authorization--&#x51C6;&#x5165;admission-control">&#x8BA4;&#x8BC1;Authenticating &amp; &#x6388;&#x6743;Authorization &amp; &#x51C6;&#x5165;Admission Control</h1>
 <p>&#x8D26;&#x6237;&#x5206;&#x4E3A;&#x4E24;&#x7C7B;&#xFF1A;</p>
 <ul>
-<li>User Account&#xFF1A;&#x666E;&#x901A;&#x7528;&#x6237;&#x88AB;&#x5047;&#x5B9A;&#x4E3A;&#x7531;&#x5916;&#x90E8;&#x72EC;&#x7ACB;&#x670D;&#x52A1;&#x7BA1;&#x7406;&#x3002;&#x7BA1;&#x7406;&#x5458;&#x5206;&#x53D1;&#x79C1;&#x94A5;&#xFF0C;&#x7528;&#x6237;&#x5B58;&#x50A8;&#xFF08;&#x5982;Keystone&#x6216;Google&#x5E10;&#x6237;&#xFF09;&#xFF0C;&#x751A;&#x81F3;&#x5305;&#x542B;&#x7528;&#x6237;&#x540D;&#x548C;&#x5BC6;&#x7801;&#x5217;&#x8868;&#x7684;&#x6587;&#x4EF6;&#x3002;&#x5728;&#x8FD9;&#x65B9;&#x9762;&#xFF0C;kubernetes&#x6CA1;&#x6709;&#x4EE3;&#x8868;&#x666E;&#x901A;&#x7528;&#x6237;&#x5E10;&#x6237;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;API&#x8C03;&#x7528;&#x7684;&#x65B9;&#x5F0F;&#x5411;&#x96C6;&#x7FA4;&#x4E2D;&#x6DFB;&#x52A0;&#x666E;&#x901A;&#x7528;&#x6237;&#x3002;&#x7528;&#x6237;&#x8D26;&#x53F7;&#x4E3A;&#x5168;&#x5C40;&#x8BBE;&#x8BA1;&#x7684;&#x3002;&#x547D;&#x540D;&#x5FC5;&#x987B;&#x5728;&#x4E00;&#x4E2A;&#x96C6;&#x7FA4;&#x7684;&#x6240;&#x6709;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E2D;&#x552F;&#x4E00;&#x3002;<strong>&#x8FD9;&#x4E2A;&#x8D26;&#x6237;&#x662F;&#x7ED9;&#x4EBA;&#x7528;&#x7684;&#x3002;</strong></li>
-<li>Service Account&#xFF1A;service account&#x662F;&#x7531;kubernetes API&#x7BA1;&#x7406;&#x7684;&#x5E10;&#x6237;&#x3002;&#x5B83;&#x4EEC;&#x90FD;&#x7ED1;&#x5B9A;&#x5230;&#x4E86;&#x7279;&#x5B9A;&#x7684; namespace&#xFF0C;&#x5E76;&#x7531;api-server&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#xFF0C;&#x6216;&#x8005;&#x901A;&#x8FC7;API&#x8C03;&#x7528;&#x624B;&#x52A8;&#x521B;&#x5EFA;&#x3002;service accoun&#x5173;&#x8054;&#x4E86;&#x4E00;&#x5957;&#x51ED;&#x8BC1;&#xFF0C;&#x5B58;&#x50A8;&#x5728;Secret&#xFF0C;&#x8FD9;&#x4E9B;&#x51ED;&#x8BC1;&#x540C;&#x65F6;&#x88AB;&#x6302;&#x8F7D;&#x5230;pod&#x4E2D;&#xFF0C;&#x4ECE;&#x800C;&#x5141;&#x8BB8;pod&#x4E0E;kubernetes API&#x4E4B;&#x95F4;&#x7684;&#x8C03;&#x7528;&#x3002;&#x670D;&#x52A1;&#x8D26;&#x53F7;&#x662F;&#x5728;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x91CC;&#x7684;&#x3002;<strong>&#x8FD9;&#x4E2A;&#x8D26;&#x6237;&#x662F;&#x7ED9;pod&#x4E2D;&#x7684;&#x8FDB;&#x7A0B;&#x7528;&#x7684;&#x3002;</strong></li>
+<li><strong>User Account</strong>&#xFF1A;&#x666E;&#x901A;&#x7528;&#x6237;&#x88AB;&#x5047;&#x5B9A;&#x4E3A;&#x7531;&#x5916;&#x90E8;&#x72EC;&#x7ACB;&#x670D;&#x52A1;&#x7BA1;&#x7406;&#x3002;&#x7BA1;&#x7406;&#x5458;&#x5206;&#x53D1;&#x79C1;&#x94A5;&#xFF0C;&#x7528;&#x6237;&#x5B58;&#x50A8;&#xFF08;&#x5982;Keystone&#x6216;Google&#x5E10;&#x6237;&#xFF09;&#xFF0C;&#x751A;&#x81F3;&#x5305;&#x542B;&#x7528;&#x6237;&#x540D;&#x548C;&#x5BC6;&#x7801;&#x5217;&#x8868;&#x7684;&#x6587;&#x4EF6;&#x3002;&#x5728;&#x8FD9;&#x65B9;&#x9762;&#xFF0C;kubernetes&#x6CA1;&#x6709;&#x4EE3;&#x8868;&#x666E;&#x901A;&#x7528;&#x6237;&#x5E10;&#x6237;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x65E0;&#x6CD5;&#x901A;&#x8FC7;API&#x8C03;&#x7528;&#x7684;&#x65B9;&#x5F0F;&#x5411;&#x96C6;&#x7FA4;&#x4E2D;&#x6DFB;&#x52A0;&#x666E;&#x901A;&#x7528;&#x6237;&#x3002;&#x7528;&#x6237;&#x8D26;&#x53F7;&#x4E3A;&#x5168;&#x5C40;&#x8BBE;&#x8BA1;&#x7684;&#x3002;&#x547D;&#x540D;&#x5FC5;&#x987B;&#x5728;&#x4E00;&#x4E2A;&#x96C6;&#x7FA4;&#x7684;&#x6240;&#x6709;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E2D;&#x552F;&#x4E00;&#x3002;<strong>&#x8FD9;&#x4E2A;&#x8D26;&#x6237;&#x662F;&#x7ED9;&#x4EBA;&#x7528;&#x7684;&#x3002;</strong></li>
+<li><strong>Service Account</strong>&#xFF1A;<code>service account</code>&#x662F;&#x7531;kubernetes API&#x7BA1;&#x7406;&#x7684;&#x5E10;&#x6237;&#x3002;&#x5B83;&#x4EEC;&#x90FD;&#x7ED1;&#x5B9A;&#x5230;&#x4E86;&#x7279;&#x5B9A;&#x7684; <code>namespace</code>&#xFF0C;&#x5E76;&#x7531;<code>api-server</code>&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#xFF0C;&#x6216;&#x8005;&#x901A;&#x8FC7;API&#x8C03;&#x7528;&#x624B;&#x52A8;&#x521B;&#x5EFA;&#x3002;<code>service account</code>&#x5173;&#x8054;&#x4E86;&#x4E00;&#x5957;&#x51ED;&#x8BC1;&#xFF0C;&#x5B58;&#x50A8;&#x5728;<code>Secret</code>&#xFF0C;&#x8FD9;&#x4E9B;&#x51ED;&#x8BC1;&#x540C;&#x65F6;&#x88AB;&#x6302;&#x8F7D;&#x5230;pod&#x4E2D;&#xFF0C;&#x4ECE;&#x800C;&#x5141;&#x8BB8;pod&#x4E0E;kubernetes API&#x4E4B;&#x95F4;&#x7684;&#x8C03;&#x7528;&#x3002;&#x670D;&#x52A1;&#x8D26;&#x53F7;&#x662F;&#x5728;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x91CC;&#x7684;&#x3002;<strong>&#x8FD9;&#x4E2A;&#x8D26;&#x6237;&#x662F;&#x7ED9;pod&#x4E2D;&#x7684;&#x8FDB;&#x7A0B;&#x7528;&#x7684;&#x3002;</strong></li>
 </ul>
 <h2 id="&#x6982;&#x8FF0;">&#x6982;&#x8FF0;</h2>
 <ul>
-<li>k8s&#x901A;&#x8FC7;kube-apiserver&#x7EC4;&#x4EF6;&#x5BF9;&#x5916;&#x63D0;&#x4F9B;REST&#x670D;&#x52A1;&#xFF0C;&#x6709;&#x4E24;&#x7C7B;&#x5BA2;&#x6237;&#x7AEF;&#xFF1A;&#x666E;&#x901A;&#x7528;&#x6237;&#x548C;&#x96C6;&#x7FA4;&#x5185;&#x7684;pod</li>
-<li>k8s&#x9ED8;&#x8BA4;https&#x5B89;&#x5168;&#x7AEF;&#x53E3;6443&#xFF0C;&#x4E00;&#x4E2A;API&#x8BF7;&#x6C42;&#x5230;&#x8FBE;&#x8BE5;&#x7AEF;&#x53E3;&#x540E;&#xFF0C;&#x8981;&#x7ECF;&#x8FC7;&#x8BA4;&#x8BC1;&#xFF0C;&#x6388;&#x6743;&#xFF0C;&#x51C6;&#x5165;&#x63A7;&#x5236;&#xFF0C;&#x5B9E;&#x9645;API&#x8BF7;&#x6C42;&#x3002;</li>
-<li>K8s&#x9ED8;&#x8BA4;&#x975E;&#x5B89;&#x5168;&#x7AEF;&#x53E3;8080&#xFF08;&#x53EA;&#x80FD;&#x672C;&#x673A;&#x8BBF;&#x95EE;&#xFF0C;&#x7ED1;&#x5B9A;&#x7684;&#x662F;localhost&#xFF09;</li>
-<li><strong>&#x8BA4;&#x8BC1;</strong>&#xFF1A;&#x5BF9;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8BA4;&#x8BC1;&#xFF0C;Authenticaton verifies who you are</li>
-<li><strong>&#x6388;&#x6743;</strong>&#xFF1A;&#x5BF9;&#x4E0D;&#x540C;&#x7528;&#x6237;&#x4E0D;&#x540C;&#x7684;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#xFF0C;Authorization verifies what you are authorized to do.</li>
-<li><strong>&#x51C6;&#x5165;</strong>&#xFF1A;Admission Control &#x6709;&#x4E00;&#x4E2A;&#x51C6;&#x5165;&#x63A7;&#x5236;&#x5217;&#x8868;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x8BBE;&#x7F6E;&#x9009;&#x62E9;&#x6267;&#x884C;&#x54EA;&#x51E0;&#x4E2A;&#x51C6;&#x5165;&#x63A7;&#x5236;&#x5668;&#x3002;&#x53EA;&#x6709;&#x6240;&#x6709;&#x7684;&#x51C6;&#x5165;&#x63A7;&#x5236;&#x5668;&#x90FD;&#x68C0;&#x67E5;&#x901A;&#x8FC7;&#x4E4B;&#x540E;&#xFF0C;apiserver &#x624D;&#x6267;&#x884C;&#x8BE5;&#x8BF7;&#x6C42;&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;&#x62D2;&#x7EDD;&#x3002;</li>
+<li>k8s&#x901A;&#x8FC7;<code>kube-apiserver</code>&#x7EC4;&#x4EF6;&#x5BF9;&#x5916;&#x63D0;&#x4F9B;REST&#x670D;&#x52A1;&#xFF0C;&#x6709;&#x4E24;&#x7C7B;&#x5BA2;&#x6237;&#x7AEF;&#xFF1A;&#x666E;&#x901A;&#x7528;&#x6237;&#x548C;&#x96C6;&#x7FA4;&#x5185;&#x7684;pod;</li>
+<li>k8s&#x9ED8;&#x8BA4;https&#x5B89;&#x5168;&#x7AEF;&#x53E3;6443&#xFF0C;&#x4E00;&#x4E2A;API&#x8BF7;&#x6C42;&#x5230;&#x8FBE;&#x8BE5;&#x7AEF;&#x53E3;&#x540E;&#xFF0C;&#x8981;&#x7ECF;&#x8FC7;&#x8BA4;&#x8BC1;&#xFF0C;&#x6388;&#x6743;&#xFF0C;&#x51C6;&#x5165;&#x63A7;&#x5236;&#xFF0C;&#x5B9E;&#x9645;API&#x8BF7;&#x6C42;;</li>
+<li>K8s&#x9ED8;&#x8BA4;&#x975E;&#x5B89;&#x5168;&#x7AEF;&#x53E3;8080&#xFF08;&#x53EA;&#x80FD;&#x672C;&#x673A;&#x8BBF;&#x95EE;&#xFF0C;&#x7ED1;&#x5B9A;&#x7684;&#x662F;localhost&#xFF09;;</li>
+<li><strong>&#x8BA4;&#x8BC1;</strong>&#xFF1A;&#x5BF9;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8BA4;&#x8BC1;&#xFF0C;Authenticaton verifies who you are;</li>
+<li><strong>&#x6388;&#x6743;</strong>&#xFF1A;&#x5BF9;&#x4E0D;&#x540C;&#x7528;&#x6237;&#x4E0D;&#x540C;&#x7684;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#xFF0C;Authorization verifies what you are authorized to do;</li>
+<li><strong>&#x51C6;&#x5165;</strong>&#xFF1A;<code>Admission Control</code> &#x6709;&#x4E00;&#x4E2A;&#x51C6;&#x5165;&#x63A7;&#x5236;&#x5217;&#x8868;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x8BBE;&#x7F6E;&#x9009;&#x62E9;&#x6267;&#x884C;&#x54EA;&#x51E0;&#x4E2A;&#x51C6;&#x5165;&#x63A7;&#x5236;&#x5668;&#x3002;&#x53EA;&#x6709;&#x6240;&#x6709;&#x7684;&#x51C6;&#x5165;&#x63A7;&#x5236;&#x5668;&#x90FD;&#x68C0;&#x67E5;&#x901A;&#x8FC7;&#x4E4B;&#x540E;&#xFF0C;apiserver &#x624D;&#x6267;&#x884C;&#x8BE5;&#x8BF7;&#x6C42;&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;&#x62D2;&#x7EDD;&#x3002;</li>
 </ul>
 <h2 id="&#x8BA4;&#x8BC1;">&#x8BA4;&#x8BC1;</h2>
-<p>apiserver&#x8BA4;&#x8BC1;&#x914D;&#x7F6E;</p>
+<p><code>apiserver</code>&#x8BA4;&#x8BC1;&#x914D;&#x7F6E;:</p>
 <pre><code>[root@node1 manifests]# cat /etc/kubernetes/manifests/kube-apiserver.manifest 
 apiVersion: v1
 kind: Pod
@@ -871,17 +958,15 @@ spec:
     - --v=2
     - --allow-privileged=true
     - --anonymous-auth=False
-</code></pre><blockquote>
-<ul>
-<li><strong>--client-ca-file:</strong> &#x6307;&#x5B9A;CA&#x6839;&#x8BC1;&#x4E66;&#x6587;&#x4EF6;&#x4E3A; <em>/etc/kubernetes/ssl/ca.pem</em> &#xFF0C;&#x5185;&#x7F6E;CA&#x516C;&#x94A5;&#x7528;&#x4E8E;&#x9A8C;&#x8BC1;&#x67D0;&#x8BC1;&#x4E66;&#x662F;&#x5426;&#x662F;CA&#x7B7E;&#x53D1;&#x7684;&#x8BC1;&#x4E66;.</li>
-<li><strong>--tls-private-key-file:</strong>  &#x6307;&#x5B9A;ApiServer&#x79C1;&#x94A5;&#x6587;&#x4EF6;&#x4E3A; <em>/etc/kubernetes/ssl/apiserver-key.pem</em> .</li>
-<li><strong>--tls-cert-file:</strong> &#x6307;&#x5B9A;ApiServer&#x8BC1;&#x4E66;&#x6587;&#x4EF6;&#x4E3A; <em>/etc/kubernetes/ssl/apiserver.pem</em></li>
-<li><strong>--token-auth-file</strong> &#x9759;&#x6001;token&#x8BA4;&#x8BC1;</li>
-<li><strong>--basic-auth-file</strong> &#x7528;&#x6237;&#x5BC6;&#x7801;&#x8BA4;&#x8BC1;</li>
-</ul>
-</blockquote>
-<ul>
-<li>user account&#x8BA4;&#x8BC1;&#x6709;&#x4E09;&#x79CD;&#xFF1A;CA&#x8BC1;&#x4E66;&#xFF0C;token&#xFF0C;Base&#x8BA4;&#x8BC1;&#xFF0C;&#x53EF;&#x4EE5;&#x914D;&#x591A;&#x79CD;</li>
+</code></pre><ul>
+<li><strong>--client-ca-file:</strong> &#x6307;&#x5B9A;CA&#x6839;&#x8BC1;&#x4E66;&#x6587;&#x4EF6;&#x4E3A; <code>/etc/kubernetes/ssl/ca.pem</code> &#xFF0C;&#x5185;&#x7F6E;CA&#x516C;&#x94A5;&#x7528;&#x4E8E;&#x9A8C;&#x8BC1;&#x67D0;&#x8BC1;&#x4E66;&#x662F;&#x5426;&#x662F;CA&#x7B7E;&#x53D1;&#x7684;&#x8BC1;&#x4E66;;</li>
+<li><strong>--tls-private-key-file:</strong>  &#x6307;&#x5B9A;ApiServer&#x79C1;&#x94A5;&#x6587;&#x4EF6;&#x4E3A; <code>/etc/kubernetes/ssl/apiserver-key.pem</code>;</li>
+<li><strong>--tls-cert-file:</strong> &#x6307;&#x5B9A;ApiServer&#x8BC1;&#x4E66;&#x6587;&#x4EF6;&#x4E3A; <code>/etc/kubernetes/ssl/apiserver.pem</code>;</li>
+<li><strong>--token-auth-file</strong> &#x9759;&#x6001;token&#x8BA4;&#x8BC1;;</li>
+<li><p><strong>--basic-auth-file</strong> &#x7528;&#x6237;&#x5BC6;&#x7801;&#x8BA4;&#x8BC1;;</p>
+</li>
+<li><p>user account&#x8BA4;&#x8BC1;&#x6709;&#x4E09;&#x79CD;&#xFF1A;CA&#x8BC1;&#x4E66;&#xFF0C;token&#xFF0C;Base&#x8BA4;&#x8BC1;&#xFF0C;&#x53EF;&#x4EE5;&#x914D;&#x591A;&#x79CD;</p>
+</li>
 <li>sa &#x8BA4;&#x8BC1;</li>
 <li>&#x5F00;&#x542F;&#x4E86;https&#x8BA4;&#x8BC1;&#xFF0C;&#x8BBF;&#x95EE;&#x96C6;&#x7FA4;&#xFF0C;&#x63D0;&#x793A;unauthorized</li>
 </ul>
@@ -934,75 +1019,75 @@ Unauthorized
         &quot;name&quot;: &quot;node1&quot;,
         &quot;selfLink&quot;: &quot;/api/v1/nodes/node1&quot;,
 </code></pre><ul>
-<li>kubelet &#x7684;&#x914D;&#x7F6E;
-```
-[root@node3 kubernetes]# cat node-kubeconfig.yaml 
-apiVersion: v1
-kind: Config
-clusters:</li>
-<li>name: local
-cluster:
-  certificate-authority: /etc/kubernetes/ssl/ca.pem
-  server: <a href="https://localhost:6443" target="_blank">https://localhost:6443</a>
-users:</li>
-<li>name: kubelet
-user:
-  client-certificate: /etc/kubernetes/ssl/node-node3.pem
-  client-key: /etc/kubernetes/ssl/node-node3-key.pem
-contexts:</li>
-<li>context:
-  cluster: local
-  user: kubelet
-name: kubelet-cluster.local
-current-context: kubelet-cluster.local</li>
+<li><code>kubelet</code> &#x7684;&#x914D;&#x7F6E;</li>
 </ul>
-<pre><code>* kubeproxy &#x7684;&#x914D;&#x7F6E;
-</code></pre><p>[root@node3 kubernetes]# cat kube-proxy-kubeconfig.yaml 
+<pre><code>[root@node3 kubernetes]# cat node-kubeconfig.yaml 
 apiVersion: v1
 kind: Config
-clusters:</p>
-<ul>
-<li>name: local
-cluster:
-  certificate-authority: /etc/kubernetes/ssl/ca.pem
-  server: <a href="https://localhost:6443" target="_blank">https://localhost:6443</a>
-users:</li>
-<li>name: kube-proxy
-user:
-  client-certificate: /etc/kubernetes/ssl/kube-proxy-node3.pem
-  client-key: /etc/kubernetes/ssl/kube-proxy-node3-key.pem
-contexts:</li>
-<li>context:
-  cluster: local
-  user: kube-proxy
-name: kube-proxy-cluster.local
+clusters:
+- name: local
+  cluster:
+    certificate-authority: /etc/kubernetes/ssl/ca.pem
+    server: https://localhost:6443
+users:
+- name: kubelet
+  user:
+    client-certificate: /etc/kubernetes/ssl/node-node3.pem
+    client-key: /etc/kubernetes/ssl/node-node3-key.pem
+contexts:
+- context:
+    cluster: local
+    user: kubelet
+  name: kubelet-cluster.local
+current-context: kubelet-cluster.local
+</code></pre><ul>
+<li><code>kubeproxy</code> &#x7684;&#x914D;&#x7F6E;</li>
+</ul>
+<pre><code>[root@node3 kubernetes]# cat kube-proxy-kubeconfig.yaml 
+apiVersion: v1
+kind: Config
+clusters:
+- name: local
+  cluster:
+    certificate-authority: /etc/kubernetes/ssl/ca.pem
+    server: https://localhost:6443
+users:
+- name: kube-proxy
+  user:
+    client-certificate: /etc/kubernetes/ssl/kube-proxy-node3.pem
+    client-key: /etc/kubernetes/ssl/kube-proxy-node3-key.pem
+contexts:
+- context:
+    cluster: local
+    user: kube-proxy
+  name: kube-proxy-cluster.local
 current-context: kube-proxy-cluster.local
-```</li>
-<li>kube-scheduler &#x7684;&#x914D;&#x7F6E;
-```
-[root@node2 kubernetes]# cat kube-scheduler-kubeconfig.yaml
+</code></pre><ul>
+<li><code>kube-scheduler</code> &#x7684;&#x914D;&#x7F6E;</li>
+</ul>
+<pre><code>[root@node2 kubernetes]# cat kube-scheduler-kubeconfig.yaml
 apiVersion: v1
 kind: Config
-clusters:</li>
-<li>name: local
-cluster:
-  certificate-authority: /etc/kubernetes/ssl/ca.pem
-  server: <a href="https://127.0.0.1:6443" target="_blank">https://127.0.0.1:6443</a>
-users:</li>
-<li>name: kube-scheduler
-user:
-  client-certificate: /etc/kubernetes/ssl/kube-scheduler.pem
-  client-key: /etc/kubernetes/ssl/kube-scheduler-key.pem
-contexts:</li>
-<li>context:
-  cluster: local
-  user: kube-scheduler
-name: kube-scheduler-cluster.local
+clusters:
+- name: local
+  cluster:
+    certificate-authority: /etc/kubernetes/ssl/ca.pem
+    server: https://127.0.0.1:6443
+users:
+- name: kube-scheduler
+  user:
+    client-certificate: /etc/kubernetes/ssl/kube-scheduler.pem
+    client-key: /etc/kubernetes/ssl/kube-scheduler-key.pem
+contexts:
+- context:
+    cluster: local
+    user: kube-scheduler
+  name: kube-scheduler-cluster.local
 current-context: kube-scheduler-cluster.local
-```</li>
-<li>&#x624B;&#x52A8;&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x548C;key&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x96C6;&#x7FA4;&#x5176;&#x4ED6;&#x8282;&#x70B9;&#x4E0A;&#x4F7F;&#x7528;
-```
-[root@node1 ssl]# openssl genrsa -out test-key.pem 2048
+</code></pre><ul>
+<li>&#x624B;&#x52A8;&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x548C;key&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x96C6;&#x7FA4;&#x5176;&#x4ED6;&#x8282;&#x70B9;&#x4E0A;&#x4F7F;&#x7528;</li>
+</ul>
+<pre><code>[root@node1 ssl]# openssl genrsa -out test-key.pem 2048
 Generating RSA private key, 2048 bit long modulus
 ......+++
 ...+++
@@ -1015,22 +1100,25 @@ subject=/CN=test
 Getting CA Private Key
 [root@node1 ssl]# scp test* node3:/root/test
 root@node3&apos;s password: 
-test.csr                                                                                                                                                                       100%  883     1.7MB/s   00:00<br>test-key.pem                                                                                                                                                                   100% 1679     3.4MB/s   00:00<br>test.pem
-[root@node3 test]# curl <a href="https://node1:6443/api/v1/nodes" target="_blank">https://node1:6443/api/v1/nodes</a> --cert ./test.pem --key ./test-key.pem
+test.csr                                                                                                                                                                       100%  883     1.7MB/s   00:00    
+test-key.pem                                                                                                                                                                   100% 1679     3.4MB/s   00:00    
+test.pem
+[root@node3 test]# curl https://node1:6443/api/v1/nodes --cert ./test.pem --key ./test-key.pem
 {
-&quot;kind&quot;: &quot;NodeList&quot;,
-&quot;apiVersion&quot;: &quot;v1&quot;,
-&quot;metadata&quot;: {
-  &quot;selfLink&quot;: &quot;/api/v1/nodes&quot;,
-  &quot;resourceVersion&quot;: &quot;439941&quot;
-},</li>
+  &quot;kind&quot;: &quot;NodeList&quot;,
+  &quot;apiVersion&quot;: &quot;v1&quot;,
+  &quot;metadata&quot;: {
+    &quot;selfLink&quot;: &quot;/api/v1/nodes&quot;,
+    &quot;resourceVersion&quot;: &quot;439941&quot;
+  },
+</code></pre><ul>
+<li>&#x5C06;&#x8BC1;&#x4E66;&#x62F7;&#x8D1D;&#x5230;&#x975E;&#x96C6;&#x7FA4;&#x8282;&#x70B9;&#x4E0A;&#xFF0C;&#x62A5;&#x9519;</li>
 </ul>
-<pre><code>
-* &#x5C06;&#x8BC1;&#x4E66;&#x62F7;&#x8D1D;&#x5230;&#x975E;&#x96C6;&#x7FA4;&#x8282;&#x70B9;&#x4E0A;&#xFF0C;&#x62A5;&#x9519;
-</code></pre><p>[root@node test]# curl <a href="https://node1:6443/api/v1/nodes" target="_blank">https://node1:6443/api/v1/nodes</a> --cert ./test.pem --key ./test-key.pem
+<pre><code>[root@node test]# curl https://node1:6443/api/v1/nodes --cert ./test.pem --key ./test-key.pem
 curl: (60) Peer&apos;s certificate has an invalid signature.
-More details here: <a href="http://curl.haxx.se/docs/sslcerts.html" target="_blank">http://curl.haxx.se/docs/sslcerts.html</a></p>
-<p>curl performs SSL certificate verification by default, using a &quot;bundle&quot;
+More details here: http://curl.haxx.se/docs/sslcerts.html
+
+curl performs SSL certificate verification by default, using a &quot;bundle&quot;
  of Certificate Authority (CA) public keys (CA certs). If the default
  bundle file isn&apos;t adequate, you can specify an alternate file
  using the --cacert option.
@@ -1039,9 +1127,9 @@ If this HTTPS server uses a certificate signed by a CA represented in
  problem with the certificate (it might be expired, or the name might
  not match the domain name in the URL).
 If you&apos;d like to turn off curl&apos;s verification of the certificate, use
- the -k (or --insecure) option.</p>
-<pre><code>&#x9700;&#x8981;&#x5C06;ca&#x6839;&#x8BC1;&#x4E66;&#x62F7;&#x8D1D;&#x8FC7;&#x6765;
-</code></pre><p>[root@node test]# curl <a href="https://node1:6443/api/v1/nodes" target="_blank">https://node1:6443/api/v1/nodes</a> --cert ./test.pem --key ./test-key.pem --cacert ./ca.pem 
+ the -k (or --insecure) option.
+</code></pre><p>&#x9700;&#x8981;&#x5C06;ca&#x6839;&#x8BC1;&#x4E66;&#x62F7;&#x8D1D;&#x8FC7;&#x6765;</p>
+<pre><code>[root@node test]# curl https://node1:6443/api/v1/nodes --cert ./test.pem --key ./test-key.pem --cacert ./ca.pem 
 {
   &quot;kind&quot;: &quot;NodeList&quot;,
   &quot;apiVersion&quot;: &quot;v1&quot;,
@@ -1053,21 +1141,25 @@ If you&apos;d like to turn off curl&apos;s verification of the certificate, use
     {
       &quot;metadata&quot;: {
         &quot;name&quot;: &quot;node1&quot;,
-        &quot;selfLink&quot;: &quot;/api/v1/nodes/node1&quot;,</p>
-<pre><code>&#x4E3A;&#x4EC0;&#x4E48;&#x96C6;&#x7FA4;&#x8282;&#x70B9;&#x4E0D;&#x9700;&#x8981;ca&#x6839;&#x8BC1;&#x4E66;&#xFF1F;
-&gt; &#x56E0;&#x4E3A;&#x96C6;&#x7FA4;ca&#x8BC1;&#x4E66;&#x5DF2;&#x7ECF;&#x5728;ca-bundle.crt&#x91CC;&#x9762;&#x4E86;&#xFF0C;curl&#x65F6;&#x4E0D;&#x7528;&#x5E26;cacert&#x3002;
-&gt; ==&#x4F46;&#x662F;&#x5C06;ca&#x8BC1;&#x4E66;&#x52A0;&#x5230;ca-bundle&#x91CC;&#x9762;&#x4E86;&#x4E5F;&#x4E0D;&#x884C;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x4E3A;&#x5565;&#xFF1F;==
-</code></pre><p>[root@node3 ssl]# cd /etc/pki/tls/certs/
+        &quot;selfLink&quot;: &quot;/api/v1/nodes/node1&quot;,
+</code></pre><blockquote>
+<p>&#x4E3A;&#x4EC0;&#x4E48;&#x96C6;&#x7FA4;&#x8282;&#x70B9;&#x4E0D;&#x9700;&#x8981;ca&#x6839;&#x8BC1;&#x4E66;&#xFF1F;<br>&#x56E0;&#x4E3A;&#x96C6;&#x7FA4;ca&#x8BC1;&#x4E66;&#x5DF2;&#x7ECF;&#x5728;ca-bundle.crt&#x91CC;&#x9762;&#x4E86;&#xFF0C;curl&#x65F6;&#x4E0D;&#x7528;&#x5E26;cacert&#x3002;<br>&#x4F46;&#x662F;&#x5C06;ca&#x8BC1;&#x4E66;&#x52A0;&#x5230;ca-bundle&#x91CC;&#x9762;&#x4E86;&#x4E5F;&#x4E0D;&#x884C;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x4E3A;&#x5565;&#xFF1F;  </p>
+</blockquote>
+<pre><code>[root@node3 ssl]# cd /etc/pki/tls/certs/
 [root@node3 certs]# ls
 ca-bundle.crt  ca-bundle.trust.crt  make-dummy-cert  Makefile  renew-dummy-cert
 [root@node3 certs]# cat ca-bundle.crt | grep MIIC9zCCAd+gAwIBAgIJAP+vWZXVLCBqMA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV
-MIIC9zCCAd+gAwIBAgIJAP+vWZXVLCBqMA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV</p>
-<pre><code>#### token &#x8BA4;&#x8BC1;
-&#x548C;&#x9759;&#x6001;&#x5BC6;&#x7801;&#x4E00;&#x6837;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x4E5F;&#x662F;&#x540D;&#x5B58;&#x5B9E;&#x4EA1;&#xFF0C;&#x4E0D;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x3002;
-* &#x67E5;&#x770B;token  
-token,user,uid,&quot;group1,group2,group3&quot;
-&gt; ==NOTE&#xFF1A;&#x5982;&#x679C;&#x8BE5;&#x9759;&#x6001;token&#x6587;&#x4EF6;&#x66F4;&#x6539;&#x7684;&#x8BDD;&#xFF0C;&#x9700;&#x8981;&#x91CD;&#x542F;apiserver==
-</code></pre><p>[root@node1 tokens]# ls
+MIIC9zCCAd+gAwIBAgIJAP+vWZXVLCBqMA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV
+</code></pre><h4 id="token-&#x8BA4;&#x8BC1;">token &#x8BA4;&#x8BC1;</h4>
+<p>&#x548C;&#x9759;&#x6001;&#x5BC6;&#x7801;&#x4E00;&#x6837;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x4E5F;&#x662F;&#x540D;&#x5B58;&#x5B9E;&#x4EA1;&#xFF0C;&#x4E0D;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x3002;</p>
+<ul>
+<li>&#x67E5;&#x770B;token  </li>
+</ul>
+<p>&#x683C;&#x5F0F;&#xFF1A;<code>token,user,uid,&quot;group1,group2,group3&quot;</code></p>
+<blockquote>
+<p>NOTE&#xFF1A;&#x5982;&#x679C;&#x8BE5;&#x9759;&#x6001;token&#x6587;&#x4EF6;&#x66F4;&#x6539;&#x7684;&#x8BDD;&#xFF0C;&#x9700;&#x8981;&#x91CD;&#x542F;apiserver</p>
+</blockquote>
+<pre><code>[root@node1 tokens]# ls
 known_tokens.csv  system:kubectl-node1.token  system:kubectl-node2.token  system:kubelet-node1.token  system:kubelet-node2.token  system:kubelet-node3.token
 [root@node1 tokens]# cat known_tokens.csv 
 UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq,system:kubectl-node1,system:kubectl-node1
@@ -1076,9 +1168,11 @@ fPv22M1DYnVDXpXKPPlzMaZDLgmGZCKp,system:kubelet-node1,system:kubelet-node1
 GwpmzUtoIbODKavaNXoNqf4P8XcaUz0K,system:kubelet-node2,system:kubelet-node2
 MjkEgEkG8L9vcmy1zEdF68OXRkriyONL,system:kubelet-node3,system:kubelet-node3
 [root@node1 tokens]# cat system\:kubectl-node1.token 
-UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq</p>
-<pre><code>* &#x8BBF;&#x95EE;1
-</code></pre><p>[root@node3 test]# curl -k --header &quot;Authorization: Bearer UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq&quot; <a href="https://node1:6443/api/v1/nodes" target="_blank">https://node1:6443/api/v1/nodes</a>
+UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq
+</code></pre><ul>
+<li>&#x8BBF;&#x95EE;1</li>
+</ul>
+<pre><code>[root@node3 test]# curl -k --header &quot;Authorization: Bearer UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq&quot; https://node1:6443/api/v1/nodes
 {
   &quot;kind&quot;: &quot;NodeList&quot;,
   &quot;apiVersion&quot;: &quot;v1&quot;,
@@ -1089,78 +1183,92 @@ UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq</p>
   &quot;items&quot;: [
     {
       &quot;metadata&quot;: {
-        &quot;name&quot;: &quot;node1&quot;,</p>
-<pre><code>* &#x8BBF;&#x95EE;2
-</code></pre><p>[root@node3 test]# ./kubectl --server=<a href="https://node1:6443" target="_blank">https://node1:6443</a>  get nodes
+        &quot;name&quot;: &quot;node1&quot;,
+</code></pre><ul>
+<li>&#x8BBF;&#x95EE;2</li>
+</ul>
+<pre><code>[root@node3 test]# ./kubectl --server=https://node1:6443  get nodes
 Please enter Username: admin
-Please enter Password: <em>**</em>
+Please enter Password: ****
 error: You must be logged in to the server (the server has asked for the client to provide credentials (get nodes))
-[root@node3 test]# ./kubectl --server=<a href="https://node1:6443" target="_blank">https://node1:6443</a> --token=UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq --insecure-skip-tls-verify=true get nodes
+[root@node3 test]# ./kubectl --server=https://node1:6443 --token=UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq --insecure-skip-tls-verify=true get nodes
 NAME      STATUS    AGE       VERSION
 node1     Ready     20d       v1.7.5+coreos.0
 node2     Ready     20d       v1.7.5+coreos.0
 node3     Ready     20d       v1.7.5+coreos.0
-[root@node3 test]# </p>
-<pre><code>#### password file&#x8BA4;&#x8BC1;
-&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5F88;&#x4E0D;&#x7075;&#x6D3B;&#xFF0C;&#x4E5F;&#x4E0D;&#x5B89;&#x5168;&#xFF0C;&#x53EF;&#x4EE5;&#x8BF4;&#x540D;&#x5B58;&#x5B9E;&#x4EA1;&#xFF0C;&#x4E0D;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x3002;
-* &#x67E5;&#x770B;
-
-&#x683C;&#x5F0F;: password,user,uid,&quot;group1,group2,group3&quot;
-</code></pre><p>[root@node1 users]# ls
+</code></pre><h4 id="password-file&#x8BA4;&#x8BC1;">password file&#x8BA4;&#x8BC1;</h4>
+<p>&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5F88;&#x4E0D;&#x7075;&#x6D3B;&#xFF0C;&#x4E5F;&#x4E0D;&#x5B89;&#x5168;&#xFF0C;&#x53EF;&#x4EE5;&#x8BF4;&#x540D;&#x5B58;&#x5B9E;&#x4EA1;&#xFF0C;&#x4E0D;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x3002;</p>
+<ul>
+<li>&#x67E5;&#x770B;</li>
+</ul>
+<p>&#x683C;&#x5F0F;: <code>password,user,uid,&quot;group1,group2,group3&quot;</code></p>
+<pre><code>[root@node1 users]# ls
 known_users.csv
 [root@node1 users]# cat known_users.csv 
-ekxj0taObdTNTXc,kube,admin,&quot;system:masters&quot;</p>
-<pre><code>* &#x4F7F;&#x7528;
-</code></pre><p>[root@node3 test]# ./kubectl --server=<a href="https://node1:6443" target="_blank">https://node1:6443</a>  get nodes
+ekxj0taObdTNTXc,kube,admin,&quot;system:masters&quot;
+</code></pre><ul>
+<li>&#x4F7F;&#x7528;</li>
+</ul>
+<pre><code>[root@node3 test]# ./kubectl --server=https://node1:6443  get nodes
 Please enter Username: kube
-Please enter Password: <strong><strong><strong><em>*</em></strong></strong></strong>
+Please enter Password: ***************
 NAME      STATUS    AGE       VERSION
 node1     Ready     20d       v1.7.5+coreos.0
 node2     Ready     20d       v1.7.5+coreos.0
 node3     Ready     20d       v1.7.5+coreos.0
-[root@node3 test]# </p>
-<pre><code>#### &#x53C2;&#x8003;
-* https://kubernetes.feisky.xyz/zh/plugins/auth.html#%20%E8%AE%A4%E8%AF%81
-
-#### SA
-
-
-
-&#x6388;&#x6743;
-----
-
-* AlwaysDeny&#xFF1A;&#x8868;&#x793A;&#x62D2;&#x7EDD;&#x6240;&#x6709;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x8BE5;&#x914D;&#x7F6E;&#x4E00;&#x822C;&#x7528;&#x4E8E;&#x6D4B;&#x8BD5;
-* AlwaysAllow&#xFF1A;&#x8868;&#x793A;&#x63A5;&#x6536;&#x6240;&#x6709;&#x8BF7;&#x6C42;&#xFF0C;&#x5982;&#x679C;&#x96C6;&#x7FA4;&#x4E0D;&#x9700;&#x8981;&#x6388;&#x6743;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x91C7;&#x53D6;&#x8FD9;&#x4E2A;&#x7B56;&#x7565;
-* ABAC&#xFF1A;&#x57FA;&#x4E8E;&#x5C5E;&#x6027;&#x7684;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#xFF0C;&#x8868;&#x793A;&#x57FA;&#x4E8E;&#x914D;&#x7F6E;&#x7684;&#x6388;&#x6743;&#x89C4;&#x5219;&#x53BB;&#x5339;&#x914D;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#xFF0C;&#x5224;&#x65AD;&#x662F;&#x5426;&#x6709;&#x6743;&#x9650;&#x3002;Beta &#x7248;&#x672C;
-* RBAC&#xFF1A;&#x57FA;&#x4E8E;&#x89D2;&#x8272;&#x7684;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#xFF0C;&#x5141;&#x8BB8;&#x7BA1;&#x7406;&#x5458;&#x901A;&#x8FC7; api &#x52A8;&#x6001;&#x914D;&#x7F6E;&#x6388;&#x6743;&#x7B56;&#x7565;&#x3002;Beta &#x7248;&#x672C;
-
-
-* &#x53C2;&#x8003;   
-&gt;* https://jimmysong.io/kubernetes-handbook/guide/kubectl-user-authentication-authorization.html
-
-#### RBAC
-&gt; * Role   
-&#x67D0;&#x4E2A;ns&#x4E0B;&#x7684;&#x8D44;&#x6E90;
-&gt; * ClusterRole  
-&#x96C6;&#x7FA4;&#x8303;&#x56F4;&#x5185;&#x7684;&#x8D44;&#x6E90;(node, endpoint pods)
-&gt; * RoleBinding  
-&gt; * ClusterRoleBinding  
-&#x5C06;role&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x6743;&#x9650;&#x6388;&#x4E88;users&#x3001;groups&#x3001;service accounts
-
-* &#x53C2;&#x8003;  
-&gt;*  https://mritd.me/2018/03/20/use-rbac-to-control-kubectl-permissions/  
-&gt;*  https://blog.qikqiak.com/post/add-authorization-for-kubernetes-dashboard/
-
-* &#x914D;&#x7F6E;
-</code></pre><p>[root@node1 manifests]# cat kube-apiserver.manifest 
+[root@node3 test]#
+</code></pre><h4 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h4>
+<ul>
+<li><a href="https://kubernetes.feisky.xyz/zh/plugins/auth.html#%20%E8%AE%A4%E8%AF%81" target="_blank">https://kubernetes.feisky.xyz/zh/plugins/auth.html#%20%E8%AE%A4%E8%AF%81</a></li>
+</ul>
+<h4 id="sa">SA</h4>
+<p><a href="service-account.html">service-account</a></p>
+<h2 id="&#x6388;&#x6743;">&#x6388;&#x6743;</h2>
+<ul>
+<li><code>AlwaysDeny</code>&#xFF1A;&#x8868;&#x793A;&#x62D2;&#x7EDD;&#x6240;&#x6709;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x8BE5;&#x914D;&#x7F6E;&#x4E00;&#x822C;&#x7528;&#x4E8E;&#x6D4B;&#x8BD5;;</li>
+<li><code>AlwaysAllow</code>&#xFF1A;&#x8868;&#x793A;&#x63A5;&#x6536;&#x6240;&#x6709;&#x8BF7;&#x6C42;&#xFF0C;&#x5982;&#x679C;&#x96C6;&#x7FA4;&#x4E0D;&#x9700;&#x8981;&#x6388;&#x6743;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x91C7;&#x53D6;&#x8FD9;&#x4E2A;&#x7B56;&#x7565;;</li>
+<li><code>ABAC</code>&#xFF1A;&#x57FA;&#x4E8E;&#x5C5E;&#x6027;&#x7684;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#xFF0C;&#x8868;&#x793A;&#x57FA;&#x4E8E;&#x914D;&#x7F6E;&#x7684;&#x6388;&#x6743;&#x89C4;&#x5219;&#x53BB;&#x5339;&#x914D;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#xFF0C;&#x5224;&#x65AD;&#x662F;&#x5426;&#x6709;&#x6743;&#x9650;&#xFF1B;</li>
+<li><p><code>RBAC</code>&#xFF1A;&#x57FA;&#x4E8E;&#x89D2;&#x8272;&#x7684;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#xFF0C;&#x5141;&#x8BB8;&#x7BA1;&#x7406;&#x5458;&#x901A;&#x8FC7; api &#x52A8;&#x6001;&#x914D;&#x7F6E;&#x6388;&#x6743;&#x7B56;&#x7565;&#x3002;</p>
+</li>
+<li><p>&#x53C2;&#x8003;  </p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="https://jimmysong.io/kubernetes-handbook/guide/kubectl-user-authentication-authorization.html" target="_blank">https://jimmysong.io/kubernetes-handbook/guide/kubectl-user-authentication-authorization.html</a></li>
+</ul>
+</blockquote>
+<h4 id="rbac">RBAC</h4>
+<p><a href="kubernetes-RBAC.html">RBAC &#x4ECB;&#x7ECD;</a></p>
+<blockquote>
+<ul>
+<li><strong>Role</strong>: &#x67D0;&#x4E2A;ns&#x4E0B;&#x7684;&#x8D44;&#x6E90;</li>
+<li><strong>ClusterRole</strong>: &#x96C6;&#x7FA4;&#x8303;&#x56F4;&#x5185;&#x7684;&#x8D44;&#x6E90;(node, endpoint pods)</li>
+<li><strong>RoleBinding</strong></li>
+<li><strong>ClusterRoleBinding</strong>: &#x5C06;role&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x6743;&#x9650;&#x6388;&#x4E88;users&#x3001;groups&#x3001;service accounts</li>
+</ul>
+</blockquote>
+<ul>
+<li>&#x53C2;&#x8003;  </li>
+</ul>
+<blockquote>
+<ul>
+<li><a href="https://mritd.me/2018/03/20/use-rbac-to-control-kubectl-permissions/" target="_blank">https://mritd.me/2018/03/20/use-rbac-to-control-kubectl-permissions/</a>  </li>
+<li><a href="https://blog.qikqiak.com/post/add-authorization-for-kubernetes-dashboard/" target="_blank">https://blog.qikqiak.com/post/add-authorization-for-kubernetes-dashboard/</a></li>
+</ul>
+</blockquote>
+<ul>
+<li>&#x914D;&#x7F6E;</li>
+</ul>
+<pre><code>[root@node1 manifests]# cat kube-apiserver.manifest 
 ...
 spec:
- command:</p>
-<ul>
-<li>--authorization-mode=Node,RBAC</li>
+ command:
+- --authorization-mode=Node,RBAC
+</code></pre><ul>
+<li>&#x67E5;&#x8BE2;roles clusterroles</li>
 </ul>
-<pre><code>* &#x67E5;&#x8BE2;roles clusterroles
-</code></pre><p>[root@node1 manifests]# kubectl get roles --all-namespaces
+<pre><code>[root@node1 manifests]# kubectl get roles --all-namespaces
 NAMESPACE     NAME                                             AGE
 kube-public   system:controller:bootstrap-signer               22d
 kube-system   extension-apiserver-authentication-reader        22d
@@ -1169,8 +1277,9 @@ kube-system   system::leader-locking-kube-controller-manager   22d
 kube-system   system::leader-locking-kube-scheduler            22d
 kube-system   system:controller:bootstrap-signer               22d
 kube-system   system:controller:cloud-provider                 22d
-kube-system   system:controller:token-cleaner                  22d</p>
-<p>[root@node1 manifests]# kubectl get clusterroles
+kube-system   system:controller:token-cleaner                  22d
+
+[root@node1 manifests]# kubectl get clusterroles
 NAME                                                                   AGE
 admin                                                                  22d
 calico-node                                                            22d
@@ -1182,11 +1291,15 @@ system:aggregate-to-admin                                              22d
 system:aggregate-to-edit                                               22d
 system:aggregate-to-view                                               22d
 system:auth-delegator                                                  22d
-...</p>
-<pre><code>* &#x67E5;&#x8BE2; rolebinding clusterrolebinding
-&gt; RoleBinding&#x628A;Role&#x7ED1;&#x5B9A;&#x5230;&#x8D26;&#x6237;&#x4E3B;&#x4F53;Subject&#xFF0C;&#x8BA9;Subject&#x7EE7;&#x627F;Role&#x6240;&#x5728;namespace&#x4E0B;&#x7684;&#x6743;&#x9650;&#x3002; ClusterRoleBinding&#x628A;ClusterRole&#x7ED1;&#x5B9A;&#x5230;Subject&#xFF0C;&#x8BA9;Subject&#x96C6;&#x6210;ClusterRole&#x5728;&#x6574;&#x4E2A;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x6743;&#x9650;&#x3002;
-&#x8D26;&#x6237;&#x4E3B;&#x4F53;Subject&#x5728;&#x8FD9;&#x91CC;&#x8FD8;&#x662F;&#x53EB;&#x201C;&#x7528;&#x6237;&#x201D;&#x5427;&#xFF0C;&#x5305;&#x542B;&#x7EC4;group&#xFF0C;&#x7528;&#x6237;user&#x548C;ServiceAccount&#x3002;
-</code></pre><p>[root@node1 manifests]# kubectl get rolebinding --all-namespaces
+...
+</code></pre><ul>
+<li>&#x67E5;&#x8BE2; rolebinding clusterrolebinding</li>
+</ul>
+<blockquote>
+<p>RoleBinding&#x628A;Role&#x7ED1;&#x5B9A;&#x5230;&#x8D26;&#x6237;&#x4E3B;&#x4F53;Subject&#xFF0C;&#x8BA9;Subject&#x7EE7;&#x627F;Role&#x6240;&#x5728;namespace&#x4E0B;&#x7684;&#x6743;&#x9650;&#x3002; ClusterRoleBinding&#x628A;ClusterRole&#x7ED1;&#x5B9A;&#x5230;Subject&#xFF0C;&#x8BA9;Subject&#x96C6;&#x6210;ClusterRole&#x5728;&#x6574;&#x4E2A;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x6743;&#x9650;&#x3002;
+&#x8D26;&#x6237;&#x4E3B;&#x4F53;Subject&#x5728;&#x8FD9;&#x91CC;&#x8FD8;&#x662F;&#x53EB;&#x201C;&#x7528;&#x6237;&#x201D;&#x5427;&#xFF0C;&#x5305;&#x542B;&#x7EC4;group&#xFF0C;&#x7528;&#x6237;user&#x548C;ServiceAccount&#x3002;</p>
+</blockquote>
+<pre><code>[root@node1 manifests]# kubectl get rolebinding --all-namespaces
 NAMESPACE     NAME                                             AGE
 kube-public   system:controller:bootstrap-signer               22d
 kube-system   kubernetes-dashboard-minimal                     22d
@@ -1205,55 +1318,52 @@ kubespray:system:node                                  22d
 system:aws-cloud-provider                              22d
 system:basic-user                                      22d
 system:controller:attachdetach-controller              22d
-...</p>
-<pre><code>
-
-&#x51C6;&#x5165;
-----
-&#x5F53;&#x524D;&#x53EF;&#x914D;&#x7F6E;&#x7684;&#x51C6;&#x5165;&#x63A7;&#x5236;&#x5668;&#x4E3B;&#x8981;&#x6709;&#xFF1A;
-
-* AlwaysAdmit&#xFF1A;&#x5141;&#x8BB8;&#x6240;&#x6709;&#x8BF7;&#x6C42;
-* AlwaysDeny&#xFF1A;&#x62D2;&#x7EDD;&#x6240;&#x6709;&#x8BF7;&#x6C42;
-* AlwaysPullImages&#xFF1A;&#x5728;&#x542F;&#x52A8;&#x5BB9;&#x5668;&#x4E4B;&#x524D;&#x603B;&#x662F;&#x53BB;&#x4E0B;&#x8F7D;&#x955C;&#x50CF;
-* ServiceAccount&#xFF1A;&#x5C06; secret &#x4FE1;&#x606F;&#x6302;&#x8F7D;&#x5230; pod &#x4E2D;&#xFF0C;&#x6BD4;&#x5982; service account token&#xFF0C;registry key &#x7B49;
-* ResourceQuota &#x548C; LimitRanger&#xFF1A;&#x5B9E;&#x73B0;&#x914D;&#x989D;&#x63A7;&#x5236;
-* SecurityContextDeny&#xFF1A;&#x7981;&#x6B62;&#x521B;&#x5EFA;&#x8BBE;&#x7F6E;&#x4E86; Security Context &#x7684; pod
-*
-
-&#x901A;&#x8FC7;kubeconfig&#x914D;&#x7F6E;&#x8BBF;&#x95EE;&#x591A;&#x96C6;&#x7FA4;
-----
-* kubeconfig&#x4ECB;&#x7ECD;  
-kubeconfig&#x6587;&#x4EF6;&#x7528;&#x4E8E;&#x7EC4;&#x7EC7;&#x5173;&#x4E8E;&#x96C6;&#x7FA4;&#x3001;&#x7528;&#x6237;&#x3001;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x548C;&#x8BA4;&#x8BC1;&#x673A;&#x5236;&#x7684;&#x4FE1;&#x606F;&#x3002;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;kubectl&#x4ECE; kubeconfig&#x6587;&#x4EF6;&#x4E2D;&#x5F97;&#x5230;&#x5B83;&#x8981;&#x9009;&#x62E9;&#x7684;&#x96C6;&#x7FA4;&#x4EE5;&#x53CA;&#x8DDF;&#x96C6;&#x7FA4;api-server&#x4EA4;&#x4E92;&#x7684;&#x4FE1;&#x606F;&#x3002;  
-&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;kubectl&#x4F1A;&#x4ECE;$HOME/.kube&#x76EE;&#x5F55;&#x4E0B;&#x67E5;&#x627E;&#x6587;&#x4EF6;&#x540D;&#x4E3A;config&#x7684;&#x6587;&#x4EF6;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;KUBECONFIG&#x6216;&#x8005;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;--kubeconfig&#x53BB;&#x6307;&#x5B9A;&#x5176;&#x5B83;kubeconfig&#x6587;&#x4EF6;&#x3002;
-* Context  
-context&#x6307;&#x5B9A;&#x4E86;kubectl&#x547D;&#x4EE4;&#x8FD0;&#x884C;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;kubectl&#x4E0E;&#x5F53;&#x524D;context&#x4E2D;&#x6307;&#x5B9A;&#x7684;&#x96C6;&#x7FA4;&#x548C;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;&#x5F53;&#x524D;context&#x4E2D;&#x5305;&#x542B;&#x7684;&#x7528;&#x6237;&#x51ED;&#x8BC1;&#x3002;  
-&#x6BCF;&#x4E2A;context&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x7531;&#xFF08;&#x96C6;&#x7FA4;&#x3001;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3001;&#x7528;&#x6237;&#xFF09;&#x63CF;&#x8FF0;&#x7684;&#x4E09;&#x5143;&#x7EC4;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;kubectl config use-context&#x53BB;&#x8BBE;&#x7F6E;&#x5F53;&#x524D;&#x7684;context&#x3002;
-</code></pre><p>[root@node1 ~]#  kubectl config view
-apiVersion: v1
-clusters:</p>
+...
+</code></pre><h2 id="&#x51C6;&#x5165;">&#x51C6;&#x5165;</h2>
+<p>&#x5F53;&#x524D;&#x53EF;&#x914D;&#x7F6E;&#x7684;&#x51C6;&#x5165;&#x63A7;&#x5236;&#x5668;&#x4E3B;&#x8981;&#x6709;&#xFF1A;</p>
 <ul>
-<li>cluster:
-  certificate-authority-data: REDACTED
-  server: <a href="https://192.168.137.101:6443" target="_blank">https://192.168.137.101:6443</a>
-name: kubernetes
-contexts:</li>
-<li>context:
-  cluster: kubernetes
-  user: kubernetes-admin
-name: kubernetes-admin@kubernetes
+<li>AlwaysAdmit&#xFF1A;&#x5141;&#x8BB8;&#x6240;&#x6709;&#x8BF7;&#x6C42;</li>
+<li>AlwaysDeny&#xFF1A;&#x62D2;&#x7EDD;&#x6240;&#x6709;&#x8BF7;&#x6C42;</li>
+<li>AlwaysPullImages&#xFF1A;&#x5728;&#x542F;&#x52A8;&#x5BB9;&#x5668;&#x4E4B;&#x524D;&#x603B;&#x662F;&#x53BB;&#x4E0B;&#x8F7D;&#x955C;&#x50CF;</li>
+<li>ServiceAccount&#xFF1A;&#x5C06; secret &#x4FE1;&#x606F;&#x6302;&#x8F7D;&#x5230; pod &#x4E2D;&#xFF0C;&#x6BD4;&#x5982; service account token&#xFF0C;registry key &#x7B49;</li>
+<li>ResourceQuota &#x548C; LimitRanger&#xFF1A;&#x5B9E;&#x73B0;&#x914D;&#x989D;&#x63A7;&#x5236;</li>
+<li>SecurityContextDeny&#xFF1A;&#x7981;&#x6B62;&#x521B;&#x5EFA;&#x8BBE;&#x7F6E;&#x4E86; Security Context &#x7684; pod</li>
+</ul>
+<h2 id="&#x901A;&#x8FC7;kubeconfig&#x914D;&#x7F6E;&#x8BBF;&#x95EE;&#x591A;&#x96C6;&#x7FA4;">&#x901A;&#x8FC7;kubeconfig&#x914D;&#x7F6E;&#x8BBF;&#x95EE;&#x591A;&#x96C6;&#x7FA4;</h2>
+<ul>
+<li>kubeconfig&#x4ECB;&#x7ECD;  </li>
+</ul>
+<p>kubeconfig&#x6587;&#x4EF6;&#x7528;&#x4E8E;&#x7EC4;&#x7EC7;&#x5173;&#x4E8E;&#x96C6;&#x7FA4;&#x3001;&#x7528;&#x6237;&#x3001;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x548C;&#x8BA4;&#x8BC1;&#x673A;&#x5236;&#x7684;&#x4FE1;&#x606F;&#x3002;&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;kubectl&#x4ECE; <code>kubeconfig</code>&#x6587;&#x4EF6;&#x4E2D;&#x5F97;&#x5230;&#x5B83;&#x8981;&#x9009;&#x62E9;&#x7684;&#x96C6;&#x7FA4;&#x4EE5;&#x53CA;&#x8DDF;&#x96C6;&#x7FA4;<code>api-server</code>&#x4EA4;&#x4E92;&#x7684;&#x4FE1;&#x606F;&#x3002;  </p>
+<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;kubectl&#x4F1A;&#x4ECE;<code>$HOME/.kube</code>&#x76EE;&#x5F55;&#x4E0B;&#x67E5;&#x627E;&#x6587;&#x4EF6;&#x540D;&#x4E3A;config&#x7684;&#x6587;&#x4EF6;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;<code>KUBECONFIG</code>&#x6216;&#x8005;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;<code>--kubeconfig</code>&#x53BB;&#x6307;&#x5B9A;&#x5176;&#x5B83;kubeconfig&#x6587;&#x4EF6;&#x3002;</p>
+<ul>
+<li>Context</li>
+</ul>
+<p>context&#x6307;&#x5B9A;&#x4E86;kubectl&#x547D;&#x4EE4;&#x8FD0;&#x884C;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;kubectl&#x4E0E;&#x5F53;&#x524D;context&#x4E2D;&#x6307;&#x5B9A;&#x7684;&#x96C6;&#x7FA4;&#x548C;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;&#x5F53;&#x524D;context&#x4E2D;&#x5305;&#x542B;&#x7684;&#x7528;&#x6237;&#x51ED;&#x8BC1;&#x3002;  </p>
+<p>&#x6BCF;&#x4E2A;context&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x7531;&#xFF08;&#x96C6;&#x7FA4;&#x3001;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3001;&#x7528;&#x6237;&#xFF09;&#x63CF;&#x8FF0;&#x7684;&#x4E09;&#x5143;&#x7EC4;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>kubectl config use-context</code>&#x53BB;&#x8BBE;&#x7F6E;&#x5F53;&#x524D;&#x7684;context&#x3002;</p>
+<pre><code>[root@node1 ~]#  kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: REDACTED
+    server: https://192.168.137.101:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
 current-context: kubernetes-admin@kubernetes
 kind: Config
 preferences: {}
-users:</li>
-<li>name: kubernetes-admin
-user:
-  client-certificate-data: REDACTED
-  client-key-data: REDACTED
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
 [root@node1 ~]# kubectl config get-contexts
-CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE</li>
-<li>kubernetes-admin@kubernetes   kubernetes   kubernetes-admin<br>```</li>
-</ul>
-<h2 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h2>
+CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPACE
+*         kubernetes-admin@kubernetes   kubernetes   kubernetes-admin
+</code></pre><h2 id="&#x53C2;&#x8003;">&#x53C2;&#x8003;</h2>
 <ul>
 <li><a href="https://kubernetes.io/docs/reference/access-authn-authz/authentication/" target="_blank">https://kubernetes.io/docs/reference/access-authn-authz/authentication/</a></li>
 <li><a href="https://jimmysong.io/kubernetes-handbook/guide/authentication.html" target="_blank">https://jimmysong.io/kubernetes-handbook/guide/authentication.html</a></li>
@@ -1266,7 +1376,7 @@ CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPAC
 <li><a href="https://blog.frognew.com/2017/04/kubernetes-1.6-rbac.html" target="_blank">https://blog.frognew.com/2017/04/kubernetes-1.6-rbac.html</a> </li>
 </ul>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">Updated:
-2019-01-18 14:48:18
+2019-01-19 17:02:26
 </span></footer>
                                 
                                 </section>
@@ -1310,7 +1420,7 @@ CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPAC
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Authentication Authorization Admission","level":"3.4","depth":1,"next":{"title":"TLS CA","level":"3.4.1","depth":2,"path":"kubernetes/tls-ca.md","ref":"kubernetes/tls-ca.md","articles":[]},"previous":{"title":"Job CronJob","level":"3.3.4","depth":2,"path":"kubernetes/job-cronJob.md","ref":"kubernetes/job-cronJob.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"},{"backlink":"operator/operator.html#fig4.2.1","level":"4.2","list_caption":"Figure: Etcd Operator","alt":"Etcd Operator","nro":12,"url":"/images/kubernetes-etcd-operator.jpg","index":1,"caption_template":"Image - _CAPTION_","label":"Etcd Operator","attributes":{},"skip":false,"key":"4.2.1"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"kubernetes/authentication-authorization-admission.md","mtime":"2019-01-18T06:48:18.080Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-18T06:55:12.720Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Authentication Authorization Admission","level":"3.4","depth":1,"next":{"title":"TLS CA","level":"3.4.1","depth":2,"path":"kubernetes/tls-ca.md","ref":"kubernetes/tls-ca.md","articles":[]},"previous":{"title":"Job CronJob","level":"3.3.5","depth":2,"path":"kubernetes/job-cronJob.md","ref":"kubernetes/job-cronJob.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"},{"backlink":"operator/operator.html#fig4.2.1","level":"4.2","list_caption":"Figure: Etcd Operator","alt":"Etcd Operator","nro":12,"url":"/images/kubernetes-etcd-operator.jpg","index":1,"caption_template":"Image - _CAPTION_","label":"Etcd Operator","attributes":{},"skip":false,"key":"4.2.1"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"kubernetes/authentication-authorization-admission.md","mtime":"2019-01-19T09:02:26.817Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-19T09:03:56.097Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

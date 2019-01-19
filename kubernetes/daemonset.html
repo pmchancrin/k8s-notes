@@ -86,7 +86,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="job-cronJob.html" />
+    <link rel="next" href="statefullset.html" />
     
     
     <link rel="prev" href="deployment.html" />
@@ -545,12 +545,27 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3.4" data-path="job-cronJob.html">
+        <li class="chapter " data-level="3.3.4" data-path="statefullset.html">
+            
+                <a href="statefullset.html">
+            
+                    
+                        <b>3.3.4.</b>
+                    
+                    StatefullSet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3.5" data-path="job-cronJob.html">
             
                 <a href="job-cronJob.html">
             
                     
-                        <b>3.3.4.</b>
+                        <b>3.3.5.</b>
                     
                     Job CronJob
             
@@ -651,6 +666,78 @@
                     RBAC
             
                 </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" >
+            
+                <span>
+            
+                    
+                        <b>3.5.</b>
+                    
+                    Network
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.5.1" >
+            
+                <span>
+            
+                    
+                        <b>3.5.1.</b>
+                    
+                    [Service]
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" >
+            
+                <span>
+            
+                    
+                        <b>3.6.</b>
+                    
+                    Storage
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="3.6.1" >
+            
+                <span>
+            
+                    
+                        <b>3.6.1.</b>
+                    
+                    [PV/PVC]
+            
+                </span>
             
 
             
@@ -803,11 +890,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="daemonset">DaemonSet</h1>
-<p>DaemonSet&#x7684;&#x4E3B;&#x8981;&#x4F5C;&#x7528;&#xFF0C;&#x8BA9;&#x4F60;&#x5728;Kubernetes&#x96C6;&#x7FA4;&#x91CC;&#xFF0C;&#x8FD0;&#x884C;&#x4E00;&#x4E2A;Daemon Pod&#x3002;  </p>
+<p>DaemonSet&#x7684;&#x4E3B;&#x8981;&#x4F5C;&#x7528;&#xFF0C;&#x8BA9;&#x4F60;&#x5728;Kubernetes&#x96C6;&#x7FA4;&#x91CC;&#xFF0C;&#x8FD0;&#x884C;&#x4E00;&#x4E2A;Daemon Pod&#x3002;</p>
 <ol>
 <li>&#x8FD9;&#x4E2A;Pod&#x8FD0;&#x884C;&#x5728;&#x6BCF;&#x4E00;&#x4E2A;Node&#x4E0A;&#xFF1B;</li>
 <li>&#x6BCF;&#x4E2A;Node&#x4E0A;&#x53EA;&#x53C8;&#x4E00;&#x4E2A;&#x8FD9;&#x6837;&#x7684;Pod&#x5B9E;&#x4F8B;&#xFF1B;</li>
-<li>&#x5F53;&#x53C8;&#x65B0;&#x7684;&#x8282;&#x70B9;&#x52A0;&#x5165;&#x540E;&#xFF0C;&#x8FD9;&#x4E2A;Pod&#x4F1A;&#x5728;&#x65B0;&#x7684;&#x8282;&#x70B9;&#x4E0A;&#x88AB;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#xFF0C;&#x5F53;&#x65E7;&#x8282;&#x70B9;&#x88AB;&#x5220;&#x9664;&#x540E;&#xFF0C;&#x4E0A;&#x9762;&#x7684;Pod&#x4E5F;&#x4F1A;&#x88AB;&#x56DE;&#x6536;&#x3002;</li>
+<li>&#x5F53;&#x6709;&#x65B0;&#x7684;&#x8282;&#x70B9;&#x52A0;&#x5165;&#x540E;&#xFF0C;&#x8FD9;&#x4E2A;Pod&#x4F1A;&#x5728;&#x65B0;&#x7684;&#x8282;&#x70B9;&#x4E0A;&#x88AB;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#xFF0C;&#x5F53;&#x65E7;&#x8282;&#x70B9;&#x88AB;&#x5220;&#x9664;&#x540E;&#xFF0C;&#x4E0A;&#x9762;&#x7684;Pod&#x4E5F;&#x4F1A;&#x88AB;&#x56DE;&#x6536;&#x3002;</li>
 </ol>
 <pre><code>apiVersion: apps/v1
 kind: DaemonSet
@@ -851,7 +938,7 @@ spec:
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
-</code></pre><p>DaemonSet&#x662F;&#x4F9D;&#x9760;Toleration&#x5B9E;&#x73B0;&#x7684;&#x3002;</p>
+</code></pre><p>DaemonSet&#x662F;&#x4F9D;&#x9760;<code>toleration</code>&#x5B9E;&#x73B0;&#x7684;&#x3002;</p>
 <h2 id="nodeaffinity-tolerations">nodeAffinity tolerations</h2>
 <p>&#x5728;&#x6307;&#x5B9A;&#x7684;Node&#x4E0A;&#x521B;&#x5EFA;&#x65B0;&#x7684;Pod&#x3002;</p>
 <pre><code>apiVersion: v1
@@ -868,8 +955,8 @@ spec:
             operator: In
             values:
             - node-geektime
-</code></pre><p>DaemonSet Controller&#x4F1A;&#x5728;&#x521B;&#x5EFA;Pod&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x81EA;&#x52A8;&#x5728;&#x8FD9;&#x4E2A;Pod&#x7684;API&#x5BF9;&#x8C61;&#x91CC;&#xFF0C;&#x52A0;&#x4E0A;nodeAffinity&#x5B9A;&#x4E49;&#x3002; &#x9700;&#x8981;&#x7ED1;&#x5B9A;&#x7684;&#x8282;&#x70B9;&#x540D;&#x79F0;&#xFF0C;&#x5C31;&#x662F;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x904D;&#x5386;&#x7684;&#x8FD9;&#x4E2A;Node&#x3002;  </p>
-<p>DaemonSet &#x8FD8;&#x4F1A;&#x7ED9;&#x8FD9;&#x4E2A;Pod&#x81EA;&#x52A8;&#x52A0;&#x4E0A;&#x4E00;&#x4E2A;&#x4E0E;&#x8C03;&#x5EA6;&#x76F8;&#x5173;&#x7684;&#x5B57;&#x6BB5; tolerations&#x3002;&#x8FD9;&#x4E2A;&#x5B57;&#x6BB5;&#x4F1A; &#x201C;&#x5BB9;&#x5FCD;&#x201D; &#xFF08;Toleration&#xFF09;&#x67D0;&#x4E9B; &#x201C;&#x6C61;&#x70B9;&#x201D;&#xFF08;Taint&#xFF09;&#x3002;  </p>
+</code></pre><p>DaemonSet Controller&#x4F1A;&#x5728;&#x521B;&#x5EFA;Pod&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x81EA;&#x52A8;&#x5728;&#x8FD9;&#x4E2A;Pod&#x7684;API&#x5BF9;&#x8C61;&#x91CC;&#xFF0C;&#x52A0;&#x4E0A;<code>nodeAffinity</code>&#x5B9A;&#x4E49;&#x3002; &#x9700;&#x8981;&#x7ED1;&#x5B9A;&#x7684;&#x8282;&#x70B9;&#x540D;&#x79F0;&#xFF0C;&#x5C31;&#x662F;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x904D;&#x5386;&#x7684;&#x8FD9;&#x4E2A;Node&#x3002;  </p>
+<p>DaemonSet &#x8FD8;&#x4F1A;&#x7ED9;&#x8FD9;&#x4E2A;Pod&#x81EA;&#x52A8;&#x52A0;&#x4E0A;&#x4E00;&#x4E2A;&#x4E0E;&#x8C03;&#x5EA6;&#x76F8;&#x5173;&#x7684;&#x5B57;&#x6BB5;<code>tolerations</code>&#x3002;&#x8FD9;&#x4E2A;&#x5B57;&#x6BB5;&#x4F1A; &#x201C;&#x5BB9;&#x5FCD;&#x201D; &#xFF08;<code>toleration</code>&#xFF09;&#x67D0;&#x4E9B; &#x201C;&#x6C61;&#x70B9;&#x201D;&#xFF08;<code>Taint</code>&#xFF09;&#x3002;  </p>
 <pre><code>apiVersion: v1
 kind: Pod
 metadata:
@@ -879,11 +966,11 @@ spec:
   - key: node.kubernetes.io/unschedulable
     operator: Exists
     effect: NoSchedule
-</code></pre><p>&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x88AB;&#x6807;&#x8BB0;&#x4E86; unscheduleable &#x201C;&#x6C61;&#x70B9;&#x201D;&#x7684;Node&#xFF0C;&#x662F;&#x4E0D;&#x4F1A;&#x53C8;&#x4EFB;&#x4F55;Pod&#x88AB;&#x8C03;&#x5EA6;&#x4E0A;&#x53BB;&#x7684;&#xFF08;effect: NoSchedule&#xFF09;&#x3002;  DeamonSet&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x7528;&#x6237;&#x7684;YAML&#x6587;&#x4EF6;&#x91CC;&#x7684;Pod&#x6A21;&#x677F;&#xFF0C;&#x800C;&#x662F;&#x5728;&#x5411;Kubernetes&#x53D1;&#x8D77;&#x8BF7;&#x6C42;&#x4E4B;&#x524D;&#xFF0C;&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#x6839;&#x636E;&#x6A21;&#x677F;&#x751F;&#x6210;&#x7684;Pod&#x5BF9;&#x8C61;&#x3002;</p>
-<p>tolerations&#x201C;&#x5BB9;&#x5FCD;&#x201D; &#x6240;&#x6709;&#x88AB;&#x6807;&#x8BB0;&#x4E3A; unschedulable &#x201C;&#x6C61;&#x70B9;&#x201D;&#x7684;Node&#xFF0C;&#x5141;&#x8BB8;&#x88AB;&#x8C03;&#x5EA6;&#x3002; </p>
-<p>DeamonSet&#x81EA;&#x52A8;&#x5730;&#x7ED9;&#x88AB;&#x7BA1;&#x7406;&#x7684;Pod&#x52A0;&#x4E0A;&#x4E86;&#x8FD9;&#x4E2A;&#x7279;&#x6B8A;&#x7684;Toleration&#xFF0C;&#x5C31;&#x4F7F;&#x5F97;&#x8FD9;&#x4E9B;Pod&#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x8FD9;&#x4E2A;&#x9650;&#x5236;&#xFF0C;&#x7EE7;&#x800C;&#x4FDD;&#x8BC1;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x4E0A;&#x90FD;&#x4F1A;&#x88AB;&#x8C03;&#x5EA6;&#x4E00;&#x4E2A;Pod&#x3002;&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x8282;&#x70B9;&#x53C8;&#x7ED9;&#x6545;&#x969C;&#x7684;&#x8BDD;&#xFF0C;&#x8FD9;&#x4E2A;Pod&#x53EF;&#x80FD;&#x4F1A;&#x542F;&#x52A8;&#x5931;&#x8D25;&#xFF0C;&#x800C;DaemonSet&#x5219;&#x59CB;&#x7EC8;&#x5C1D;&#x8BD5;&#x4E0B;&#x53BB;&#xFF0C;&#x76F4;&#x5230;Pod&#x542F;&#x52A8;&#x6210;&#x529F;&#x3002; </p>
+</code></pre><p>&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x88AB;&#x6807;&#x8BB0;&#x4E86; <code>unscheduleable</code> &#x201C;&#x6C61;&#x70B9;&#x201D;&#x7684;Node&#xFF0C;&#x662F;&#x4E0D;&#x4F1A;&#x6709;&#x4EFB;&#x4F55;Pod&#x88AB;&#x8C03;&#x5EA6;&#x4E0A;&#x53BB;&#x7684;&#xFF08;<code>effect: NoSchedule</code>&#xFF09;&#x3002;  DeamonSet&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x7528;&#x6237;&#x7684;YAML&#x6587;&#x4EF6;&#x91CC;&#x7684;Pod&#x6A21;&#x677F;&#xFF0C;&#x800C;&#x662F;&#x5728;&#x5411;Kubernetes&#x53D1;&#x8D77;&#x8BF7;&#x6C42;&#x4E4B;&#x524D;&#xFF0C;&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#x6839;&#x636E;&#x6A21;&#x677F;&#x751F;&#x6210;&#x7684;Pod&#x5BF9;&#x8C61;&#x3002;</p>
+<p><code>tolerations</code>&#x201C;&#x5BB9;&#x5FCD;&#x201D; &#x6240;&#x6709;&#x88AB;&#x6807;&#x8BB0;&#x4E3A; <code>unschedulable</code> &#x201C;&#x6C61;&#x70B9;&#x201D;&#x7684;Node&#xFF0C;&#x5141;&#x8BB8;&#x88AB;&#x8C03;&#x5EA6;&#x3002; </p>
+<p>DeamonSet&#x81EA;&#x52A8;&#x5730;&#x7ED9;&#x88AB;&#x7BA1;&#x7406;&#x7684;Pod&#x52A0;&#x4E0A;&#x4E86;&#x8FD9;&#x4E2A;&#x7279;&#x6B8A;&#x7684;toleration&#xFF0C;&#x5C31;&#x4F7F;&#x5F97;&#x8FD9;&#x4E9B;Pod&#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x8FD9;&#x4E2A;&#x9650;&#x5236;&#xFF0C;&#x7EE7;&#x800C;&#x4FDD;&#x8BC1;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x4E0A;&#x90FD;&#x4F1A;&#x88AB;&#x8C03;&#x5EA6;&#x4E00;&#x4E2A;Pod&#x3002;&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x8282;&#x70B9;&#x53C8;&#x7ED9;&#x6545;&#x969C;&#x7684;&#x8BDD;&#xFF0C;&#x8FD9;&#x4E2A;Pod&#x53EF;&#x80FD;&#x4F1A;&#x542F;&#x52A8;&#x5931;&#x8D25;&#xFF0C;&#x800C;DaemonSet&#x5219;&#x59CB;&#x7EC8;&#x5C1D;&#x8BD5;&#x4E0B;&#x53BB;&#xFF0C;&#x76F4;&#x5230;Pod&#x542F;&#x52A8;&#x6210;&#x529F;&#x3002; </p>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">Updated:
-2019-01-18 14:48:18
+2019-01-19 16:13:15
 </span></footer>
                                 
                                 </section>
@@ -916,7 +1003,7 @@ spec:
                 </a>
                 
                 
-                <a href="job-cronJob.html" class="navigation navigation-next " aria-label="Next page: Job CronJob">
+                <a href="statefullset.html" class="navigation navigation-next " aria-label="Next page: StatefullSet">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -927,7 +1014,7 @@ spec:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"DaemonSet","level":"3.3.3","depth":2,"next":{"title":"Job CronJob","level":"3.3.4","depth":2,"path":"kubernetes/job-cronJob.md","ref":"kubernetes/job-cronJob.md","articles":[]},"previous":{"title":"Deployment","level":"3.3.2","depth":2,"path":"kubernetes/deployment.md","ref":"kubernetes/deployment.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"},{"backlink":"operator/operator.html#fig4.2.1","level":"4.2","list_caption":"Figure: Etcd Operator","alt":"Etcd Operator","nro":12,"url":"/images/kubernetes-etcd-operator.jpg","index":1,"caption_template":"Image - _CAPTION_","label":"Etcd Operator","attributes":{},"skip":false,"key":"4.2.1"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"kubernetes/daemonset.md","mtime":"2019-01-18T06:48:18.092Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-18T06:55:12.720Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"DaemonSet","level":"3.3.3","depth":2,"next":{"title":"StatefullSet","level":"3.3.4","depth":2,"path":"kubernetes/statefullset.md","ref":"kubernetes/statefullset.md","articles":[]},"previous":{"title":"Deployment","level":"3.3.2","depth":2,"path":"kubernetes/deployment.md","ref":"kubernetes/deployment.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"},{"backlink":"operator/operator.html#fig4.2.1","level":"4.2","list_caption":"Figure: Etcd Operator","alt":"Etcd Operator","nro":12,"url":"/images/kubernetes-etcd-operator.jpg","index":1,"caption_template":"Image - _CAPTION_","label":"Etcd Operator","attributes":{},"skip":false,"key":"4.2.1"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"kubernetes/daemonset.md","mtime":"2019-01-19T08:13:15.254Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-19T09:03:56.097Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
