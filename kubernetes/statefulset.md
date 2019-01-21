@@ -77,7 +77,7 @@ Events:
  
 ```
 
-StatefullSet 先后创建Pod，分别命名web-0，web-1。
+StatefulSet 先后创建Pod，分别命名web-0，web-1。
 
 查询下每个pod的hostname，于Pod名称相同：
 ```
@@ -153,7 +153,7 @@ spec:
           storage: 1Gi
 ```
 
-当我们创建StatefullSet后，Kubernetes集群里面会多2个PVC，这些PVC以 “<PVC名称>-<StatefullSet名称>-<编号>” 的方式命名。
+当我们创建StatefulSet后，Kubernetes集群里面会多2个PVC，这些PVC以 “<PVC名称>-<StatefulSet名称>-<编号>” 的方式命名。
 
 当Pod被删除后，对应的PVC和PV并不会被删除，Kubernetes会按照顺序重新恢复Pod，并找到之前的的PVC，进而和这个PVC绑定的PV。
 
@@ -168,7 +168,7 @@ $ kubectl patch statefulset mysql --type='json' -p='[{"op": "replace", "path": "
 statefulset.apps/mysql patched
 ```
 
-StatefullSet Controller会按照Pod编号相反的顺序，从最后一个Pod开始，逐一更新每个Pod。  
+StatefulSet Controller会按照Pod编号相反的顺序，从最后一个Pod开始，逐一更新每个Pod。  
 sepc.updateStrategy.rollingUpdate的partition字段，可以更精细的控制“滚动更新”，比如Canary Deploy。  
 
 ```
