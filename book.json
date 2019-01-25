@@ -23,7 +23,9 @@
         "page-toc-button",
         "local-pagefooter",
         "theme-default",
-        "favicon"
+        "favicon",
+        "theme-default",
+        "-highlight", "prism", "prism-themes"
     ],
     "pluginsConfig":{
         "github":{
@@ -51,6 +53,11 @@
         "favicon":{
             "shortcut": "favicon.ico",
             "bookmark": "favicon.ico"
+        },
+        "prism": {
+            "css": [
+            "prism-themes/themes/prism-darcula.css"
+            ]
         }
     }
 }
