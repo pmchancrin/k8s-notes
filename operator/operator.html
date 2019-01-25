@@ -49,7 +49,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-darcula.css">
                 
             
                 
@@ -929,7 +929,7 @@
 <p><a href="https://github.com/coreos/etcd-operator" target="_blank">https://github.com/coreos/etcd-operator</a></p>
 </blockquote>
 <h2 id="deploy-an-etcd-cluster-with-3-nodes">Deploy an etcd cluster with 3 nodes</h2>
-<pre><code># clone etcd-operator repo
+<pre class="language-"><code># clone etcd-operator repo
 $ git clone https://github.com/coreos/etcd-operator
 
 # create clusterrole and clusterrolebinding
@@ -946,7 +946,7 @@ $ kubectl apply -f example/example-etcd-cluster.yaml
 <li>&#x5BF9;<code>CRD</code>&#x5BF9;&#x8C61;&#x6709;&#x6240;&#x6709;&#x6743;&#x9650;&#xFF1B;</li>
 <li>&#x5BF9;&#x5C5E;&#x4E8E;<code>etcd.database.coreos.com</code> &#x8FD9;&#x4E2A;API Group&#x7684;CR&#x5BF9;&#x8C61;<code>etcdbackups&#xFF0C;etcdclusters&#xFF0C;etcdrestores</code> &#x6709;&#x6240;&#x6709;&#x6743;&#x9650;&#x3002;</li>
 </ol>
-<pre><code>$ example/rbac/create_role.sh 
+<pre class="language-"><code>$ example/rbac/create_role.sh 
 Creating role with ROLE_NAME=etcd-operator, NAMESPACE=default
 clusterrole.rbac.authorization.k8s.io/etcd-operator created
 Creating role binding with ROLE_NAME=etcd-operator, ROLE_BINDING_NAME=etcd-operator, NAMESPACE=default
@@ -954,8 +954,8 @@ clusterrolebinding.rbac.authorization.k8s.io/etcd-operator created
 
 $ kubectl describe clusterrolebindings.rbac.authorization.k8s.io etcd-operator
 Name:         etcd-operator
-Labels:       &lt;none&gt;
-Annotations:  &lt;none&gt;
+Labels:       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>
+Annotations:  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>
 Role:
   Kind:  ClusterRole
   Name:  etcd-operator
@@ -966,8 +966,8 @@ Subjects:
 
 $ kubectl describe clusterrole etcd-operator 
 Name:         etcd-operator
-Labels:       &lt;none&gt;
-Annotations:  &lt;none&gt;
+Labels:       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>
+Annotations:  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>
 PolicyRule:
   Resources                                       Non-Resource URLs  Resource Names  Verbs
   ---------                                       -----------------  --------------  -----
@@ -984,7 +984,7 @@ PolicyRule:
   secrets                                         []                 []              [get]
 </code></pre><h3 id="deploy-etcd-operator">Deploy Etcd Operator</h3>
 <p>Etcd Operator &#x672C;&#x8EAB;&#x5C31;&#x662F;&#x4E00;&#x4E2A;Deployment&#xFF1A;</p>
-<pre><code>apiVersion: extensions/v1beta1
+<pre class="language-"><code>apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: etcd-operator
@@ -1012,7 +1012,7 @@ spec:
             fieldRef:
               fieldPath: metadata.name
 </code></pre><p>&#x76F4;&#x63A5;&#x521B;&#x5EFA;&#x5C31;&#x53EF;&#x4EE5;&#xFF1A;</p>
-<pre><code>$ kubectl apply -f example/deployment.yaml 
+<pre class="language-"><code>$ kubectl apply -f example/deployment.yaml 
 deployment.extensions/etcd-operator created
 </code></pre><p>Etcd Operator&#x7684;Pod&#x8FDB;&#x5165;Running&#x72B6;&#x6001;&#xFF0C;CRD&#x5C31;&#x4F1A;&#x88AB;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#xFF1A;</p>
 <ul>
@@ -1020,15 +1020,15 @@ deployment.extensions/etcd-operator created
 <li>API Group&#xFF1A;<code>etcd.database.coreos.com</code></li>
 <li>API Kind: <code>EtcdCluster</code></li>
 </ul>
-<pre><code>$ kubectl get crd
+<pre class="language-"><code>$ kubectl get crd
 NAME                                    CREATED AT
 etcdclusters.etcd.database.coreos.com   2019-01-16T01:40:36Z
 
 $ kubectl describe crd etcdclusters.etcd.database.coreos.com 
 Name:         etcdclusters.etcd.database.coreos.com
 Namespace:    
-Labels:       &lt;none&gt;
-Annotations:  &lt;none&gt;
+Labels:       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>
+Annotations:  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>
 API Version:  apiextensions.k8s.io/v1beta1
 Kind:         CustomResourceDefinition
 Metadata:
@@ -1051,7 +1051,7 @@ Spec:
 </code></pre><p>Etcd Operator&#x672C;&#x8EAB;&#x5C31;&#x662F;&#x4E2A;&#x81EA;&#x5B9A;&#x4E49;&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x5BF9;&#x5E94;&#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x63A7;&#x5236;&#x5668;&#x3002;</p>
 <h3 id="deploy-etcd-cluster">Deploy Etcd Cluster</h3>
 <p>&#x90E8;&#x7F72;Etcd&#x96C6;&#x7FA4;,&#x5982;&#x4E0B;&#x5C31;&#x662F;&#x90E8;&#x7F72;&#x4E00;&#x4E2A;<code>EtcdCluster</code>&#x7684;CR&#xFF0C;Etcd&#x8282;&#x70B9;&#x6570;&#x4E3A;3&#xFF0C;yaml&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code>apiVersion: &quot;etcd.database.coreos.com/v1beta2&quot;
+<pre class="language-"><code>apiVersion: &quot;etcd.database.coreos.com/v1beta2&quot;
 kind: &quot;EtcdCluster&quot;
 metadata:
   name: &quot;example-etcd-cluster&quot;
@@ -1059,7 +1059,7 @@ spec:
   size: 3
   version: &quot;3.2.13&quot;
 </code></pre><p>&#x90E8;&#x7F72;etcd&#x96C6;&#x7FA4;&#xFF0C;&#x901A;&#x8FC7;&#x4FEE;&#x6539;yaml&#x5C31;&#x53EF;&#x4EE5;scale&#xFF0C;upgrade&#x96C6;&#x7FA4;&#xFF0C;Operator&#x4FDD;&#x8BC1;&#x96C6;&#x7FA4;&#x53EF;&#x4EE5;failover&#xFF1A;</p>
-<pre><code>$ kubectl apply -f example/example-etcd-cluster.yaml 
+<pre class="language-"><code>$ kubectl apply -f example/example-etcd-cluster.yaml 
 etcdcluster.etcd.database.coreos.com/example-etcd-cluster created
 
 $ kubectl get pods
@@ -1069,12 +1069,12 @@ example-etcd-cluster-mg8x9h4xfg   1/1     Running   0          111s
 example-etcd-cluster-z8ckrc7cvd   1/1     Running   0          95s
 </code></pre><h3 id="access-etcd-cluster">Access Etcd Cluster</h3>
 <p>Etcd Operator&#x521B;&#x5EFA;&#x96C6;&#x7FA4;&#x540E;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;client service&#xFF0C;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;Cluster IP&#x548C;Port&#x5C31;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;Etcd&#x96C6;&#x7FA4;&#xFF1A;</p>
-<pre><code>$ kubectl get service
+<pre class="language-"><code>$ kubectl get service
 NAME                          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)             AGE
-example-etcd-cluster          ClusterIP   None           &lt;none&gt;        2379/TCP,2380/TCP   18m
-example-etcd-cluster-client   ClusterIP   10.106.102.1   &lt;none&gt;        2379/TCP            18m
+example-etcd-cluster          ClusterIP   None           <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>        2379/TCP,2380/TCP   18m
+example-etcd-cluster-client   ClusterIP   10.106.102.1   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>none</span><span class="token punctuation">&gt;</span></span>        2379/TCP            18m
 </code></pre><p>&#x5728;Pod&#x91CC;&#x9762;&#x5C31;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;Etcd&#x96C6;&#x7FA4;&#xFF1A;</p>
-<pre><code>$ kubectl run --rm -i --tty fun --image quay.io/coreos/etcd:v3.2.13 --restart=Never -- /bin/sh
+<pre class="language-"><code>$ kubectl run --rm -i --tty fun --image quay.io/coreos/etcd:v3.2.13 --restart=Never -- /bin/sh
 / # ETCDCTL_API=3 etcdctl --endpoints http://example-etcd-cluster-client:2379 member list
 74b19bcfe1048628, started, example-etcd-cluster-z8ckrc7cvd, http://example-etcd-cluster-z8ckrc7cvd.example-etcd-cluster.default.svc:2380, http://example-etcd-cluster-z8ckrc7cvd.example-etcd-cluster.default.svc:2379
 82f4a1214aae8562, started, example-etcd-cluster-mg8x9h4xfg, http://example-etcd-cluster-mg8x9h4xfg.example-etcd-cluster.default.svc:2380, http://example-etcd-cluster-mg8x9h4xfg.example-etcd-cluster.default.svc:2379
@@ -1095,7 +1095,7 @@ OK
 <p>&#x7F16;&#x5199;&#x4E00;&#x4E2A;Etcd Operator &#x8DDF;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x81EA;&#x5B9A;&#x4E49;&#x63A7;&#x5236;&#x5668;&#x6CA1;&#x5565;&#x533A;&#x522B;&#x3002;</p>
 <p>Etcd Operator&#x90E8;&#x7F72;Etcd&#x96C6;&#x7FA4;&#xFF0C;&#x91C7;&#x7528;&#x7684;&#x662F;&#x9759;&#x6001;&#x96C6;&#x7FA4;Static&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x6CA1;&#x6709;&#x91C7;&#x7528;&#x52A8;&#x6001;&#x96C6;&#x7FA4;&#x7684;&#x65B9;&#x5F0F;&#x3002;</p>
 <p>&#x9759;&#x6001;&#x96C6;&#x7FA4;&#x90E8;&#x7F72;&#x524D;&#x9700;&#x8981;&#x89C4;&#x5212;&#x597D;&#x96C6;&#x7FA4;&#x62D3;&#x6251;&#x7ED3;&#x6784;&#xFF0C;&#x548C;&#x5404;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x56FA;&#x5B9A;IP&#x3002;</p>
-<pre><code>$ etcd --name infra0 --initial-advertise-peer-urls http://10.0.1.10:2380 \
+<pre class="language-"><code>$ etcd --name infra0 --initial-advertise-peer-urls http://10.0.1.10:2380 \
   --listen-peer-urls http://10.0.1.10:2380 \
 ...
   --initial-cluster-token etcd-cluster-1 \
@@ -1119,7 +1119,7 @@ $ etcd --name infra2 --initial-advertise-peer-urls http://10.0.1.12:2380 \
 <ul>
 <li>&#x6CA1;&#x6709;&#x4F7F;&#x7528;WorkQueue&#x3002;</li>
 </ul>
-<pre><code>// TODO: use workqueue to avoid blocking
+<pre class="language-"><code>// TODO: use workqueue to avoid blocking
 ...
 </code></pre><ul>
 <li>&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;EtcdCluster&#x5BF9;&#x8C61;&#xFF0C;&#x90FD;&#x542F;&#x52A8;&#x4E86;&#x4E00;&#x4E2A;&#x63A7;&#x5236;&#x5FAA;&#x73AF;&#xFF0C;&#x201C;&#x5E76;&#x53D1;&#x201D;&#x7684;&#x54CD;&#x5E94;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x7684;&#x53D8;&#x5316;&#x3002;</li>
@@ -1129,7 +1129,7 @@ $ etcd --name infra2 --initial-advertise-peer-urls http://10.0.1.12:2380 \
 <li>addOneMember&#xFF1A;<ul>
 <li>&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x65B0;&#x8282;&#x70B9;&#x7684;Pod&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;example-etcd-cluster-xxx&#xFF1B;</li>
 <li>&#x8C03;&#x7528;Etcd Client&#xFF0C;etcdctl member add example-etcd-cluster-xxx&#x547D;&#x540D;&#x3002;</li>
-<li>&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;Pod &#x540D;&#x5B57;&#xFF0C;&#x548C;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5217;&#x8868;&#xFF0C;&#x7EC4;&#x6210;inital-cluster&#x5B57;&#x6BB5;&#xFF0C;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5B57;&#x6BB5;&#x751F;&#x6210;Pod&#x91CC;&#x9762;&#x7684;Etcd&#x5BB9;&#x5668;&#x7684;&#x542F;&#x52A8;&#x547D;&#x4EE4;&#xFF1A;<pre><code>/usr/local/bin/etcd
+<li>&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;Pod &#x540D;&#x5B57;&#xFF0C;&#x548C;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;&#x6240;&#x6709;&#x8282;&#x70B9;&#x5217;&#x8868;&#xFF0C;&#x7EC4;&#x6210;inital-cluster&#x5B57;&#x6BB5;&#xFF0C;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5B57;&#x6BB5;&#x751F;&#x6210;Pod&#x91CC;&#x9762;&#x7684;Etcd&#x5BB9;&#x5668;&#x7684;&#x542F;&#x52A8;&#x547D;&#x4EE4;&#xFF1A;<pre class="language-"><code>/usr/local/bin/etcd
 --data-dir=/var/etcd/data
 --name=example-etcd-cluster-v6v6s6stxd
 --initial-advertise-peer-urls=http://example-etcd-cluster-v6v6s6stxd.example-etcd-cluster.default.svc:2380
@@ -1157,7 +1157,7 @@ $ etcd --name infra2 --initial-advertise-peer-urls http://10.0.1.12:2380 \
 </blockquote>
 <p>CoreOS &#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x7528;&#x6237;&#x5F00;&#x53D1;Operator&#xFF0C;&#x63A8;&#x51FA;&#x4E86;Operator SDK &#x5373;operator-framework&#xFF0C;&#x7B80;&#x5316;&#x4E86;&#x5F00;&#x53D1;&#x6B65;&#x9AA4;&#x3002; </p>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">Updated:
-2019-01-19 17:04:43
+2019-01-21 17:23:25
 </span></footer>
                                 
                                 </section>
@@ -1201,7 +1201,7 @@ $ etcd --name infra2 --initial-advertise-peer-urls http://10.0.1.12:2380 \
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Operator","level":"4.2","depth":1,"next":{"title":"Etcd","level":"6.1","depth":1,"path":"app/etcd.md","ref":"app/etcd.md","articles":[]},"previous":{"title":"Declarative API","level":"4.1","depth":1,"path":"operator/declarative-api.md","ref":"operator/declarative-api.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"},{"backlink":"operator/operator.html#fig4.2.1","level":"4.2","list_caption":"Figure: Etcd Operator","alt":"Etcd Operator","nro":12,"url":"/images/kubernetes-etcd-operator.jpg","index":1,"caption_template":"Image - _CAPTION_","label":"Etcd Operator","attributes":{},"skip":false,"key":"4.2.1"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"operator/operator.md","mtime":"2019-01-19T09:04:43.474Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-21T09:22:36.362Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Operator","level":"4.2","depth":1,"next":{"title":"Etcd","level":"6.1","depth":1,"path":"app/etcd.md","ref":"app/etcd.md","articles":[]},"previous":{"title":"Declarative API","level":"4.1","depth":1,"path":"operator/declarative-api.md","ref":"operator/declarative-api.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon","theme-default","-highlight","prism","prism-themes"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-darcula.css"]},"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"},{"backlink":"operator/operator.html#fig4.2.1","level":"4.2","list_caption":"Figure: Etcd Operator","alt":"Etcd Operator","nro":12,"url":"/images/kubernetes-etcd-operator.jpg","index":1,"caption_template":"Image - _CAPTION_","label":"Etcd Operator","attributes":{},"skip":false,"key":"4.2.1"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"operator/operator.md","mtime":"2019-01-21T09:23:25.323Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-25T01:23:38.370Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

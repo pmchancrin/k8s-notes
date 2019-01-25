@@ -49,7 +49,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-darcula.css">
                 
             
                 
@@ -893,7 +893,7 @@
 <blockquote>
 <p>docker run &#x4E00;&#x4E2A;centos&#x955C;&#x50CF;&#xFF0C;&#x5F53;&#x901A;&#x8FC7;non-root&#x7528;&#x6237;exec&#x8FDB;&#x5165;&#x5BB9;&#x5668;&#x540E;&#xFF0C;su&#x5207;&#x6362;&#x5230;root&#x7528;&#x6237;&#x65F6;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;root&#x5BC6;&#x7801;&#x3002;</p>
 </blockquote>
-<pre><code>yzw@yzw-vm:~$ docker run -it -d centos:7.4.1708 
+<pre class="language-"><code>yzw@yzw-vm:~$ docker run -it -d centos:7.4.1708 
 c091aee509c85153f738815618e6fd8eec20d2795104a687b2f2a5b222161a5f
 yzw@yzw-vm:~$ docker exec -it -u 1000 c091aee50 bash
 bash-4.2$ id
@@ -905,65 +905,65 @@ su: Authentication failure
 <p>Docker &#x9ED8;&#x8BA4;&#x6CA1;&#x6709;&#x5F00;&#x542F;User Namespace&#xFF0C;Docker&#x548C;Host&#x516C;&#x7528;&#x4E00;&#x5957;UID/GID&#x3002;</p>
 <h2 id="example-1">Example 1</h2>
 <p>&#x8FD0;&#x884C;&#x4E00;&#x4E2A;centos&#x5BB9;&#x5668;&#xFF1A;</p>
-<pre><code>yzw@yzw-vm:~$ docker run -it -d centos:7.4.1708 
+<pre class="language-"><code>yzw@yzw-vm:~$ docker run -it -d centos:7.4.1708 
 c091aee509c85153f738815618e6fd8eec20d2795104a687b2f2a5b222161a5f
 </code></pre><p>&#x5728;&#x5BB9;&#x5668;&#x91CC;&#x9762;&#x521B;&#x5EFA;&#x4E2A;test&#x7528;&#x6237;&#xFF0C;UID=1000</p>
-<pre><code>yzw@yzw-vm:~$ docker exec -it  c091aee50 bash
+<pre class="language-"><code>yzw@yzw-vm:~$ docker exec -it  c091aee50 bash
 [root@c091aee509c8 /]# useradd test
 [root@c091aee509c8 /]# cat /etc/passwd | grep test
 test:x:1000:1000::/home/test:/bin/bash
 </code></pre><p>&#x4F7F;&#x7528;test&#x7528;&#x6237;&#x8FDB;&#x5165;&#x5BB9;&#x5668;&#xFF0C;&#x8DD1;&#x4E2A;sleep</p>
-<pre><code>yzw@yzw-vm:~$ docker exec -it -u test c091aee509 bash
+<pre class="language-"><code>yzw@yzw-vm:~$ docker exec -it -u test c091aee509 bash
 [test@c091aee509c8 /]$ sleep 1000
 </code></pre><p>&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;root&#x8FDB;&#x5165;&#x5BB9;&#x5668;&#xFF0C;sleep&#x8FDB;&#x7A0B;&#x7684;User&#x662F;test,UID=1000</p>
-<pre><code>yzw@yzw-vm:~$ docker exec -it c091aee509 bash
+<pre class="language-"><code>yzw@yzw-vm:~$ docker exec -it c091aee509 bash
 [root@c091aee509c8 /]# ps aux | grep -v grep | grep sleep
 test        97  0.0  0.0   4328   716 pts/2    S+   07:30   0:00 sleep 1000
 </code></pre><p>host&#x4E3B;&#x673A;&#x4E0A;&#xFF0C;sleep&#x8FDB;&#x7A0B;&#x7684;User&#x662F;yzw&#xFF0C;&#x56E0;&#x4E3A;yzw&#x7684;UID&#x4E5F;&#x662F;1000</p>
-<pre><code>yzw@yzw-vm:~$ ps aux | grep -v grep | grep sleep
+<pre class="language-"><code>yzw@yzw-vm:~$ ps aux | grep -v grep | grep sleep
 yzw       4121  0.0  0.0   4328   716 pts/2    S+   15:30   0:00 sleep 1000
 
 yzw@yzw-vm:~$ id
 uid=1000(yzw) gid=1000(yzw) groups=1000(yzw),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),116(lpadmin),126(sambashare),998(docker),999(vboxsf)
 </code></pre><h2 id="example-2">Example 2</h2>
 <p>&#x5728;&#x5BB9;&#x5668;&#x91CC;&#x9762;&#x521B;&#x5EFA;&#x4E2A;test01&#x7528;&#x6237;&#xFF0C;UID=1001</p>
-<pre><code>[root@c091aee509c8 /]# useradd test02
+<pre class="language-"><code>[root@c091aee509c8 /]# useradd test02
 [root@c091aee509c8 /]# cat /etc/passwd | grep test02
 test02:x:1001:1001::/home/test02:/bin/bash
 [root@c091aee509c8 /]# cat /etc/group | grep test02
 test02:x:1001:
 </code></pre><p>&#x4F7F;&#x7528;test01&#x8FDB;&#x5165;&#x5BB9;&#x5668;&#xFF0C;&#x8DD1;&#x4E2A;sleep</p>
-<pre><code>yzw@yzw-vm:~$ docker exec -it -u test02 c091aee509 bash
+<pre class="language-"><code>yzw@yzw-vm:~$ docker exec -it -u test02 c091aee509 bash
 [test02@c091aee509c8 /]$ id
 uid=1001(test02) gid=1001(test02) groups=1001(test02)
 [test02@c091aee509c8 /]$ sleep 1000
 </code></pre><p>&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;root&#x8FDB;&#x5165;&#x5BB9;&#x5668;&#xFF0C;sleep&#x8FDB;&#x7A0B;&#x7684;User&#x662F;test02,UID=1001</p>
-<pre><code>[root@c091aee509c8 /]# ps aux | grep -v grep | grep sleep
+<pre class="language-"><code>[root@c091aee509c8 /]# ps aux | grep -v grep | grep sleep
 test02     129  0.0  0.0   4328   612 pts/2    S+   01:29   0:00 sleep 1000
 </code></pre><p>host&#x4E3B;&#x673A;&#x4E0A;&#xFF0C;sleep&#x8FDB;&#x7A0B;&#x7684;User&#x662F;1001</p>
-<pre><code>yzw@yzw-vm:~$ ps aux | grep -v grep | grep sleep
+<pre class="language-"><code>yzw@yzw-vm:~$ ps aux | grep -v grep | grep sleep
 1001   6438  0.0  0.0   4328   612 pts/2    S+   09:29   0:00 sleep 1000
 </code></pre><h2 id="example-3">Example 3</h2>
 <p>&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x7684;UID&#x767B;&#x9646;&#x5BB9;&#x5668;,&#x8DD1;&#x4E2A;sleep&#xFF1A;</p>
-<pre><code># &#x53EA;&#x6307;&#x5B9A;&#x4E86;UID&#xFF0C;&#x6240;&#x6709;GID&#x9ED8;&#x8BA4;&#x4E3A;0&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;-u &lt;name|uid&gt;[:&lt;group|gid&gt;]&#x6765;&#x6307;&#x5B9A;GID&#x3002;
+<pre class="language-"><code># &#x53EA;&#x6307;&#x5B9A;&#x4E86;UID&#xFF0C;&#x6240;&#x6709;GID&#x9ED8;&#x8BA4;&#x4E3A;0&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;-u <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name|uid</span><span class="token punctuation">&gt;</span></span>[:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>group|gid</span><span class="token punctuation">&gt;</span></span>]&#x6765;&#x6307;&#x5B9A;GID&#x3002;
 yzw@yzw-vm:~$ docker exec -it -u 1003 c091aee509 sh
 sh-4.2$ id
 uid=1003 gid=0(root) groups=0(root)
 sh-4.2$ sleep 1000
 </code></pre><p>&#x7528;root&#x767B;&#x9646;&#x5BB9;&#x5668;&#x67E5;&#x770B;&#xFF1A;</p>
-<pre><code>[root@c091aee509c8 /]# ps aux | grep -v grep | grep sleep
+<pre class="language-"><code>[root@c091aee509c8 /]# ps aux | grep -v grep | grep sleep
 1003       198  0.0  0.0   4328   660 pts/2    S+   01:48   0:00 sleep 1000
 [root@c091aee509c8 /]# 
 [root@c091aee509c8 /]# 
 [root@c091aee509c8 /]# cat /etc/passwd | grep 1003
 [root@c091aee509c8 /]# cat /etc/group | grep 1003
 </code></pre><p>Host&#x4E0A;&#x67E5;&#x770B;sleep&#x8FDB;&#x7A0B;&#xFF1A;</p>
-<pre><code>yzw@yzw-vm:~$ ps aux | grep -v grep | grep sleep
+<pre class="language-"><code>yzw@yzw-vm:~$ ps aux | grep -v grep | grep sleep
 1003      7399  0.0  0.0   4328   660 pts/2    S+   09:48   0:00 sleep 1000
 yzw@yzw-vm:~$ cat /etc/passwd | grep 1003
 yzw@yzw-vm:~$ cat /etc/group | grep 1003
 </code></pre><h2 id="dockerfile&#x6307;&#x5B9A;&#x7528;&#x6237;">Dockerfile&#x6307;&#x5B9A;&#x7528;&#x6237;</h2>
-<pre><code>FROM ubuntu
+<pre class="language-"><code>FROM ubuntu
 RUN groupadd -g 999 appuser &amp;&amp; \
     useradd -r -u 999 -g appuser appuser
 USER appuser
@@ -971,7 +971,7 @@ USER appuser
 <p>&#x5BB9;&#x5668;&#x91CC;&#x9762;&#x548C;&#x4E3B;&#x673A;root&#x7684;&#x6743;&#x9650;&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x90A3;&#x5B89;&#x5168;&#x95EE;&#x9898;&#x600E;&#x4E48;&#x89E3;&#x51B3;&#xFF1F;Docker&#x76EE;&#x524D;&#x63D0;&#x4F9B;&#x4E86;2&#x79CD;&#x65B9;&#x6848;&#xFF1A;privileged&#x548C;user namespace&#x3002;</p>
 <h2 id="privileged">privileged</h2>
 <p>Docker&#x9ED8;&#x8BA4;&#x65F6;&#x5173;&#x95ED;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#x7684;&#xFF0C;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x76F4;&#x63A5; <code>docker run --privileged=true</code></p>
-<pre><code>$ docker run --help
+<pre class="language-"><code>$ docker run --help
 --privileged                     Give extended privileges to this container
 </code></pre><p>&#x8FD9;&#x6837;&#x5168;&#x90E8;&#x7684;capabilities&#x90FD;&#x88AB;&#x8BD5;&#x80FD;&#x3002;</p>
 <blockquote>
@@ -979,7 +979,7 @@ USER appuser
 <p>The &#x2013;privileged flag gives all capabilities to the container, and it also lifts all the limitations enforced by the device cgroup controller. In other words, the container can then do almost everything that the host can do. This flag exists to allow special use-cases, like running Docker within Docker.</p>
 </blockquote>
 <p>&#x8FD8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>docker run --cap-add/drop</code> &#x52A0;&#x548C;&#x51CF;&#x6307;&#x5B9A;&#x7684;capabilities</p>
-<pre><code>$ docker run --help
+<pre class="language-"><code>$ docker run --help
 --cap-add list                   Add Linux capabilities
 --cap-drop list                  Drop Linux capabilities
 </code></pre><p>Docker &#x9ED8;&#x8BA4;&#x4E0D;&#x5F00;&#x542F;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#xFF0C;&#x9ED8;&#x8BA4;&#x53EA;&#x652F;&#x6301;&#x4E86;&#x4E00;&#x4E9B;&#x57FA;&#x672C;&#x7684;capabilities&#xFF0C;&#x4ECE;&#x800C;&#x9650;&#x5236;&#x4E86;&#x5BB9;&#x5668;&#x91CC;&#x9762;root&#x7528;&#x6237;&#x6743;&#x9650;&#x3002;<br>&#x9ED8;&#x8BA4;&#x652F;&#x6301;&#x7684;&#x6709;&#xFF1A;CAP_CHOWN &#x3001; CAP_DAC_OVERRIDE &#x3001; CAP_FSETID &#x3001; CAP_MKNOD &#x3001; FOWNER &#x3001; NET_RAW &#x3001; SETGID &#x3001; SETUID &#x3001; SETFCAP &#x3001; SETPCAP &#x3001; NET_BIND_SERVICE &#x3001; SYS_CHROOT &#x3001; KILL &#x548C; AUDIT_WRITE&#x3002;<br>&#x5728;&#x8FD9; 14 &#x9879;&#x4E2D;&#x51E0;&#x4E4E;&#x6CA1;&#x6709;&#x4E00;&#x9879;&#x6D89;&#x53CA;&#x5230;&#x7CFB;&#x7EDF;&#x7BA1;&#x7406;&#x6743;&#x9650;&#xFF0C;&#x6BD4;&#x5982; Docker &#x5BB9;&#x5668;&#x7684; root &#x7528;&#x6237;&#x4E0D;&#x5177;&#x5907; CAP_SYS_ADMIN&#xFF0C;&#x78C1;&#x76D8;&#x9650;&#x989D;&#x64CD;&#x4F5C;&#x3001;mount &#x64CD;&#x4F5C;&#x3001;&#x521B;&#x5EFA;&#x8FDB;&#x7A0B;&#x65B0;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7B49;&#x5747;&#x65E0;&#x6CD5;&#x5B9E;&#x73B0;&#xFF1B;&#x6BD4;&#x5982;&#x7531;&#x4E8E;&#x6CA1;&#x6709; CAP_NET_ADMIN&#xFF0C;&#x7F51;&#x7EDC;&#x65B9;&#x9762;&#x7684;&#x914D;&#x7F6E;&#x7BA1;&#x7406;&#x4E5F;&#x5C06;&#x53D7;&#x5230;&#x7BA1;&#x5236;&#x3002;</p>
@@ -992,14 +992,14 @@ USER appuser
 </ul>
 <h2 id="user-namespace">User Namespace</h2>
 <p>&#x5F00;&#x542F;&#xFF1A;</p>
-<pre><code># /etc/docker/daemon.json
+<pre class="language-"><code># /etc/docker/daemon.json
 {
   &quot;userns-remap&quot;: &quot;default&quot;
 }
 
 $ systemctl restart docker
 </code></pre><p>&#x9A8C;&#x8BC1;</p>
-<pre><code># &#x5F00;&#x542F;&#x540E;&#x7CFB;&#x7EDF;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;dockremap&#x7684;&#x7528;&#x6237;
+<pre class="language-"><code># &#x5F00;&#x542F;&#x540E;&#x7CFB;&#x7EDF;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;dockremap&#x7684;&#x7528;&#x6237;
 yzw@yzw-vm:~/code/ns$ id dockremap
 uid=125(dockremap) gid=130(dockremap) groups=130(dockremap)
 yzw@yzw-vm:~/code/ns$ sudo cat /etc/group | grep dockre
@@ -1025,7 +1025,7 @@ drwx------ 2 165536 165536 4096 Dec 29 00:39 tmp
 drwx------ 2 root   root   4096 Dec 29 00:39 trust
 drwx------ 2 165536 165536 4096 Dec 29 00:39 volumes
 </code></pre><p>&#x4F7F;&#x7528;</p>
-<pre><code># &#x62C9;&#x4E2A;&#x5BB9;&#x5668;&#x8DD1;&#x4E2A;sleep
+<pre class="language-"><code># &#x62C9;&#x4E2A;&#x5BB9;&#x5668;&#x8DD1;&#x4E2A;sleep
 yzw@yzw-vm:~/code/ns$ docker run -it -d centos bash
 5028c0844804f6e5a5d57840448edeb596fa73a7d82d74eb40246ce9fc200e21
 yzw@yzw-vm:~/code/ns$ docker exec -it 5028c084 bash
@@ -1056,7 +1056,7 @@ $ docker run -d --userns=host --name sleepme ubuntu sleep infinity
 <h3 id="&#x5BB9;&#x5668;exec&#x8FDB;&#x53BB;&#x4E3A;&#x4EC0;&#x4E48;&#x9ED8;&#x8BA4;&#x662F;root&#x7528;&#x6237;">&#x5BB9;&#x5668;exec&#x8FDB;&#x53BB;&#x4E3A;&#x4EC0;&#x4E48;&#x9ED8;&#x8BA4;&#x662F;root&#x7528;&#x6237;</h3>
 <p>dockerfile&#x6587;&#x4EF6;&#x91CC;&#x9762;&#x53EF;&#x4EE5;&#x4FEE;&#x6539; </p>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">Updated:
-2019-01-19 17:04:43
+2019-01-21 17:23:25
 </span></footer>
                                 
                                 </section>
@@ -1100,7 +1100,7 @@ $ docker run -d --userns=host --name sleepme ubuntu sleep infinity
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"User","level":"2.4","depth":1,"next":{"title":"User and Group","level":"2.4.1","depth":2,"path":"docker/user-and-group.md","ref":"docker/user-and-group.md","articles":[]},"previous":{"title":"Docker exec and Docker volume","level":"2.3.2","depth":2,"path":"docker/exec-and-volume.md","ref":"docker/exec-and-volume.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"},{"backlink":"operator/operator.html#fig4.2.1","level":"4.2","list_caption":"Figure: Etcd Operator","alt":"Etcd Operator","nro":12,"url":"/images/kubernetes-etcd-operator.jpg","index":1,"caption_template":"Image - _CAPTION_","label":"Etcd Operator","attributes":{},"skip":false,"key":"4.2.1"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"docker/user-in-docker.md","mtime":"2019-01-19T09:04:43.356Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-21T09:22:36.362Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"User","level":"2.4","depth":1,"next":{"title":"User and Group","level":"2.4.1","depth":2,"path":"docker/user-and-group.md","ref":"docker/user-and-group.md","articles":[]},"previous":{"title":"Docker exec and Docker volume","level":"2.3.2","depth":2,"path":"docker/exec-and-volume.md","ref":"docker/exec-and-volume.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon","theme-default","-highlight","prism","prism-themes"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-darcula.css"]},"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"},{"backlink":"operator/operator.html#fig4.2.1","level":"4.2","list_caption":"Figure: Etcd Operator","alt":"Etcd Operator","nro":12,"url":"/images/kubernetes-etcd-operator.jpg","index":1,"caption_template":"Image - _CAPTION_","label":"Etcd Operator","attributes":{},"skip":false,"key":"4.2.1"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"docker/user-in-docker.md","mtime":"2019-01-21T09:23:25.176Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-25T01:23:38.370Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

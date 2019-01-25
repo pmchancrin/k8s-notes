@@ -49,7 +49,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-darcula.css">
                 
             
                 
@@ -906,7 +906,7 @@
 </ul>
 <h2 id="&#x8BA4;&#x8BC1;">&#x8BA4;&#x8BC1;</h2>
 <p><code>apiserver</code>&#x8BA4;&#x8BC1;&#x914D;&#x7F6E;:</p>
-<pre><code>[root@node1 manifests]# cat /etc/kubernetes/manifests/kube-apiserver.manifest 
+<pre class="language-"><code>[root@node1 manifests]# cat /etc/kubernetes/manifests/kube-apiserver.manifest 
 apiVersion: v1
 kind: Pod
 metadata:
@@ -971,7 +971,7 @@ spec:
 <li>&#x5F00;&#x542F;&#x4E86;https&#x8BA4;&#x8BC1;&#xFF0C;&#x8BBF;&#x95EE;&#x96C6;&#x7FA4;&#xFF0C;&#x63D0;&#x793A;unauthorized</li>
 </ul>
 <h4 id="ca&#x8BA4;&#x8BC1;">CA&#x8BA4;&#x8BC1;</h4>
-<pre><code>[root@node3 kubernetes]# curl https://node1:6443/api/v1/nodes
+<pre class="language-"><code>[root@node3 kubernetes]# curl https://node1:6443/api/v1/nodes
 Unauthorized
 [root@node3 kubernetes]# curl https://node1:6443/api/v1/nodes --cert /etc/kubernetes/ssl/node-node3.pem --key /etc/kubernetes/ssl/node-node3-key.pem
 {
@@ -1021,7 +1021,7 @@ Unauthorized
 </code></pre><ul>
 <li><code>kubelet</code> &#x7684;&#x914D;&#x7F6E;</li>
 </ul>
-<pre><code>[root@node3 kubernetes]# cat node-kubeconfig.yaml 
+<pre class="language-"><code>[root@node3 kubernetes]# cat node-kubeconfig.yaml 
 apiVersion: v1
 kind: Config
 clusters:
@@ -1043,7 +1043,7 @@ current-context: kubelet-cluster.local
 </code></pre><ul>
 <li><code>kubeproxy</code> &#x7684;&#x914D;&#x7F6E;</li>
 </ul>
-<pre><code>[root@node3 kubernetes]# cat kube-proxy-kubeconfig.yaml 
+<pre class="language-"><code>[root@node3 kubernetes]# cat kube-proxy-kubeconfig.yaml 
 apiVersion: v1
 kind: Config
 clusters:
@@ -1065,7 +1065,7 @@ current-context: kube-proxy-cluster.local
 </code></pre><ul>
 <li><code>kube-scheduler</code> &#x7684;&#x914D;&#x7F6E;</li>
 </ul>
-<pre><code>[root@node2 kubernetes]# cat kube-scheduler-kubeconfig.yaml
+<pre class="language-"><code>[root@node2 kubernetes]# cat kube-scheduler-kubeconfig.yaml
 apiVersion: v1
 kind: Config
 clusters:
@@ -1087,7 +1087,7 @@ current-context: kube-scheduler-cluster.local
 </code></pre><ul>
 <li>&#x624B;&#x52A8;&#x751F;&#x6210;&#x8BC1;&#x4E66;&#x548C;key&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x96C6;&#x7FA4;&#x5176;&#x4ED6;&#x8282;&#x70B9;&#x4E0A;&#x4F7F;&#x7528;</li>
 </ul>
-<pre><code>[root@node1 ssl]# openssl genrsa -out test-key.pem 2048
+<pre class="language-"><code>[root@node1 ssl]# openssl genrsa -out test-key.pem 2048
 Generating RSA private key, 2048 bit long modulus
 ......+++
 ...+++
@@ -1114,7 +1114,7 @@ test.pem
 </code></pre><ul>
 <li>&#x5C06;&#x8BC1;&#x4E66;&#x62F7;&#x8D1D;&#x5230;&#x975E;&#x96C6;&#x7FA4;&#x8282;&#x70B9;&#x4E0A;&#xFF0C;&#x62A5;&#x9519;</li>
 </ul>
-<pre><code>[root@node test]# curl https://node1:6443/api/v1/nodes --cert ./test.pem --key ./test-key.pem
+<pre class="language-"><code>[root@node test]# curl https://node1:6443/api/v1/nodes --cert ./test.pem --key ./test-key.pem
 curl: (60) Peer&apos;s certificate has an invalid signature.
 More details here: http://curl.haxx.se/docs/sslcerts.html
 
@@ -1129,7 +1129,7 @@ If this HTTPS server uses a certificate signed by a CA represented in
 If you&apos;d like to turn off curl&apos;s verification of the certificate, use
  the -k (or --insecure) option.
 </code></pre><p>&#x9700;&#x8981;&#x5C06;ca&#x6839;&#x8BC1;&#x4E66;&#x62F7;&#x8D1D;&#x8FC7;&#x6765;</p>
-<pre><code>[root@node test]# curl https://node1:6443/api/v1/nodes --cert ./test.pem --key ./test-key.pem --cacert ./ca.pem 
+<pre class="language-"><code>[root@node test]# curl https://node1:6443/api/v1/nodes --cert ./test.pem --key ./test-key.pem --cacert ./ca.pem 
 {
   &quot;kind&quot;: &quot;NodeList&quot;,
   &quot;apiVersion&quot;: &quot;v1&quot;,
@@ -1145,7 +1145,7 @@ If you&apos;d like to turn off curl&apos;s verification of the certificate, use
 </code></pre><blockquote>
 <p>&#x4E3A;&#x4EC0;&#x4E48;&#x96C6;&#x7FA4;&#x8282;&#x70B9;&#x4E0D;&#x9700;&#x8981;ca&#x6839;&#x8BC1;&#x4E66;&#xFF1F;<br>&#x56E0;&#x4E3A;&#x96C6;&#x7FA4;ca&#x8BC1;&#x4E66;&#x5DF2;&#x7ECF;&#x5728;ca-bundle.crt&#x91CC;&#x9762;&#x4E86;&#xFF0C;curl&#x65F6;&#x4E0D;&#x7528;&#x5E26;cacert&#x3002;<br>&#x4F46;&#x662F;&#x5C06;ca&#x8BC1;&#x4E66;&#x52A0;&#x5230;ca-bundle&#x91CC;&#x9762;&#x4E86;&#x4E5F;&#x4E0D;&#x884C;&#xFF0C;&#x4E0D;&#x77E5;&#x9053;&#x4E3A;&#x5565;&#xFF1F;  </p>
 </blockquote>
-<pre><code>[root@node3 ssl]# cd /etc/pki/tls/certs/
+<pre class="language-"><code>[root@node3 ssl]# cd /etc/pki/tls/certs/
 [root@node3 certs]# ls
 ca-bundle.crt  ca-bundle.trust.crt  make-dummy-cert  Makefile  renew-dummy-cert
 [root@node3 certs]# cat ca-bundle.crt | grep MIIC9zCCAd+gAwIBAgIJAP+vWZXVLCBqMA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV
@@ -1159,7 +1159,7 @@ MIIC9zCCAd+gAwIBAgIJAP+vWZXVLCBqMA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV
 <blockquote>
 <p>NOTE&#xFF1A;&#x5982;&#x679C;&#x8BE5;&#x9759;&#x6001;token&#x6587;&#x4EF6;&#x66F4;&#x6539;&#x7684;&#x8BDD;&#xFF0C;&#x9700;&#x8981;&#x91CD;&#x542F;apiserver</p>
 </blockquote>
-<pre><code>[root@node1 tokens]# ls
+<pre class="language-"><code>[root@node1 tokens]# ls
 known_tokens.csv  system:kubectl-node1.token  system:kubectl-node2.token  system:kubelet-node1.token  system:kubelet-node2.token  system:kubelet-node3.token
 [root@node1 tokens]# cat known_tokens.csv 
 UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq,system:kubectl-node1,system:kubectl-node1
@@ -1172,7 +1172,7 @@ UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq
 </code></pre><ul>
 <li>&#x8BBF;&#x95EE;1</li>
 </ul>
-<pre><code>[root@node3 test]# curl -k --header &quot;Authorization: Bearer UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq&quot; https://node1:6443/api/v1/nodes
+<pre class="language-"><code>[root@node3 test]# curl -k --header &quot;Authorization: Bearer UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq&quot; https://node1:6443/api/v1/nodes
 {
   &quot;kind&quot;: &quot;NodeList&quot;,
   &quot;apiVersion&quot;: &quot;v1&quot;,
@@ -1187,7 +1187,7 @@ UPVzqw3LVaqpPCrijfuc2rwKadjvGNUq
 </code></pre><ul>
 <li>&#x8BBF;&#x95EE;2</li>
 </ul>
-<pre><code>[root@node3 test]# ./kubectl --server=https://node1:6443  get nodes
+<pre class="language-"><code>[root@node3 test]# ./kubectl --server=https://node1:6443  get nodes
 Please enter Username: admin
 Please enter Password: ****
 error: You must be logged in to the server (the server has asked for the client to provide credentials (get nodes))
@@ -1202,14 +1202,14 @@ node3     Ready     20d       v1.7.5+coreos.0
 <li>&#x67E5;&#x770B;</li>
 </ul>
 <p>&#x683C;&#x5F0F;: <code>password,user,uid,&quot;group1,group2,group3&quot;</code></p>
-<pre><code>[root@node1 users]# ls
+<pre class="language-"><code>[root@node1 users]# ls
 known_users.csv
 [root@node1 users]# cat known_users.csv 
 ekxj0taObdTNTXc,kube,admin,&quot;system:masters&quot;
 </code></pre><ul>
 <li>&#x4F7F;&#x7528;</li>
 </ul>
-<pre><code>[root@node3 test]# ./kubectl --server=https://node1:6443  get nodes
+<pre class="language-"><code>[root@node3 test]# ./kubectl --server=https://node1:6443  get nodes
 Please enter Username: kube
 Please enter Password: ***************
 NAME      STATUS    AGE       VERSION
@@ -1260,7 +1260,7 @@ node3     Ready     20d       v1.7.5+coreos.0
 <ul>
 <li>&#x914D;&#x7F6E;</li>
 </ul>
-<pre><code>[root@node1 manifests]# cat kube-apiserver.manifest 
+<pre class="language-"><code>[root@node1 manifests]# cat kube-apiserver.manifest 
 ...
 spec:
  command:
@@ -1268,7 +1268,7 @@ spec:
 </code></pre><ul>
 <li>&#x67E5;&#x8BE2;roles clusterroles</li>
 </ul>
-<pre><code>[root@node1 manifests]# kubectl get roles --all-namespaces
+<pre class="language-"><code>[root@node1 manifests]# kubectl get roles --all-namespaces
 NAMESPACE     NAME                                             AGE
 kube-public   system:controller:bootstrap-signer               22d
 kube-system   extension-apiserver-authentication-reader        22d
@@ -1299,7 +1299,7 @@ system:auth-delegator                                                  22d
 <p>RoleBinding&#x628A;Role&#x7ED1;&#x5B9A;&#x5230;&#x8D26;&#x6237;&#x4E3B;&#x4F53;Subject&#xFF0C;&#x8BA9;Subject&#x7EE7;&#x627F;Role&#x6240;&#x5728;namespace&#x4E0B;&#x7684;&#x6743;&#x9650;&#x3002; ClusterRoleBinding&#x628A;ClusterRole&#x7ED1;&#x5B9A;&#x5230;Subject&#xFF0C;&#x8BA9;Subject&#x96C6;&#x6210;ClusterRole&#x5728;&#x6574;&#x4E2A;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x6743;&#x9650;&#x3002;
 &#x8D26;&#x6237;&#x4E3B;&#x4F53;Subject&#x5728;&#x8FD9;&#x91CC;&#x8FD8;&#x662F;&#x53EB;&#x201C;&#x7528;&#x6237;&#x201D;&#x5427;&#xFF0C;&#x5305;&#x542B;&#x7EC4;group&#xFF0C;&#x7528;&#x6237;user&#x548C;ServiceAccount&#x3002;</p>
 </blockquote>
-<pre><code>[root@node1 manifests]# kubectl get rolebinding --all-namespaces
+<pre class="language-"><code>[root@node1 manifests]# kubectl get rolebinding --all-namespaces
 NAMESPACE     NAME                                             AGE
 kube-public   system:controller:bootstrap-signer               22d
 kube-system   kubernetes-dashboard-minimal                     22d
@@ -1340,7 +1340,7 @@ system:controller:attachdetach-controller              22d
 </ul>
 <p>context&#x6307;&#x5B9A;&#x4E86;kubectl&#x547D;&#x4EE4;&#x8FD0;&#x884C;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF0C;kubectl&#x4E0E;&#x5F53;&#x524D;context&#x4E2D;&#x6307;&#x5B9A;&#x7684;&#x96C6;&#x7FA4;&#x548C;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;&#x5F53;&#x524D;context&#x4E2D;&#x5305;&#x542B;&#x7684;&#x7528;&#x6237;&#x51ED;&#x8BC1;&#x3002;  </p>
 <p>&#x6BCF;&#x4E2A;context&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x7531;&#xFF08;&#x96C6;&#x7FA4;&#x3001;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x3001;&#x7528;&#x6237;&#xFF09;&#x63CF;&#x8FF0;&#x7684;&#x4E09;&#x5143;&#x7EC4;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>kubectl config use-context</code>&#x53BB;&#x8BBE;&#x7F6E;&#x5F53;&#x524D;&#x7684;context&#x3002;</p>
-<pre><code>[root@node1 ~]#  kubectl config view
+<pre class="language-"><code>[root@node1 ~]#  kubectl config view
 apiVersion: v1
 clusters:
 - cluster:
@@ -1376,7 +1376,7 @@ CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPAC
 <li><a href="https://blog.frognew.com/2017/04/kubernetes-1.6-rbac.html" target="_blank">https://blog.frognew.com/2017/04/kubernetes-1.6-rbac.html</a> </li>
 </ul>
 <footer class="page-footer"><span class="copyright">powered by Gitbook</span><span class="footer-modification">Updated:
-2019-01-19 17:04:43
+2019-01-21 17:23:25
 </span></footer>
                                 
                                 </section>
@@ -1420,7 +1420,7 @@ CURRENT   NAME                          CLUSTER      AUTHINFO           NAMESPAC
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Authentication Authorization Admission","level":"3.4","depth":1,"next":{"title":"TLS CA","level":"3.4.1","depth":2,"path":"kubernetes/tls-ca.md","ref":"kubernetes/tls-ca.md","articles":[]},"previous":{"title":"Job CronJob","level":"3.3.5","depth":2,"path":"kubernetes/job-cronJob.md","ref":"kubernetes/job-cronJob.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"},{"backlink":"operator/operator.html#fig4.2.1","level":"4.2","list_caption":"Figure: Etcd Operator","alt":"Etcd Operator","nro":12,"url":"/images/kubernetes-etcd-operator.jpg","index":1,"caption_template":"Image - _CAPTION_","label":"Etcd Operator","attributes":{},"skip":false,"key":"4.2.1"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"kubernetes/authentication-authorization-admission.md","mtime":"2019-01-19T09:04:43.367Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-21T09:22:36.362Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Authentication Authorization Admission","level":"3.4","depth":1,"next":{"title":"TLS CA","level":"3.4.1","depth":2,"path":"kubernetes/tls-ca.md","ref":"kubernetes/tls-ca.md","articles":[]},"previous":{"title":"Job CronJob","level":"3.3.5","depth":2,"path":"kubernetes/job-cronJob.md","ref":"kubernetes/job-cronJob.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","disqus","-lunr","-search","search-plus","splitter","code","editlink","image-captions","back-to-top-button","page-toc-button","local-pagefooter","theme-default","favicon","theme-default","-highlight","prism","prism-themes"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-darcula.css"]},"disqus":{"useIdentifier":false,"shortName":"k8s-notes"},"github":{"url":"https://github.com/zhiweiyin318"},"editlink":{"label":"Edit This Page","multilingual":false,"base":"https://github.com/zhiweiyin318/k8s-notes/blob/master/"},"splitter":{},"local-pagefooter":{"islocal":true,"modify_label":"Updated:","modify_format":"YYYY-MM-DD HH:mm:ss"},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"prism-themes":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":true,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"Image - _CAPTION_","variable_name":"_pictures"}},"theme":"default","author":"Zhiwei Yin","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"_pictures":[{"backlink":"content/concept.html#fig1.2.1","level":"1.2","list_caption":"Figure: IaaS-PaaS-SaaS","alt":"IaaS-PaaS-SaaS","nro":1,"url":"/images/IaaS-PaaS-SaaS.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"IaaS-PaaS-SaaS","attributes":{},"skip":false,"key":"1.2.1"},{"backlink":"content/kubernetes.html#fig1.3.1","level":"1.3","list_caption":"Figure: Pod","alt":"Pod","nro":2,"url":"/images/kubernetes-pod.png","index":1,"caption_template":"Image - _CAPTION_","label":"Pod","attributes":{},"skip":false,"key":"1.3.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.1","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment Yaml","alt":"Kubernetes Deployment Yaml","nro":3,"url":"/images/kubernetes-deployment-yaml.png","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment Yaml","attributes":{},"skip":false,"key":"3.3.2.1"},{"backlink":"kubernetes/deployment.html#fig3.3.2.2","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":4,"url":"/images/kubernetes-deployment-rs.png","index":2,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.2"},{"backlink":"kubernetes/deployment.html#fig3.3.2.3","level":"3.3.2","list_caption":"Figure: Kubernetes Deployment ReplicaSet","alt":"Kubernetes Deployment ReplicaSet","nro":5,"url":"/images/kubernetes-deployment-rs-2.png","index":3,"caption_template":"Image - _CAPTION_","label":"Kubernetes Deployment ReplicaSet","attributes":{},"skip":false,"key":"3.3.2.3"},{"backlink":"kubernetes/kubernetes-RBAC.html#fig3.4.5.1","level":"3.4.5","list_caption":"Figure: Kubernetes Access Control Overview","alt":"Kubernetes Access Control Overview","nro":6,"url":"/images/kubernetes-access-control-overview.PNG","index":1,"caption_template":"Image - _CAPTION_","label":"Kubernetes Access Control Overview","attributes":{},"skip":false,"key":"3.4.5.1"},{"backlink":"operator/declarative-api.html#fig4.1.1","level":"4.1","list_caption":"Figure: kubernetes api","alt":"kubernetes api","nro":7,"url":"/images/kubernetes-api.png","index":1,"caption_template":"Image - _CAPTION_","label":"kubernetes api","attributes":{},"skip":false,"key":"4.1.1"},{"backlink":"operator/declarative-api.html#fig4.1.2","level":"4.1","list_caption":"Figure: kubernetes api process","alt":"kubernetes api process","nro":8,"url":"/images/kubernetes-api-process.png","index":2,"caption_template":"Image - _CAPTION_","label":"kubernetes api process","attributes":{},"skip":false,"key":"4.1.2"},{"backlink":"operator/declarative-api.html#fig4.1.3","level":"4.1","list_caption":"Figure: kubernetes deployment yaml","alt":"kubernetes deployment yaml","nro":9,"url":"/images/kubernetes-deployment-yaml.png","index":3,"caption_template":"Image - _CAPTION_","label":"kubernetes deployment yaml","attributes":{},"skip":false,"key":"4.1.3"},{"backlink":"operator/declarative-api.html#fig4.1.4","level":"4.1","list_caption":"Figure: kubernetes custom controller","alt":"kubernetes custom controller","nro":10,"url":"/images/kubernetes-custom-controller.png","index":4,"caption_template":"Image - _CAPTION_","label":"kubernetes custom controller","attributes":{},"skip":false,"key":"4.1.4"},{"backlink":"operator/declarative-api.html#fig4.1.5","level":"4.1","list_caption":"Figure: kubernetes istio","alt":"kubernetes istio","nro":11,"url":"/images/kubernetes-istio-demo.jpg","index":5,"caption_template":"Image - _CAPTION_","label":"kubernetes istio","attributes":{},"skip":false,"key":"4.1.5"},{"backlink":"operator/operator.html#fig4.2.1","level":"4.2","list_caption":"Figure: Etcd Operator","alt":"Etcd Operator","nro":12,"url":"/images/kubernetes-etcd-operator.jpg","index":1,"caption_template":"Image - _CAPTION_","label":"Etcd Operator","attributes":{},"skip":false,"key":"4.2.1"}]},"title":"Kubernetes Notes","language":"zh-hans","links":{"sidebar":{"My Blog":"https://zhiweiyin318.github.io/","Kubernetes-handbook(Jimmysong)":"https://jimmysong.io/kubernetes-handbook","Kubernetes":"https://kubernetes.io/"},"gitbook":true},"gitbook":"*","description":"Some notes about kubernetes during working and studying."},"file":{"path":"kubernetes/authentication-authorization-admission.md","mtime":"2019-01-21T09:23:25.187Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-25T01:23:38.370Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
