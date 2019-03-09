@@ -1,10 +1,11 @@
 # API Server
 
-<img src="https://kubernetes.feisky.xyz/zh/components/images/kube-apiserver.png" width="500" hegiht="313" align=center />
+![kubernetes apiserver](/images/kubenetes-apiserver.png)
 
 ## 访问API server
 
 * kubectl 命令访问
+
 ```
 #打开调试开关
 kubectl -v=8 get pods
@@ -67,7 +68,6 @@ spec:
 * NoExecute：新的 Pod 不调度到该 Node 上，并且删除（evict）已在运行的 Pod。Pod 可以增加一个时间（tolerationSeconds）
 
 ```
-
 #设置 taint
 kubectl taint nodes node1 key1=value1:NoSchedule
 kubectl taint nodes node1 key1=value1:NoExecute
@@ -89,12 +89,12 @@ Annotations:		node-mgnt-ip=172.16.106.102
 			node.alpha.kubernetes.io/ttl=0
 			volumes.kubernetes.io/controller-managed-attach-detach=true
 Taints:			dedicated=master:NoSchedule
-
 ```
 
 ## tolerations 用于pod
 
 配了tolerations 可以被分配到taints的节点，也可以分配到其他节点，如果您希望这些 pod 只能被分配到上述专用节点，那么您还需要给这些专用节点另外添加一个和上述 taint 类似的 label。
+
 ```
 tolerations:
 - key: "key1"
@@ -135,7 +135,7 @@ tolerations:
 
 # kube-controller-manager
 
-<img src="https://kubernetes.feisky.xyz/zh/components/images/post-ccm-arch.png" width="500" hegiht="313" align=center />
+![kubernetes controller manager](/images/kubernetes-controller-manager.png)
 
 ## controller manager由一系列控制器组成
 
@@ -162,7 +162,7 @@ tolerations:
 
 ## 参考
 
-* https://kubernetes.feisky.xyz/zh/components/controller-manager.html
+* https://kubernetes.feisky.xyz/he-xin-yuan-li/index-1/controller-manager
 
 # kubelet
 

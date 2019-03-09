@@ -101,6 +101,7 @@ CRD API resource allows you to define custom resources.
 为Kubernetes添加一个叫Network的API资源类型。  作用是用户一旦创建一个Network对象，Kubernetes就应该使用这个对象定义的网络参数，调用真实的网络插件，为用户创建一个真正的网络，用户创建Pod就可以使用这个网络了。
 
 Network对象的YAML文件：
+
 ```
 apiVersion: samplecrd.k8s.io/v1
 kind: Network
@@ -115,6 +116,7 @@ spec:
 上面这个文件就是一个CR（Custom Resource），为了能让Kubernetes认识这个CR，需要让Kubernetes明白这个CR的定义是什么，就是CRD（Custom Resource Definition）
 
 CRD的YAML：
+
 ```
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
@@ -137,6 +139,7 @@ spec:
 scope是Namespaced，定义这个Network是一个属于Namespace的对象，类似Pod。
 
 创建CRD和CR
+
 ```
 yzw@yzw-vm:~$ kubectl apply -f network.yaml 
 customresourcedefinition.apiextensions.k8s.io/networks.samplecrd.k8s.io created
@@ -166,7 +169,6 @@ Spec:
   Cidr:     192.168.0.0/16
   Gateway:  192.168.0.1
 Events:     <none>
-
 ```
 
 ## Controller Pattern
@@ -206,6 +208,7 @@ Deployment 控制器的实现步骤：
 > https://blog.openshift.com/kubernetes-deep-dive-code-generation-customresources/
 
 创建一个GO项目：
+
 ```
 $ tree ~/go/src/github.com/resouer/k8s-controller-custom-resource
 .
@@ -223,10 +226,10 @@ $ tree ~/go/src/github.com/resouer/k8s-controller-custom-resource
                 ├── doc.go
                 ├── register.go
                 └── types.go
-
 ```
 
 `pkg/apis/samplecrd/`下创建`register.go` 用来放全局变量
+
 ```
 package samplecrd
 
@@ -237,6 +240,7 @@ const (
 ```
 
 `pkg/apis/samplecrd/v1` 下创建`doc.go` (Golang的文档源文件)
+
 ```
 // +k8s:deepcopy-gen=package
 
@@ -250,6 +254,7 @@ package v1
 * 这些注释又叫 **Global Tags** 。
 
 `pkg/apis/samplecrd/v1` 下创建`types.go`,定义CDR类型有哪些字段，spec字段的内容。
+
 ```
 package v1
 
@@ -308,6 +313,7 @@ type NetworkList struct {
 * `+k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object` 生成DeepCopy的时候，实现K8s提供的runtime.Object接口。否则会有编译错误，固定操作。
 
 `pkg/apis/samplecrd/v1` 下创建`register.go`文件
+
 ```
 package v1
 
@@ -358,10 +364,12 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 }
 
 ```
+
 * 通过`addKnownTypes`让生成的client指定Network和NetworkList类型的定义。
 * 这个文件属于模板写法。
 
 通过`k8s.io/code-generator`工具自动生成代码：
+
 ```
 # 代码生成的工作目录，也就是我们的项目路径
 $ ROOT_PACKAGE="github.com/resouer/k8s-controller-custom-resource"
@@ -380,11 +388,12 @@ enerating deepcopy funcs
 Generating clientset for samplecrd:v1 at github.com/resouer/k8s-controller-custom-resource/pkg/client/clientset
 Generating listers for samplecrd:v1 at github.com/resouer/k8s-controller-custom-resource/pkg/client/listers
 Generating informers for samplecrd:v1 at github.com/resouer/k8s-controller-custom-resource/pkg/client/informers
-
 ```
+
 `./generate-groups.sh`参数使用的是跟import一样的相对路径。
 
 生成完成后，项目目录如下：
+
 ```
 $ tree
 .
@@ -407,7 +416,6 @@ $ tree
         ├── clientset
         ├── informers
         └── listers
-
 ```
 
 * `zz_generated.deepcopy.go` 自动生成的DeepCopy代码文件。
@@ -416,7 +424,6 @@ $ tree
 `main.go` 里面完成初始化和启动一共自定义controller。
 
 ![kubernetes custom controller](/images/kubernetes-custom-controller.png)
-
 
 ```
 package main
@@ -463,8 +470,8 @@ func init() {
 	flag.StringVar(&kubeconfig, "kubeconfig", "", "Path to a kubeconfig. Only required if out-of-cluster.")
 	flag.StringVar(&masterURL, "master", "", "The address of the Kubernetes API server. Overrides any value in kubeconfig. Only required if out-of-cluster.")
 }
-
 ```
+
 * Informer和API对象一一对应，我们自定义Network对象的Informer就是Network Informer。
 * networkInformerFactory通过networkClient跟APIServer建立连接，负责维护这个连接的是Relflector包，通过ListAndWatch方法获取和监听Network对象实例化的变化。
 * ListAndWatch一旦监控盗APIServer端有信的Network实例被创建，删除或者更新，Reflector就会收到“事件通知”。该事件及它对应的API对象 叫增量（Delta），放进FIFO中。
@@ -503,8 +510,8 @@ func NewController(
     DeleteFunc: controller.enqueueNetworkForDelete,
  return controller
 }
-
 ```
+
 * 创建了一个work queue，同步Informer和控制循环之间的数据。
 * 为networkInformer注册3个Handler。
 * 实际入队的不是API对象本身，是Key，`<namespace>/<name>`。
@@ -525,8 +532,8 @@ func (c *Controller) Run(threadiness int, stopCh <-chan struct{}) error {
   ...
   return nil
 }
-
 ```
+
 * main 中调用controller.Run()启动控制循环。
 * 等待Informer完成一次本地缓存数据同步后，启动多个无限循环的任务。
 
@@ -596,7 +603,6 @@ func (c *Controller) syncHandler(key string) error {
   
   return nil
 }
-
 ```
 
 * 从workqueue.Get一个Key；
@@ -616,8 +622,8 @@ I0915 12:50:29.051615   27159 controller.go:113] Starting Network control loop
 I0915 12:50:29.051630   27159 controller.go:116] Waiting for informer caches to sync
 E0915 12:50:29.066745   27159 reflector.go:134] github.com/resouer/k8s-controller-custom-resource/pkg/client/informers/externalversions/factory.go:117: Failed to list *v1.Network: the server could not find the requested resource (get networks.samplecrd.k8s.io)
 ...
-
 ```
+
 编译工程，执行控制器，创建,更新，删除Network,可以看到打印信息。
 
 
@@ -722,7 +728,6 @@ data:
       - name: envoy-conf
         configMap:
           name: envoy
-
 ```
 
 Initializer要干的工作就是把Envoy相关字段，自动添加到用户提交的Pod的API对象里。  
@@ -745,8 +750,8 @@ spec:
     - name: envoy-initializer
       image: envoy-initializer:0.0.1
       imagePullPolicy: Always
-
 ```
+
 Kubernetes的Controller的就是一个死循环，不断获取实际状态，与期望状态作对比。  
 
 envoy-initializer使用的镜像是一个事先编译好的Custom Controller，主要功能是：  
@@ -838,6 +843,7 @@ metadata
     "initializer.kubernetes.io/envoy": "true"
     ...
 ```
+
 就会使用到我们之前定义的envoy-initializer了。
 
 **Istio项目的核心，就是由无数个运行Pod中的Envoy容器组成的服务代理网络，这正是Service Mesh的含有。**  
@@ -854,4 +860,3 @@ Kubernetes 声明式API具有对API对象进行在线的更新的能力：
 * https://www.envoyproxy.io/docs/envoy/latest/intro/comparison
 * Initializer和Preset都能注入Pod配置，Preset是Initializer的子集，比较适合发布流程离处理比较简单的情况，Initializer是需要写代码的。
 * Envoy相对Nginx，HAProxy的优势在于编程友好的API，方便容器化，配置方便。
-

@@ -5,7 +5,7 @@ API Server
 * 其他模块间数据通信的枢纽（只有API Server才能直接操作etcd）
 * 资源配额控制入口；
 
-<img src="https://kubernetes.feisky.xyz/zh/components/images/kube-apiserver.png" width="500" hegiht="313" align=center />
+![kubernetes apiserver](/images/kubenetes-apiserver.png)
 
 ### 启动参数
 
@@ -89,11 +89,12 @@ $ cat /etc/kubernetes/manifests/kube-apiserver.manifest
 ### 访问API Server
 默认情况下，kube-apiserver进程在本机通过：
 * insecure-bind-address:insecure-port（127.0.0.1:8080或者localhost:8080）端口提供非安全认证的REST服务；
-* secure-port（6443）端口提供HTTPS安全服务；==（用的哪个IP？？）==
+* secure-port（6443）端口提供HTTPS安全服务；
 #### kubectl 命令访问
 kubectrl 跟api service 也是通过REST方式通信的。
 
 * 打开调试开关
+
 ```
 [root@node1 ~]# kubectl -v=8 get pods
 I0704 09:57:25.641993    8087 loader.go:357] Config loaded from file /root/.kube/config
@@ -116,9 +117,10 @@ I0704 09:57:25.767367    8087 round_trippers.go:411] Response Headers:
 I0704 09:57:25.767372    8087 round_trippers.go:414]     Content-Type: application/json
 I0704 09:57:25.767376    8087 round_trippers.go:414]     Content-Length: 3274
 I0704 09:57:25.767381    8087 round_trippers.go:414]     Date: Wed, 04 Jul 2018 01:57:25 GMT
-
 ```
+
 * kubectl 直接访问API
+
 ```
 ## 版本信息
 [root@node1 ~]# kubectl get --raw /api
@@ -130,6 +132,7 @@ I0704 09:57:25.767381    8087 round_trippers.go:414]     Date: Wed, 04 Jul 2018 
 [root@node1 ~]# kubectl get --raw /api/v1/services
 [root@node1 ~]# kubectl get --raw /api/v1/replicationcontrollers
 ```
+
 #### REST API
 
 > **api-reference:**
@@ -150,6 +153,7 @@ I0704 09:57:25.767381    8087 round_trippers.go:414]     Date: Wed, 04 Jul 2018 
 Kubernetes API 的每个请求都会经过多阶段的访问控制之后才会被接受，这包括认证、授权以及准入控制（Admission Control）等。
 * 认证 失败返回401
 * 授权 失败返回403
+
 ```
 [root@node1 ~]# curl https://node1:6443/api/v1/nodes
 Unauthorized
@@ -185,33 +189,33 @@ Please enter Password: ***************
 * 需要通过调用api来我开发基于k8s的管理平台；
 
 pod中的进程通过API server的service来访问API Server。
+
 ```
 [root@node1 ~]# kubectl get services
 NAME         CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   10.233.0.1   <none>        443/TCP   27d
-
 ```
 
 client-go ：https://github.com/kubernetes/client-go
 
 ##### kubectl proxy 
 启动内部代理，然后访问内部代理进行调用，可以进行访问控制，如限制要访问的接口，增加允许访问的client的白名单。
+
 ```
 ## 8001端口启动代理，拒绝客户端访问pods
 [root@node1 ~]# kubectl proxy --reject-paths="^/api/v1/pods" --port=8001 --v=2
 [root@node1 ~]# curl localhost:8001/api/v1/pods
 <h3>Unauthorized</h3>
-[root@node1 ~]# 
-
 ```
+
 #### proxy API接口
 API Server把收到的REST请求转发到某个node上的kubelet进程的REST端口上，由kubelet进程负责响应。
 这里获取的数据来源于node，并非ETCD，会有时间上偏差。
+
 ```
 [root@node1 ~]# curl localhost:8080/api/v1/proxy/nodes/node3/pods/
 [root@node1 ~]# curl localhost:8080/api/v1/proxy/nodes/node3/stats/
 [root@node1 ~]# curl localhost:8080/api/v1/proxy/nodes/node3/spec/
-
 ```
 
 ### 资源配额
@@ -222,6 +226,7 @@ API Server把收到的REST请求转发到某个node上的kubelet进程的REST端
 * scheduler --> apiserver （watch侦听新建pod的信息， 检索符合要求的node列表，并进行调度逻辑的执行）
 
 ==为缓解apiserver的压力， 各个模块会缓存从apiserver获取的数据， 某些情况下会直接使用缓存的数据（什么情况使用缓存， 如何保证数据的一致性？）==
+
 ```
 [root@node3 node1_6443]# ll /root/.kube/cache/discovery/node1_6443/
 total 64
@@ -241,9 +246,7 @@ drwxr-xr-x. 4 root root 4096 Jun 27 16:35 rbac.authorization.k8s.io
 drwxr-xr-x. 3 root root 4096 Jun 27 16:35 settings.k8s.io
 drwxr-xr-x. 4 root root 4096 Jun 27 16:35 storage.k8s.io
 drwxr-xr-x. 2 root root 4096 Jun 27 16:35 v1
-
 ```
-
 
 ### 参考
 > * http://docs.kubernetes.org.cn/750.html
